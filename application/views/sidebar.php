@@ -17,7 +17,7 @@
     <ul class="menu-inner py-1">
     <!-- Dashboard -->
     <li class="menu-item active">
-        <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('main')?>" class="menu-link">
+        <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/main')?>" class="menu-link">
         <i class="menu-icon tf-icons bx bx-home-circle"></i>
         <div data-i18n="Analytics">Home</div>
         </a>
@@ -39,7 +39,7 @@
 
         <ul class="menu-sub">
         <li class="menu-item">
-            <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('scan_rfid')?>" class="menu-link">
+            <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/scan_rfid')?>" class="menu-link">
             <div data-i18n="Without menu">Pemindai Barang</div>
             </a>
         </li>
@@ -49,12 +49,12 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('taging_ble')?>"  class="menu-link">
+            <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/taging_ble')?>"  class="menu-link">
             <div data-i18n="Container">Penandaan Tag BLE</div>
             </a>
         </li>
         <li class="menu-item">
-            <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('untaging_ble')?>"  class="menu-link">
+            <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/untaging_ble')?>"  class="menu-link">
             <div data-i18n="Container">Pelepasan Tag BLE</div>
             </a>
         </li>

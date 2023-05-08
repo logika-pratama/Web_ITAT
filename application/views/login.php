@@ -172,7 +172,7 @@
     <script>
       function login(){
         $.ajax({
-            url : "<?=base_url()?>login/login",
+            url : "<?=base_url()?>index.php/login/login",
             type: "POST",
             data : $(".form-login").serialize(),
             dataType:"JSON",
