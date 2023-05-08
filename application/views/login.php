@@ -126,7 +126,7 @@
               </div>
               <!-- /Logo -->
               <?php echo $this->session->flashdata('msg'); ?>
-              <form method="post" action="javascript:void(0)" class="form-horizontal">
+              <form method="post" action="javascript:void(0)" class="form-horizontal form-login">
                 <div class="mb-3">
                   <label for="email" class="form-label">Email or Username</label>
                   <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email or username" autofocus />
@@ -174,6 +174,7 @@
         $.ajax({
             url : "<?=base_url()?>login/login",
             type: "POST",
+            data : $(".form-login").serialize(),
             dataType:"JSON",
         success: function(data){
             if(data.status == true){
@@ -196,6 +197,23 @@
               setTimeout(function(){
                 window.location.replace("<?=base_url('dashboard')?>");
               },1000)
+            } else {
+              const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+              })
+
+              Toast.fire({
+                icon: 'error',
+                title: data.massage
+              })
             }
         },
         error: function (xhr, status, error){

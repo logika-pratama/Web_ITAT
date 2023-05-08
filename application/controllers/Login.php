@@ -27,58 +27,40 @@ class Login extends CI_Controller {
 	}
 
 	function login(){
-		// $this->form_validation->set_rules('email','email','required');
-		// $this->form_validation->set_rules('password','Password','required');
-		
-		// $email = $this->input->post('email');
-		// $password = $this->input->post('password');
-		$email = 'admin@gmail.com';
-		$password = '123456';
+		$email = $this->input->post('email');
+		$password = $this->input->post('password');
+		$this->db->where('username',$email);
+		$cek_email = $this->db->get('users')->row_array();
+		if(empty($cek_email)){
+			echo json_encode(array('status' => false,'massage' => 'Akun tidak dikenali!'));
+			die;
+		}
+		if($password == $cek_email['password']){
+			$data_session = array(
+				'email' => $email,
+			);
 
-		// if($this->form_validation->run() === FALSE ){
-			// $this->session->set_flashdata('msg', '<div class="alert alert-danger"><p>Email atau Password tidak boleh Kosong</p></div>');
-			// redirect('login');
-		// } else {
-			$this->db->where('email',$email);
-			$this->db->where('status','active');
-			$cek_email = $this->db->get('user')->row_array();
-			$id = $cek_email['id_user'];
-			$role = $cek_email['role'];
-			$name = $cek_email['user'];	
-			if(empty($cek_email)){
-				$this->session->set_flashdata('msg', '<div class="alert alert-danger"><p>email Anda Salah</p></div>');
-				redirect('login');
-			}
-			$cek = password_verify($password,$cek_email['password']) ? true : false;
-			if($cek > 0){
-				$data_session = array(
-					'id' => $id,
-					'name' => $name,
-					'email' => $email,
-					'role' => $role,
-				);
+			$jwtToken = $this->jwt->generateToken($data_session);
 
-				$jwtToken = $this->jwt->generateToken($data_session);
+			$token = array(
+				'token' => $jwtToken,
+				'logged_in' => TRUE,
+			);
 
-				$token = array(
-					'token' => $jwtToken,
-					'logged_in' => TRUE,
-				);
+			$this->session->set_userdata($token);
 
-				$this->session->set_userdata($token);
-
-				echo json_encode(array('status' => true));
-			} else {
-				echo json_encode(array('status' => false));
-			}
-		// }
+			echo json_encode(array('status' => true));
+		} else {
+			echo json_encode(array('status' => false,'massage' => 'Password anda salah!'));
+			die;
+		}
 	}
 
-	function logout(){
-		$this->session->sess_destroy();
-		$this->session->set_flashdata('msg', '<div class="alert alert-success"><p>Anda Berhasil Logout</p></div>');
-		redirect('login');
-	}
+		function logout(){
+			$this->session->sess_destroy();
+			$this->session->set_flashdata('msg', '<div class="alert alert-success"><p>Anda Berhasil Logout</p></div>');
+			redirect('login');
+		}
 
 	
 }
