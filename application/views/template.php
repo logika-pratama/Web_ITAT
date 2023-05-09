@@ -48,7 +48,7 @@
                       <div class="col-sm-12">
                         <div class="card-body p-1">
                           <div class="video-container">
-                              <iframe class="content-frame" style="background-color: #FFFFFF;" src="<?=base_url('main')?>" frameborder="0" allowfullscreen></iframe>
+                              <iframe class="content-frame" style="background-color: #FFFFFF;" src="<?=base_url('index.php/main')?>" frameborder="0" allowfullscreen></iframe>
                           </div>
                         </div>
                       </div>
