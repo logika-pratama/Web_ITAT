@@ -17,7 +17,7 @@
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
         <li>
-            <a class="dropdown-item" href="<?=base_url('dashboard/logout')?>">
+            <a class="dropdown-item" href="<?=base_url('index.php/dashboard/logout')?>">
             <i class="bx bx-power-off me-2"></i>
             <span class="align-middle">Keluar</span>
             </a>

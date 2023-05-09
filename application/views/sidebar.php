@@ -71,7 +71,7 @@
         </ul>
 
         <li class="menu-item">
-            <a href="<?=base_url('dashboard/logout')?>" class="menu-link">
+            <a href="<?=base_url('index.php/dashboard/logout')?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-power-off"></i>
                 <div data-i18n="Analytics">Keluar</div>
             </a>
