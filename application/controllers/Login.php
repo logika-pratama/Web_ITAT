@@ -13,7 +13,7 @@ class Login extends CI_Controller {
 		$this->load->model('jwt_model','jwt');
 
 		if(!empty($this->session->userdata('token'))){
-			redirect('dashboard');
+			redirect('index.php/dashboard');
 		}
 
 	}
@@ -59,7 +59,7 @@ class Login extends CI_Controller {
 		function logout(){
 			$this->session->sess_destroy();
 			$this->session->set_flashdata('msg', '<div class="alert alert-success"><p>Anda Berhasil Logout</p></div>');
-			redirect('login');
+			redirect('index.php/login');
 		}
 
 	
