@@ -40,7 +40,7 @@ class Dashboard extends CI_Controller {
 	function logout(){
 		$this->session->sess_destroy();
 		$this->session->set_flashdata('msg', '<div class="alert alert-success"><p>Anda Berhasil Logout</p></div>');
-		redirect('login');
+		redirect('index.php/login');
 	}
 
 }
