@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="<?=base_url()?>assets/css/demo.css" />
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="<?=base_url()?>assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.5/sweetalert2.min.css"/>
     <!-- Page CSS -->
     <!-- Helpers -->
     <script src="<?=base_url()?>assets/vendor/js/helpers.js"></script>

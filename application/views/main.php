@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <?php $this->load->view($this->uri->segment(1).'/header'); ?>
-  </head>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+	</head>
   <body>
   <section>
     <div id="preloader">
@@ -59,11 +62,11 @@
 
         if ($('#ctn-preloader').hasClass('loaded')) {
           // Es para que una vez que se haya ido el preloader se elimine toda la seccion preloader
-          $('#preloader').delay(1000).queue(function() {
+          $('#preloader').delay(500).queue(function() {
             $(this).remove();
           });
         }
-      }, 700);
+      }, 500);
     });
   </script>
   </body>

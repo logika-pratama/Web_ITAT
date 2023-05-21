@@ -8,38 +8,87 @@
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
 <script type="text/javascript">
-
 let table = new DataTable('#myTable', {
-  paging: false,
-  ordering: false
+  "paging":   false,
+  "ordering": false,
+  "info":     false
 });
 
-var no = 0;
-$(".fokus").change(function(){
-  no = 1;
-  scanRFID();
-});
-
-setInterval(function(){
-  if(no === 1){
-    no = 0;
-  }
-}, 3000);
-
-function scanRFID(){
-  data = $(".fokus").val();
-  console.log(data);
-  if(no == 0){
-    $(".label-info").html('');
-  }
+function insertData(){
+    $('[name="nomer"]').val(1);
 }
+
+setInterval(
+  function(){
+    no = $('[name="nomer"]').val();
+    if(no == 1){
+      getData();
+      $('[name="nomer"]').val(0);
+    }
+  }, 
+2500);
+
+function getData(){
+  data = $("[name='scanrfid']").val();
+  $.ajax({
+      url : "<?=base_url()?>index.php/scan_rfid/scanRFID/",
+      type: "POST",
+      data : {scan:data},
+      dataType:"JSON",
+      success: function(data){
+        $(".listtable").html('');
+        $('.total-item').text('Total :'+data.length);
+        var i;
+        for (i = 0; i < data.length; ++i) {
+          id = data[i]['assets_id'];
+          lok = data[i]['location_asset'];
+          if(lok == null){
+            lok = '';
+          }
+          $('.listtable').append("<tr data-id='"+id+"' onclick='showData()'><td>"+data[i]['assets_id']+"</td><td>"+data[i]['name_asset']+"</td><td>"+lok+"</td></tr>");
+        }
+        $("#texttags").hide();
+      },
+  });
+}
+
+function showData(){
+  rfid = event.currentTarget.dataset.id;
+  $.ajax({
+      url : "<?=base_url()?>index.php/scan_rfid/detailRFID/"+rfid,
+      type: "GET",
+      dataType:"JSON",
+      success: function(data){
+        $(".list-data").html('');
+        $('.asset_id').text(data[0]['asset_id']);
+        $('.name_asset').text(data[0]['name_asset']);
+        $('.serial_number').text(data[0]['serial_number']);
+        $('.year_project').text(data[0]['year_project']);
+
+        var i;
+        for (i = 0; i < data[0]['specification'].length; ++i) {
+          $('.list-data').append("<tr><td>"+data[0]['specification'][i]['name']+"</td><td>"+data[0]['specification'][i]['description']+"</td></tr>");
+        }
+      
+      },
+  });
+
+  $('#modalLong').modal('show');
+}
+function reset(){
+  location.reload();
+}
+
+setTimeout(function(){
+    $(".fokus").tagsinput('focus');
+},1000);
 
 (function ($) {
   "use strict";
 
   var defaultOptions = {
     tagClass: function(item) {
-      return 'label label-info';
+      return 'label label-info removeCom';
     },
     itemValue: function(item) {
       return item ? item.toString() : item;
@@ -81,7 +130,7 @@ function scanRFID(){
     this.inputSize = Math.max(1, this.placeholderText.length);
 
     this.$container = $('<div class="bootstrap-tagsinput"></div>');
-    this.$input = $('<input type="text" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
+    this.$input = $('<input onkeypress="insertData()" type="text" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
 
     this.$element.before(this.$container);
 
@@ -681,13 +730,27 @@ function scanRFID(){
   });
 })(window.jQuery);
 
+function drawImge(){
+    var video = document.querySelector("#webCamera");
+    var canvas = document.querySelector("#videoCanvas");
+    var ctx = canvas.getContext('2d');
 
-function showData(){
-    $('#modalLong').modal('show');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    var faceArea = 300;
+    var pX=canvas.width/2 - faceArea/2;
+    var pY=canvas.height/2 - faceArea/2;
+
+    ctx.rect(pX,pY,faceArea,faceArea);
+    ctx.lineWidth = "6";
+    ctx.strokeStyle = "red";    
+    ctx.stroke();
+
+
+    setTimeout(drawImge , 100);
 }
-
-setTimeout(function(){
-    $(".fokus").tagsinput('focus');
-},1000);
-
 </script>

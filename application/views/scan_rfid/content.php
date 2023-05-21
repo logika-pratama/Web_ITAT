@@ -7,73 +7,78 @@
     <div class="col-md-12">
         <div class="form-group ps-4">
             <div id="texttags">
-                <input type="text" class="fokus form-control" value="" data-role="tagsinput" placeholder="Add tags RFID"/>
+                <input type="text" name="scanrfid" class="fokus form-control" style="width:100%;" data-role="tagsinput"/>
             </div>
         </div>
     </div>
+    <div class="col-6">
+        <div class="form-group ps-4 mt-2">
+            <a class="btn btn-danger text-white" onclick="reset()">Reset Scan</a>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group ps-4 mt-2">
+            <span class="btn btn-success text-white total-item">Total : </span>
+        </div>
+    </div>
     <div class="col-md-12 mt-3">
-        <div class="table-responsive text-nowrap">
-            <table class="table table-striped table-bordered mt-4" id="myTable">
+        <div class="">
+            <table class="table table-striped table-bordered mt-3" style="font-size:10px;" id="myTable">
+            <input name="nomer" type="hidden" value="0">
             <thead style="background-color:#342a29;">
                 <tr>
                     <th style="color:white;">ID Aset</th>
-                    <th style="color:white;">Nama Aset</th>
+                    <th style="color:white;">Nama</th>
                     <th style="color:white;">Lokasi</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr onclick="showData()">
-                    <td>1237177</td>
-                    <td>Leptop</td>
-                    <td>Gudang</td>
-                </tr>
-                <tr onclick="showData()">
-                    <td>1666666</td>
-                    <td>Leptop Asus</td>
-                    <td>Gudang</td>
-                </tr>
-                <tr onclick="showData()">
-                    <td>1211111</td>
-                    <td>Leptop Fujitsu</td>
-                    <td>Gudang</td>
-                </tr>
-                <tr onclick="showData()">
-                    <td>123712</td>
-                    <td>Leptop Acer</td>
-                    <td>Gudang</td>
-                </tr>
+            <tbody class="listtable">
             </tbody>
             </table>
         </div>
+    </div>
+</div>
 
-        <div class="modal fade" id="modalLong" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="modalLongTitle">Detail RFID</h5>
-                <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                ></button>
-                </div>
-                <div class="modal-body">
-                <p>
-                    Leptop Lenovo X1 Carbon<br>
-                    Processor ci7 3000<br>
-                    HDD 1Tera<br>
-                    RAM 4gb DDR4<br>
-                    VGA GTX 1500 Nvidia
-                </p>
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                    Close
-                </button>
-                </div>
-            </div>
-            </div>
+<div class="modal fade" id="modalLong" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen" role="document">
+    <div class="modal-content ">
+        <div class="modal-header">
+        <h5 class="modal-title" id="modalLongTitle">Detail RFID</h5>
         </div>
+        <div class="modal-body">
+        <table>
+            <tbody>
+                <tr>
+                    <td>ASSET ID</td>
+                    <td><span class="asset_id"></span></td>
+                </tr>
+                <tr>
+                    <td>Nama Aset</td>
+                    <td> : <span class="name_asset"></span></td>
+                </tr>
+                <tr>
+                    <td>Serial Number</td>
+                    <td> : <span class="serial_number"></span></td>
+                </tr>
+                <tr>
+                    <td>Tahun Project</td>
+                    <td> : <span class="year_project"></span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-striped table-bordered mt-3">
+            <thead>
+            </thead>
+            <tbody class="list-data">
+            </tbody>
+        </table>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+            Close
+        </button>
+        </div>
+    </div>
     </div>
 </div>

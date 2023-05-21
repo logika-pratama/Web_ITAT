@@ -43,4 +43,19 @@ class Dashboard extends CI_Controller {
 		redirect('index.php/login');
 	}
 
+	function redirectUrl(){
+		$url = 'https://10.230.200.158:8081/login';
+
+		$arrContextOptions=array(
+			"ssl"=>array(
+				"verify_peer"=>false,
+				"verify_peer_name"=>false
+			),
+		);  
+		
+		$response = file_get_contents($url, false, stream_context_create($arrContextOptions));
+		
+		echo $response; 
+	}
+
 }

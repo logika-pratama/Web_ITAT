@@ -11,9 +11,7 @@
     <!-- User -->
     <li class="nav-item navbar-dropdown dropdown-user dropdown">
         <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-        <div class="avatar avatar-online">
-            <img src="<?=base_url('assets/img/icon.png')?>" alt class="w-px-35 h-auto rounded-circle" />
-        </div>
+            <img src="<?=base_url('assets/img/icon.png')?>" alt class="w-px-30 h-auto rounded-circle" />
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
         <li>

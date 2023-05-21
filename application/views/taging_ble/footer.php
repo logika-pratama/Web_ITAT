@@ -5,6 +5,7 @@
 <script src="<?=base_url()?>assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 <script src="<?=base_url()?>assets/vendor/js/menu.js"></script>
 <script src="<?=base_url()?>assets/js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.5/sweetalert2.min.js"></script>
 <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
 
 <script type="text/javascript">
@@ -23,6 +24,18 @@ function showData(num){
 let selectedDeviceId = null;
 const codeReader = new ZXing.BrowserMultiFormatReader();
 const sourceSelect = $("#pilihKamera");
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+})
 
 $(document).on('change','#pilihKamera',function(){
     selectedDeviceId = $(this).val();
@@ -95,6 +108,50 @@ if (navigator.mediaDevices) {
 
 } else {
     alert('Cannot access camera.');
+}
+
+function konfirmasi(){
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    });
+
+    if($('.qrcode1').val() == '' || $('.qrcode2').val() == ''){
+        Toast.fire({
+            icon: 'error',
+            title: 'Tags RFID atau BLE Belum Terisi'
+        }) 
+    } else {
+
+    }
+    
+    $.ajax({
+      url : "<?=base_url()?>index.php/taging_ble/konfrim/",
+      type: "POST",
+      data:{
+        ble1:$('.qrcode1').val(),
+        ble2:$('.qrcode2').val(),
+      },
+      dataType:"JSON",
+        success: function(data){
+            $('.qrcode1').text('');
+            $('.qrcode2').text('');
+            // $('.ble1').val('');
+            // $('.ble2').val('');
+            
+            Toast.fire({
+                icon: 'success',
+                title: 'Taging BLE dan RFID Berhasil'
+            })
+      },
+    });
 }
 
 </script>

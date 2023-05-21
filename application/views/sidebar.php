@@ -30,6 +30,13 @@
         </a>
     </li>
 
+    <li class="menu-item">
+        <a href="http://10.230.200.154/#/dashboard" target="_blank" class="menu-link">
+        <i class='menu-icon tf-icons bx bxs-pie-chart-alt-2' ></i>
+        <div data-i18n="Analytics">Dashboard ITAT</div>
+        </a>
+    </li>
+
     <!-- Layouts -->
     <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -43,11 +50,13 @@
             <div data-i18n="Without menu">Pemindai Barang</div>
             </a>
         </li>
+        
         <li class="menu-item">
-            <a href="javascript:void(0)" onclick="changePage()" data-url="https://10.230.200.158:8082/" class="menu-link">
+            <a href="https://10.230.200.158:8082/" target="_blank"  class="menu-link">
             <div data-i18n="Without navbar">Aset Gudang</div>
             </a>
         </li>
+        
         <li class="menu-item">
             <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/taging_ble')?>"  class="menu-link">
             <div data-i18n="Container">Penandaan Tag BLE</div>
@@ -59,12 +68,12 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="javascript:void(0)" onclick="changePage()" data-url="https://10.230.200.158:8081/" class="menu-link">
+            <a href="http://10.230.200.158:8081/" target="_blank" class="menu-link">
             <div data-i18n="Fluid">Aset Luar Gudang</div>
             </a>
         </li>
         <li class="menu-item">
-            <a href="javascript:void(0)" onclick="changePage()" data-url="https://10.230.200.158/web?db=polri_prod#action=912&cids=1&menu_id=280" class="menu-link">
+            <a href="https://10.230.200.158" target="_blank" class="menu-link">
             <div data-i18n="Blank">Pelacakan Aset</div>
             </a>
         </li>

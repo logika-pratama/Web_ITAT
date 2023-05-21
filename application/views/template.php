@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
     <title>ITAT Mobile</title>
     <meta name="description" content="" />
+	  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="<?=base_url()?>assets/img/favicon/favicon.ico" />
     <!-- Fonts -->
@@ -18,6 +19,13 @@
     <link rel="stylesheet" href="<?=base_url()?>assets/vendor/libs/apex-charts/apex-charts.css" />
     <script src="<?=base_url()?>assets/vendor/js/helpers.js"></script>
     <script src="<?=base_url()?>assets/js/config.js"></script>
+    <style>
+    #frame {
+        -ms-zoom: 1;
+        -webkit-transform: scale(1);
+        -webkit-transform-origin: top centre;
+    }
+    </style>
   </head>
 
   <body>
@@ -48,7 +56,7 @@
                       <div class="col-sm-12">
                         <div class="card-body p-1">
                           <div class="video-container">
-                              <iframe class="content-frame" style="background-color: #FFFFFF;" src="<?=base_url('index.php/main')?>" frameborder="0" allowfullscreen></iframe>
+                              <iframe class="content-frame" id="frame" style="background-color: #FFFFFF;" src="<?=base_url('index.php/main')?>" frameborder="0" allowfullscreen></iframe>
                           </div>
                         </div>
                       </div>
