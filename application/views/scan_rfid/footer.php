@@ -26,7 +26,7 @@ setInterval(
       $('[name="nomer"]').val(0);
     }
   }, 
-4000);
+2000);
 
 function getData(){
   data = $("[name='scanrfid']").val();
