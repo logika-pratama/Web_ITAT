@@ -52,6 +52,17 @@ function getData(){
   });
 }
 
+function closeMat(){
+  $.ajax({
+      url : "<?=base_url()?>index.php/scan_rfid/closeMat/",
+      type: "POST",
+      dataType:"JSON",
+      success: function(data){
+        console.log(data);
+      },
+  });
+}
+
 function showData(){
   rfid = event.currentTarget.dataset.id;
   $.ajax({

@@ -75,7 +75,7 @@
         </table>
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+        <button type="button" onclick="closeMat()" class="btn btn-outline-secondary" data-bs-dismiss="modal">
             Close
         </button>
         </div>
