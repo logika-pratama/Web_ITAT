@@ -31,7 +31,7 @@
     </li>
 
     <li class="menu-item">
-        <a href="http://10.230.200.154/#/dashboard"  class="menu-link">
+        <a href="<?=base_url('index.php/searching/waiting?url=')?>http://10.230.200.154/#/dashboard"  class="menu-link">
         <i class='menu-icon tf-icons bx bxs-pie-chart-alt-2' ></i>
         <div data-i18n="Analytics">Dashboard ITAT</div>
         </a>
@@ -52,7 +52,7 @@
         </li>
         
         <li class="menu-item">
-            <a href="https://10.230.200.158:8082/" class="menu-link">
+            <a href="<?=base_url('index.php/searching/waiting?url=')?>https://10.230.200.158:8082/" class="menu-link">
             <div data-i18n="Without navbar">Aset Gudang</div>
             </a>
         </li>
@@ -68,12 +68,12 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="http://10.230.200.158:8081/" class="menu-link">
+            <a href="<?=base_url('index.php/searching/waiting?url=')?>http://10.230.200.158:8081/" class="menu-link">
             <div data-i18n="Fluid">Aset Luar Gudang</div>
             </a>
         </li>
         <li class="menu-item">
-            <a href="https://10.230.200.158" class="menu-link">
+            <a href="<?=base_url('index.php/searching/waiting?url=')?>https://10.230.200.158" class="menu-link">
             <div data-i18n="Blank">Pelacakan Aset</div>
             </a>
         </li>
