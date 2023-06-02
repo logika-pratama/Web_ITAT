@@ -26,7 +26,7 @@ setInterval(
       $('[name="nomer"]').val(0);
     }
   }, 
-2000);
+5000);
 
 function getData(){
   data = $("[name='scanrfid']").val();
@@ -65,12 +65,13 @@ function closeMat(){
 
 function showData(){
   rfid = event.currentTarget.dataset.id;
+  $(".list-data").html('');
+  $(".list-data-history").html('');
   $.ajax({
       url : "<?=base_url()?>index.php/scan_rfid/detailRFID/"+rfid,
       type: "GET",
       dataType:"JSON",
       success: function(data){
-        $(".list-data").html('');
         $('.asset_id').text(data[0]['asset_id']);
         $('.name_asset').text(data[0]['name_asset']);
         $('.serial_number').text(data[0]['serial_number']);
@@ -81,6 +82,18 @@ function showData(){
           $('.list-data').append("<tr><td>"+data[0]['specification'][i]['name']+"</td><td>"+data[0]['specification'][i]['description']+"</td></tr>");
         }
       
+      },
+  });
+
+  $.ajax({
+      url : "<?=base_url()?>index.php/scan_rfid/historyRFID/"+rfid,
+      type: "GET",
+      dataType:"JSON",
+      success: function(data){
+        var i;
+        for (i = 0; i < data[0]['data'].length; ++i) {
+          $('.list-data-history').append("<tr><td>"+data[i]['location_awal']+"</td><td>"+data[i]['location_tujuan']+"</td><td>"+data[i]['tanggal']+"</td></tr>");
+        }
       },
   });
 

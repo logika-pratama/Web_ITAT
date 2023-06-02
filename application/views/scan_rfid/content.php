@@ -43,7 +43,7 @@
     <div class="modal-dialog modal-fullscreen" role="document">
     <div class="modal-content ">
         <div class="modal-header">
-        <h5 class="modal-title" id="modalLongTitle">Detail RFID</h5>
+            <h5 class="modal-title" id="modalLongTitle">Detail RFID</h5>
         </div>
         <div class="modal-body">
         <table>
@@ -73,6 +73,16 @@
             <tbody class="list-data">
             </tbody>
         </table>
+
+        <h5>History</h5>
+
+        <table class="table table-striped table-bordered mt-3">
+            <thead>
+            </thead>
+            <tbody class="list-data-history">
+            </tbody>
+        </table>
+
         </div>
         <div class="modal-footer">
         <button type="button" onclick="closeMat()" class="btn btn-outline-secondary" data-bs-dismiss="modal">
