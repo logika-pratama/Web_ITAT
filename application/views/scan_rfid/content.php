@@ -79,9 +79,9 @@
         <table class="table table-striped table-bordered mt-3">
             <thead>
                 <tr>
-                    <td>Lokasi Awal</td>
-                    <td>Lokasi Tujuan</td>
-                    <td>Waktu</td>
+                    <td>Dari</td>
+                    <td>Ke</td>
+                    <td>Tanggal / Jam</td>
                 </tr>
             </thead>
             <tbody class="list-data-history">
