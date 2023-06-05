@@ -123,15 +123,13 @@ function konfirmasi(){
         }
     });
 
-    if($('.qrcode1').val() == '' || $('.qrcode2').val() == ''){
+    if($('.ble1').val() == '' || $('.ble2').val() == ''){
         Toast.fire({
             icon: 'error',
             title: 'Tags RFID atau BLE Belum Terisi'
         }) 
-    } else {
-
     }
-    
+
     $.ajax({
       url : "<?=base_url()?>index.php/taging_ble/konfrim/",
       type: "POST",
@@ -143,8 +141,8 @@ function konfirmasi(){
         success: function(data){
             $('.qrcode1').text('');
             $('.qrcode2').text('');
-            // $('.ble1').val('');
-            // $('.ble2').val('');
+            $('.ble1').val('');
+            $('.ble2').val('');
             
             Toast.fire({
                 icon: 'success',

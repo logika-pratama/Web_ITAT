@@ -91,8 +91,17 @@ function showData(){
       dataType:"JSON",
       success: function(data){
         var i;
-        for (i = 0; i < data[0]['data'].length; ++i) {
-          $('.list-data-history').append("<tr><td>"+data[i]['location_awal']+"</td><td>"+data[i]['location_tujuan']+"</td><td>"+data[i]['tanggal']+"</td></tr>");
+        for (i = 0; i < data.length; ++i) {
+
+          var todaydate = new Date(data[i]['tanggal']); 
+          var dd = todaydate .getDate();
+          var mm = todaydate .getMonth()+1;
+          var yyyy = todaydate .getFullYear();
+          if(dd<10){  dd='0'+dd } 
+          if(mm<10){  mm='0'+mm } 
+          var date = dd+'-'+mm+'-'+yyyy+' '+todaydate.getHours() + ':' + todaydate.getMinutes();
+
+          $('.list-data-history').append("<tr><td>"+data[i]['location_awal']+"</td><td>"+data[i]['location_tujuan']+"</td><td>"+date+"</td></tr>");
         }
       },
   });

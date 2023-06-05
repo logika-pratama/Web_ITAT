@@ -37,7 +37,7 @@ class Taging_ble extends CI_Controller {
 		$arr = array();
 		$payload= array(
 			"id" => $ble1,
-			"tag_name" => "BTM-0001",
+			"tag_name" => "BTM-".$name_produk,
 			"assetId" => $ble2,
 			"name" => $name_produk,
 			"object_name" => "assetA",

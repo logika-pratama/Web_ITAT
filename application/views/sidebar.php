@@ -24,7 +24,7 @@
     </li>
 
     <li class="menu-item">
-        <a href="javascript:void(0)" onclick="changePage()" data-url="https://depo.divtik.polri.go.id/" class="menu-link">
+        <a href="<?=base_url('index.php/searching/waiting?url=')?>https://depo.divtik.polri.go.id/" class="menu-link">
         <i class="menu-icon tf-icons bx bxs-file-find"></i>
         <div data-i18n="Analytics">Pelacakan BLE</div>
         </a>

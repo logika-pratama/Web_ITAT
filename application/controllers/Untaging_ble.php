@@ -30,15 +30,15 @@ class Untaging_ble extends CI_Controller {
 
 	public function konfrim(){
 		$ble1 = $this->input->post('ble1');
-		$ble2 = $this->input->post('ble2');
+		$ble2 = "";
 	
-		$name_produk = $this->detailRFID($ble2);
+		$name_produk = "";
 		
 		$arr = array();
 		$payload= array(
 			"id" => $ble1,
-			"tag_name" => "BTM-0001",
-			"assetId" => "",
+			"tag_name" => "",
+			"assetId" => $ble2,
 			"name" => $name_produk,
 			"object_name" => "assetA",
 			"object_type" => "assets",
@@ -76,32 +76,6 @@ class Untaging_ble extends CI_Controller {
 		curl_close($curl);
 		
 		echo $response;
-	}
-
-	public function detailRFID($rfid){
-			$curl = curl_init();
-			curl_setopt_array($curl, array(
-			CURLOPT_URL => 'http://10.230.200.158:8081/api/asset/detail?asset_id='.$rfid,
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_ENCODING => '',
-			CURLOPT_MAXREDIRS => 10,
-			CURLOPT_TIMEOUT => 0,
-			CURLOPT_FOLLOWLOCATION => true,
-			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			CURLOPT_CUSTOMREQUEST => 'GET',
-			CURLOPT_HTTPHEADER => array(
-				'apikey: $pbkdf2-sha512$6000$GMP4/39PSak1ZsyZs1aqVQ$a60XBBB.7SIq0rjWhdoR8vc27x526lcHngEN./Ou2kO2mJaHKww7abLzqvRRZZfaAu/3IXlxq5hOi71F2rStYA'
-			),
-			));
-			$response = curl_exec($curl);
-			curl_close($curl);
-			$rss = json_decode($response);
-		
-			if($rss->meta->status == 'success'){
-				return $rss->data[0]->name_asset;
-			} else {
-				return '';
-			}
 	}
 	
 }
