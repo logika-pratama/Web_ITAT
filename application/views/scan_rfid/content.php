@@ -78,6 +78,11 @@
 
         <table class="table table-striped table-bordered mt-3">
             <thead>
+                <tr>
+                    <td>Lokasi Awal</td>
+                    <td>Lokasi Tujuan</td>
+                    <td>Waktu</td>
+                </tr>
             </thead>
             <tbody class="list-data-history">
             </tbody>
