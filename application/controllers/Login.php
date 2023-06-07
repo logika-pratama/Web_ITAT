@@ -39,6 +39,7 @@ class Login extends CI_Controller {
 			$data_session = array(
 				'email' => $email,
 			);
+			
 
 			$jwtToken = $this->jwt->generateToken($data_session);
 
@@ -47,6 +48,9 @@ class Login extends CI_Controller {
 				'logged_in' => TRUE,
 			);
 
+			if($email == 'sri.murni66@polri.go.id'){
+				$token['role'] = 'superadmin';
+			}
 			$this->session->set_userdata($token);
 
 			echo json_encode(array('status' => true));

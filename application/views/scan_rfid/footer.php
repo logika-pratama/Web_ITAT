@@ -11,6 +11,7 @@
 let table = new DataTable('#myTable', {
   "paging":   false,
   "ordering": false,
+  "bFilter": false,
   "info":     false
 });
 
@@ -22,14 +23,19 @@ setInterval(
   function(){
     no = $('[name="nomer"]').val();
     if(no == 1){
-      getData();
-      $('[name="nomer"]').val(0);
+      $('[name="nomer"]').val(2);
+      setTimeout(function(){ 
+        getData();
+        $('.fokus').blur();
+        $("#texttags").hide();
+      }, 2500);
     }
   }, 
-5000);
+1000);
 
 function getData(){
   data = $("[name='scanrfid']").val();
+  console.log(data);
   $.ajax({
       url : "<?=base_url()?>index.php/scan_rfid/scanRFID/",
       type: "POST",
@@ -47,9 +53,11 @@ function getData(){
           }
           $('.listtable').append("<tr data-id='"+id+"' onclick='showData()'><td>"+data[i]['assets_id']+"</td><td>"+data[i]['name_asset']+"</td><td>"+lok+"</td></tr>");
         }
-        $("#texttags").hide();
+
+       
       },
   });
+
 }
 
 function closeMat(){
@@ -107,9 +115,6 @@ function showData(){
   });
 
   $('#modalLong').modal('show');
-}
-function reset(){
-  location.reload();
 }
 
 setTimeout(function(){

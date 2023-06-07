@@ -1,10 +1,6 @@
 
 <div class="row">
-    <div class="col-md-12">
-        <h5 class="card-header m-0"><?=$title?></h5>
-    </div>
-
-    <div class="col-md-12">
+    <div class="col-md-12 mt-1">
         <div class="form-group ps-4">
             <div id="texttags">
                 <input type="text" name="scanrfid" class="fokus form-control" style="width:100%;" data-role="tagsinput"/>
@@ -13,12 +9,12 @@
     </div>
     <div class="col-6">
         <div class="form-group ps-4 mt-2">
-            <a class="btn btn-danger text-white" onclick="reset()">Reset Scan</a>
+            <a href="<?=base_url('index.php/scan_rfid')?>" class="btn btn-danger btn-sm text-white">Reset Scan</a>
         </div>
     </div>
     <div class="col-6">
         <div class="form-group ps-4 mt-2">
-            <span class="btn btn-success text-white total-item">Total : </span>
+            <span class="btn btn-success text-white btn-sm total-item">Total : </span>
         </div>
     </div>
     <div class="col-md-12 mt-3">
