@@ -15,7 +15,6 @@
                 <tr>
                     <th style="color:white;">Nama</th>
                     <th style="color:white;">Username</th>
-                    <th style="color:white;">Password</th>
                     <th style="color:white;">Aksi</th>
                 </tr>
             </thead>
@@ -24,7 +23,6 @@
                 <tr>
                     <td><?=$u['name']?></td>
                     <td><?=$u['username']?></td>
-                    <td><?=$u['password']?></td>
                     <td>
                         <a href="javascript:void(0)" onclick="deleteItem('<?=$u['id_user']?>')" class="btn btn-danger btn-sm">Delete</a>
                         <a href="javascript:void(0)" data-id="<?=$u['id_user']?>" data-nama="<?=$u['name']?>" data-username="<?=$u['username']?>" data-password="<?=$u['password']?>" onclick="editItem('<?=$u['id_user']?>')" class="btn btn-info btn-sm">Edit</a>

@@ -73,15 +73,15 @@
                                                 </a>
                                             </div>
                                             <div class="col-4">
-                                                <a href="<?=base_url('index.php/searching/waiting?url=')?>http://10.230.200.154/#/dashboard" class="btn btn-secondary btn-sm mb-2" style="height:85px; width:100%;">
-                                                    <i class="bx bxs-pie-chart-alt-2 bx-md mb-1"></i>
-                                                    <p class="icon-name text-capitalize">Dasbhoard ITAT</p>
+                                                <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/pindai_rfid')?>" class="btn btn-danger btn-sm mb-2" style="height:85px; width:100%;">
+                                                    <i class="bx bx-scan bx-md mb-1"></i>
+                                                    <p class="icon-name text-capitalize">Pemindai RFID</p>
                                                 </a>
                                             </div>
                                             <div class="col-4">
-                                                <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/scan_rfid')?>" class="btn btn-danger btn-sm mb-2" style="height:85px; width:100%;">
+                                                <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/scan_rfid')?>" class="btn btn-secondary btn-sm mb-2" style="height:85px; width:100%;">
                                                     <i class="bx bx-scan bx-md mb-1"></i>
-                                                    <p class="icon-name text-capitalize">Pemindai Barang</p>
+                                                    <p class="icon-name text-capitalize">Scan RFID</p>
                                                 </a>
                                             </div>
                                             <div class="col-4">
@@ -160,17 +160,11 @@
     <script src="<?=base_url()?>assets/js/main.js"></script>
     <script src="<?=base_url()?>assets/js/dashboards-analytics.js"></script>
     <script>
-       $('.main-template').hide();
-       $('.frame-template').hide();
+    
        
       $( document ).ready(function() {
-          if(window.location.href == '<?=base_url()?>index.php/dashboard'){
-            $('.frame-template').hide();
-            $('.main-template').show();
-          } else {
-            $('.frame-template').show();
-            $('.main-template').hide();
-          }
+        $('.frame-template').hide();
+        $('.main-template').show();
       });
       
       function changePage(){

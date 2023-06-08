@@ -30,13 +30,6 @@
         </a>
     </li>
 
-    <li class="menu-item">
-        <a href="<?=base_url('index.php/searching/waiting?url=')?>http://10.230.200.154/#/dashboard"  class="menu-link">
-        <i class='menu-icon tf-icons bx bxs-pie-chart-alt-2' ></i>
-        <div data-i18n="Analytics">Dashboard ITAT</div>
-        </a>
-    </li>
-
     <!-- Layouts -->
     <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -46,8 +39,14 @@
 
         <ul class="menu-sub">
         <li class="menu-item">
+            <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/pindai_rfid')?>" class="menu-link">
+            <div data-i18n="Without menu">Pemindai RFID</div>
+            </a>
+        </li>
+
+        <li class="menu-item">
             <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/scan_rfid')?>" class="menu-link">
-            <div data-i18n="Without menu">Pemindai Barang</div>
+            <div data-i18n="Without menu">Scan RFID</div>
             </a>
         </li>
         
