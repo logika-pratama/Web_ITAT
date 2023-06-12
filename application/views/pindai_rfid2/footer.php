@@ -76,31 +76,29 @@ function showData(){
   $(".list-data").html('');
   $(".list-data-history").html('');
   $.ajax({
-      url : "<?=base_url()?>index.php/pindai_rfid2/detailRFID/"+rfid,
+      url : "<?=base_url()?>index.php/scan_rfid/detailRFID/"+rfid,
       type: "GET",
       dataType:"JSON",
       success: function(data){
-        $('.asset_id').text(data[0]['asset_id']);
-        $('.name_asset').text(data[0]['name_asset']);
-        $('.serial_number').text(data[0]['serial_number']);
-        $('.year_project').text(data[0]['year_project']);
-
+        $('.asset_id').text(data['data'][0]['asset_id']);
+        $('.name_asset').text(data['data'][0]['name_asset']);
+        $('.serial_number').text(data['data'][0]['serial_number']);
+        $('.year_project').text(data['data'][0]['year_project']);
         var i;
-        for (i = 0; i < data[0]['specification'].length; ++i) {
-          $('.list-data').append("<tr><td>"+data[0]['specification'][i]['name']+"</td><td>"+data[0]['specification'][i]['description']+"</td></tr>");
+        for (i = 0; i < data['data'][0]['product_attribute'].length; ++i) {
+          $('.list-data').append("<tr><td>"+data['data'][0]['product_attribute'][i]['name']+"</td><td>"+data['data'][0]['product_attribute'][i]['description']+"</td></tr>");
         }
       
       },
   });
 
   $.ajax({
-      url : "<?=base_url()?>index.php/pindai_rfid2/historyRFID/"+rfid,
+      url : "<?=base_url()?>index.php/scan_rfid/historyRFID/"+rfid,
       type: "GET",
       dataType:"JSON",
       success: function(data){
         var i;
         for (i = 0; i < data.length; ++i) {
-
           var todaydate = new Date(data[i]['tanggal']); 
           var dd = todaydate .getDate();
           var mm = todaydate .getMonth()+1;

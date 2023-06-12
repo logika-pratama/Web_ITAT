@@ -40,13 +40,7 @@
         <ul class="menu-sub">
         <li class="menu-item">
             <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/pindai_rfid')?>" class="menu-link">
-            <div data-i18n="Without menu">Gate In RFID</div>
-            </a>
-        </li>
-
-        <li class="menu-item">
-            <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/pindai_rfid2')?>" class="menu-link">
-            <div data-i18n="Without menu">Gate Out RFID</div>
+            <div data-i18n="Without menu">Pemindai RFID</div>
             </a>
         </li>
 
@@ -70,6 +64,11 @@
         <li class="menu-item">
             <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/untaging_ble')?>"  class="menu-link">
             <div data-i18n="Container">Pelepasan Tag BLE</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="<?=base_url('index.php/searching/waiting?url=')?>http://10.230.200.158:8081/" class="menu-link">
+            <div data-i18n="Fluid">Aset Luar Gudang</div>
             </a>
         </li>
         <li class="menu-item">
