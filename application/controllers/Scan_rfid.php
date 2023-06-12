@@ -168,4 +168,5 @@ class Scan_rfid extends CI_Controller {
 		echo $response;
 	}
 
+	
 }
