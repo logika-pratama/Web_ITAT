@@ -23,15 +23,18 @@ setInterval(
   function(){
     no = $('[name="nomer"]').val();
     if(no == 1){
+      data = $("[name='scanrfid']").val();
+      if(data != ''){
       $('[name="nomer"]').val(2);
-      setTimeout(function(){ 
-        getData();
-        $('.fokus').blur();
-        $("#texttags").hide();
-      }, 2500);
+        setTimeout(function(){ 
+          getData();
+          $('.fokus').blur();
+          $("#texttags").hide();
+        }, 2500);
+      }
     }
   }, 
-2000);
+1000);
 
 function getData(){
   data = $("[name='scanrfid']").val();
