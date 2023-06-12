@@ -35,7 +35,6 @@ setInterval(
 
 function getData(){
   data = $("[name='scanrfid']").val();
-  console.log(data);
   $.ajax({
       url : "<?=base_url()?>index.php/scan_rfid/scanRFID/",
       type: "POST",
@@ -66,7 +65,6 @@ function closeMat(){
       type: "POST",
       dataType:"JSON",
       success: function(data){
-        console.log(data);
       },
   });
 }
