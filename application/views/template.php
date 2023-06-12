@@ -75,9 +75,17 @@
                                             <div class="col-4">
                                                 <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/pindai_rfid')?>" class="btn btn-danger btn-sm mb-2" style="height:85px; width:100%;">
                                                     <i class="bx bx-scan bx-md mb-1"></i>
-                                                    <p class="icon-name text-capitalize">Pemindai RFID</p>
+                                                    <p class="icon-name text-capitalize">Gate In</p>
                                                 </a>
                                             </div>
+
+                                            <div class="col-4">
+                                                <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/pindai_rfid2')?>" class="btn btn-danger btn-sm mb-2" style="height:85px; width:100%;">
+                                                    <i class="bx bx-scan bx-md mb-1"></i>
+                                                    <p class="icon-name text-capitalize">Gate Out</p>
+                                                </a>
+                                            </div>
+
                                             <div class="col-4">
                                                 <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/scan_rfid')?>" class="btn btn-secondary btn-sm mb-2" style="height:85px; width:100%;">
                                                     <i class="bx bx-scan bx-md mb-1"></i>
