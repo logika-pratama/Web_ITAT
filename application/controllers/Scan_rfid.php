@@ -53,19 +53,17 @@ class Scan_rfid extends CI_Controller {
 			$response = curl_exec($curl);
 			curl_close($curl);
 			$rss = json_decode($response);
-			if(!empty($rss)){
-				if($rss->meta->message != 'Asset tidak ditemukan'){
-					if($rss->meta->status == 'success'){
-						$brr[$x]['assets_id'] = $rss->data[0]->asset_id;
-						$brr[$x]['location_asset'] = $rss->data[0]->location_asset;
-						if(!empty($rss->data[0]->name_asset)){
-							$brr[$x]['name_asset'] = $rss->data[0]->name_asset;
-						} else {
-							$brr[$x]['name_asset'] = '';
-						}
-						$x++;
-					} 
-				}
+			if($rss->meta->message != 'Asset tidak ditemukan'){
+				if($rss->meta->status == 'success'){
+					$brr[$x]['assets_id'] = $rss->data[0]->asset_id;
+					$brr[$x]['location_asset'] = $rss->data[0]->location_asset;
+					if(!empty($rss->data[0]->name_asset)){
+						$brr[$x]['name_asset'] = $rss->data[0]->name_asset;
+					} else {
+						$brr[$x]['name_asset'] = '';
+					}
+					$x++;
+				} 
 			}
 		}
 	
@@ -93,10 +91,12 @@ class Scan_rfid extends CI_Controller {
 
 		$response = curl_exec($curl);
 		curl_close($curl);
-		
+
 		$curl = curl_init();
+
+		$url = 'http://10.230.200.158:8081/api/asset/detail?asset_id='.$rfid;
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => 'http://10.230.200.157:8080/api/v1/item/search_detail?tag_number='.$rfid,
+		CURLOPT_URL => $url,
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,
@@ -105,13 +105,15 @@ class Scan_rfid extends CI_Controller {
 		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 		CURLOPT_CUSTOMREQUEST => 'GET',
 		CURLOPT_HTTPHEADER => array(
-			'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiT3BlcmF0b3IiLCJpZF91c2VyIjoib3BlcmF0b3ItZ3VkYW5nIiwiaWRhY2NvdW50IjoiMDAwOSIsInJvbGUiOiIzIiwiRGV2aWNlX0lEIjoiMDAwOGI4IiwibW9kdWxfbmFtZSI6IldJTTIiLCJpYXQiOjE2NjU2MzQzMDAsImV4cCI6MTY2NTcyMDcwMH0.kCGbOLCHwlWp8TjkZk2aM1tTuZ30EvN0TvO_8NDRUE4'
+			'apikey: $pbkdf2-sha512$6000$P4cQYmzN.X8v5bw3xhijtA$PzGUd4dnuuvvEDgwhUsvDafEKu4W4Z5McvDO5nchfAlllfNsbCXBeB5XE/KrbtFEqfM4ymR2IMzGsKWT0vXKFA'
 		),
 		));
 
 		$response = curl_exec($curl);
+
 		curl_close($curl);
-		$rss = json_decode($response);
+		$rss = json_decode($response,true);
+
 		if($rss->status == 'success'){
 			echo json_encode($rss->data);
 		} else {
