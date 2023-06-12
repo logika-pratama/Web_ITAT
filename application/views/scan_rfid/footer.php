@@ -23,42 +23,39 @@ setInterval(
   function(){
     no = $('[name="nomer"]').val();
     if(no == 1){
-      data = $("[name='scanrfid']").val();
-      if(data != ''){
       $('[name="nomer"]').val(2);
-        setTimeout(function(){ 
-          getData();
-          $('.fokus').blur();
-          $("#texttags").hide();
-        }, 2500);
-      }
+      setTimeout(function(){ 
+        getData();
+        $('.fokus').blur();
+        $("#texttags").hide();
+      }, 2500);
     }
   }, 
 1000);
 
 function getData(){
   data = $("[name='scanrfid']").val();
-  if(data != ''){
-    $.ajax({
-        url : "<?=base_url()?>index.php/scan_rfid/scanRFID/",
-        type: "POST",
-        data : {scan:data},
-        dataType:"JSON",
-        success: function(data){
-          $(".listtable").html('');
-          $('.total-item').text('Total :'+data.length);
-          var i;
-          for (i = 0; i < data.length; ++i) {
-            id = data[i]['assets_id'];
-            lok = data[i]['location_asset'];
-            if(lok == null){
-              lok = '';
-            }
-            $('.listtable').append("<tr data-id='"+id+"' onclick='showData()'><td>"+data[i]['assets_id']+"</td><td>"+data[i]['name_asset']+"</td><td>"+lok+"</td></tr>");
+  console.log(data);
+  $.ajax({
+      url : "<?=base_url()?>index.php/scan_rfid/scanRFID/",
+      type: "POST",
+      data : {scan:data},
+      dataType:"JSON",
+      success: function(data){
+        $(".listtable").html('');
+        $('.total-item').text('Total :'+data.length);
+        var i;
+        for (i = 0; i < data.length; ++i) {
+          id = data[i]['assets_id'];
+          lok = data[i]['location_asset'];
+          if(lok == null){
+            lok = '';
           }
-        },
-    });
-  }
+          $('.listtable').append("<tr data-id='"+id+"' onclick='showData()'><td>"+data[i]['assets_id']+"</td><td>"+data[i]['name_asset']+"</td><td>"+lok+"</td></tr>");
+        }
+      },
+  });
+
 }
 
 function closeMat(){
