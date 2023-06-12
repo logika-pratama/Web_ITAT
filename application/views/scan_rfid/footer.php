@@ -28,7 +28,7 @@ setInterval(
         getData();
         $('.fokus').blur();
         $("#texttags").hide();
-      }, 2500);
+      }, 3000);
     }
   }, 
 1000);
