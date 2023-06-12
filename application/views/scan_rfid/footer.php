@@ -28,10 +28,10 @@ setInterval(
         getData();
         $('.fokus').blur();
         $("#texttags").hide();
-      }, 3000);
+      }, 2500);
     }
   }, 
-1000);
+2000);
 
 function getData(){
   data = $("[name='scanrfid']").val();
