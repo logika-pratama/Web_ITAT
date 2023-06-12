@@ -35,29 +35,27 @@ setInterval(
 
 function getData(){
   data = $("[name='scanrfid']").val();
-  console.log(data);
-  $.ajax({
-      url : "<?=base_url()?>index.php/scan_rfid/scanRFID/",
-      type: "POST",
-      data : {scan:data},
-      dataType:"JSON",
-      success: function(data){
-        $(".listtable").html('');
-        $('.total-item').text('Total :'+data.length);
-        var i;
-        for (i = 0; i < data.length; ++i) {
-          id = data[i]['assets_id'];
-          lok = data[i]['location_asset'];
-          if(lok == null){
-            lok = '';
+  if(data != ''){
+    $.ajax({
+        url : "<?=base_url()?>index.php/scan_rfid/scanRFID/",
+        type: "POST",
+        data : {scan:data},
+        dataType:"JSON",
+        success: function(data){
+          $(".listtable").html('');
+          $('.total-item').text('Total :'+data.length);
+          var i;
+          for (i = 0; i < data.length; ++i) {
+            id = data[i]['assets_id'];
+            lok = data[i]['location_asset'];
+            if(lok == null){
+              lok = '';
+            }
+            $('.listtable').append("<tr data-id='"+id+"' onclick='showData()'><td>"+data[i]['assets_id']+"</td><td>"+data[i]['name_asset']+"</td><td>"+lok+"</td></tr>");
           }
-          $('.listtable').append("<tr data-id='"+id+"' onclick='showData()'><td>"+data[i]['assets_id']+"</td><td>"+data[i]['name_asset']+"</td><td>"+lok+"</td></tr>");
-        }
-
-       
-      },
-  });
-
+        },
+    });
+  }
 }
 
 function closeMat(){
