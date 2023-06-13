@@ -110,6 +110,8 @@ function showData(){
       type: "GET",
       dataType:"JSON",
       success: function(data){
+        $(".list-data").html('');
+        $(".list-data-history").html('');
         setTimeout(function(){ 
           $('.asset_id').text(data['data'][0]['asset_id']);
           $('.name_asset').text(data['data'][0]['name_asset']);
@@ -119,7 +121,7 @@ function showData(){
           for (i = 0; i < data['data'][0]['product_attribute'].length; ++i) {
             $('.list-data').append("<tr><td>"+data['data'][0]['product_attribute'][i]['name']+"</td><td>"+data['data'][0]['product_attribute'][i]['description']+"</td></tr>");
           }
-        }, 1000);
+        }, 500);
       },
   });
   
