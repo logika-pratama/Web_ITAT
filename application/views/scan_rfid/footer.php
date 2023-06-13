@@ -105,24 +105,23 @@ function showData(){
   $('.serial_number').text('');
   $('.year_project').text('');
 
-  setTimeout(function(){ 
   $.ajax({
       url : "<?=base_url()?>index.php/scan_rfid/detailRFID/"+rfid,
       type: "GET",
       dataType:"JSON",
       success: function(data){
-        $('.asset_id').text(data['data'][0]['asset_id']);
-        $('.name_asset').text(data['data'][0]['name_asset']);
-        $('.serial_number').text(data['data'][0]['serial_number']);
-        $('.year_project').text(data['data'][0]['year_project']);
-        var i;
-        for (i = 0; i < data['data'][0]['product_attribute'].length; ++i) {
-          $('.list-data').append("<tr><td>"+data['data'][0]['product_attribute'][i]['name']+"</td><td>"+data['data'][0]['product_attribute'][i]['description']+"</td></tr>");
-        }
-      
+        setTimeout(function(){ 
+          $('.asset_id').text(data['data'][0]['asset_id']);
+          $('.name_asset').text(data['data'][0]['name_asset']);
+          $('.serial_number').text(data['data'][0]['serial_number']);
+          $('.year_project').text(data['data'][0]['year_project']);
+          var i;
+          for (i = 0; i < data['data'][0]['product_attribute'].length; ++i) {
+            $('.list-data').append("<tr><td>"+data['data'][0]['product_attribute'][i]['name']+"</td><td>"+data['data'][0]['product_attribute'][i]['description']+"</td></tr>");
+          }
+        }, 1000);
       },
   });
-  }, 1000);
   
   $.ajax({
       url : "<?=base_url()?>index.php/scan_rfid/setRFID/"+rfid,

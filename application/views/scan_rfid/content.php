@@ -9,7 +9,7 @@
     </div>
     <div class="col-12">
         <div class="form-group ps-4 mt-2">
-            <a href="javascript:void(0)" class="btn btn-primary btn-sm text-white" onclick="getData()">Search</a>
+            <a href="javascript:void(0)" class="btn btn-primary btn-sm text-white" style="width:100%;" onclick="getData()">Search</a>
         </div>
     </div>
     <div class="col-6">
