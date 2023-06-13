@@ -15,23 +15,23 @@ let table = new DataTable('#myTable', {
   "info":     false
 });
 
-function insertData(){
-    $('[name="nomer"]').val(1);
-}
+// function insertData(){
+//     $('[name="nomer"]').val(1);
+// }
 
-setInterval(
-  function(){
-    no = $('[name="nomer"]').val();
-    if(no == 1){
-      $('[name="nomer"]').val(2);
-      setTimeout(function(){ 
-        getData();
-        $('.fokus').blur();
-        $("#texttags").hide();
-      }, 2500);
-    }
-  }, 
-1000);
+// setInterval(
+//   function(){
+//     no = $('[name="nomer"]').val();
+//     if(no == 1){
+//       $('[name="nomer"]').val(2);
+//       setTimeout(function(){ 
+//         getData();
+//         $('.fokus').blur();
+//         $("#texttags").hide();
+//       }, 2500);
+//     }
+//   }, 
+// 1000);
 
 function getData(){
   data = $("[name='scanrfid']").val();
@@ -71,13 +71,15 @@ function closeMat(){
 
 function showData(){
   rfid = event.currentTarget.dataset.id;
-  $(".list-data").html('');
-  $(".list-data-history").html('');
+  $(".list-data").html('loading..');
+  $(".list-data-history").html('loading..');
   $.ajax({
       url : "<?=base_url()?>index.php/scan_rfid/detailRFID/"+rfid,
       type: "GET",
       dataType:"JSON",
       success: function(data){
+        $(".list-data").html('');
+
         $('.asset_id').text(data['data'][0]['asset_id']);
         $('.name_asset').text(data['data'][0]['name_asset']);
         $('.serial_number').text(data['data'][0]['serial_number']);
@@ -103,6 +105,7 @@ function showData(){
       type: "GET",
       dataType:"JSON",
       success: function(data){
+        $(".list-data-history").html('');
         var i;
         for (i = 0; i < data.length; ++i) {
 
@@ -173,7 +176,7 @@ setTimeout(function(){
     this.inputSize = Math.max(1, this.placeholderText.length);
 
     this.$container = $('<div class="bootstrap-tagsinput"></div>');
-    this.$input = $('<input onkeypress="insertData()" type="text" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
+    this.$input = $('<input type="text" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
 
     this.$element.before(this.$container);
 

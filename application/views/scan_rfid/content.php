@@ -5,6 +5,11 @@
             <div id="texttags">
                 <input type="text" name="scanrfid" class="fokus form-control" style="width:100%;" data-role="tagsinput"/>
             </div>
+        </div>    
+    </div>
+    <div class="col-12">
+        <div class="form-group ps-4 mt-2">
+            <a href="javascript:void(0)" class="btn btn-primary btn-sm text-white" style="width:100%;" onclick="getData()">Search</a>
         </div>
     </div>
     <div class="col-6">
