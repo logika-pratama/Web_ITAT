@@ -93,7 +93,7 @@ function closeMat(){
 function showData(){
   rfid = event.currentTarget.dataset.id;
   $(".list-data").html('loading....');
-  $(".list-data-history").html('');
+  $(".list-data-history").html('loading...');
 
   $.ajax({
       url : "<?=base_url()?>index.php/scan_rfid/detailRFID/"+rfid,
