@@ -24,10 +24,15 @@ setInterval(
     no = $('[name="nomer"]').val();
     if(no == 1){
       setTimeout(function(){ 
-        getData();
-        $('.fokus').blur();
-        $("#texttags").hide();
+        no = $('[name="nomer"]').val(2);
       }, 2500);
+    }
+
+    if(no == 2){
+      no = $('[name="nomer"]').val(1);
+      getData();
+      $('.fokus').blur();
+      $("#texttags").hide();
     }
   }, 
 1000);
