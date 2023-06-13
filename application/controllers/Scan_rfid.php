@@ -71,10 +71,8 @@ class Scan_rfid extends CI_Controller {
 		echo $ress;
 	}
 
-	public function detailRFID($rfid){
-
+	public function setRFID($rfid){
 		$curl = curl_init();
-
 		curl_setopt_array($curl, array(
 		CURLOPT_URL => 'http://10.230.200.158:8081/api/ujimat/set_view_ujimat?asset_id='.$rfid,
 		CURLOPT_RETURNTRANSFER => true,
@@ -92,6 +90,9 @@ class Scan_rfid extends CI_Controller {
 		$response = curl_exec($curl);
 		curl_close($curl);
 
+	}
+
+	public function detailRFID($rfid){
 		$curl = curl_init();
 
 		$url = 'http://10.230.200.158:8081/api/asset/detail?asset_id='.$rfid;

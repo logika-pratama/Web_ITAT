@@ -94,6 +94,7 @@ function showData(){
   rfid = event.currentTarget.dataset.id;
   $(".list-data").html('');
   $(".list-data-history").html('');
+
   $.ajax({
       url : "<?=base_url()?>index.php/scan_rfid/detailRFID/"+rfid,
       type: "GET",
@@ -109,6 +110,14 @@ function showData(){
           $('.list-data').append("<tr><td>"+data['data'][0]['product_attribute'][i]['name']+"</td><td>"+data['data'][0]['product_attribute'][i]['description']+"</td></tr>");
         }
       
+      },
+  });
+  
+  $.ajax({
+      url : "<?=base_url()?>index.php/scan_rfid/setRFID/"+rfid,
+      type: "GET",
+      dataType:"JSON",
+      success: function(data){
       },
   });
 
