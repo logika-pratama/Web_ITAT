@@ -14,7 +14,7 @@
     </div>
     <div class="col-6">
         <div class="form-group ps-4 mt-2">
-            <a href="<?=base_url('index.php/scan_rfid')?>" class="btn btn-danger btn-sm text-white">Reset Scan</a>
+            <a href="javascript:void(0)" onclick="resetData()" class="btn btn-danger btn-sm text-white">Reset Scan</a>
         </div>
     </div>
     <div class="col-6">

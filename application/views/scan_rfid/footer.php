@@ -15,6 +15,10 @@ let table = new DataTable('#myTable', {
   "info":     false
 });
 
+function resetData(){
+  location.reload(true);
+}
+
 // function insertData(){
 //     $('[name="nomer"]').val(1);
 // }
