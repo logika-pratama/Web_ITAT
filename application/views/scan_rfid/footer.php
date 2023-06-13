@@ -94,6 +94,10 @@ function showData(){
   rfid = event.currentTarget.dataset.id;
   $(".list-data").html('loading....');
   $(".list-data-history").html('loading...');
+  $('.asset_id').text('');
+  $('.name_asset').text('');
+  $('.serial_number').text('');
+  $('.year_project').text('');
 
   $.ajax({
       url : "<?=base_url()?>index.php/scan_rfid/detailRFID/"+rfid,
