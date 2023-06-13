@@ -16,8 +16,13 @@ let table = new DataTable('#myTable', {
 });
 
 function resetData(){
-  location.reload(true);
+  location.reload();
 }
+
+$( document ).ready(function() {
+  location.reload();
+});
+
 
 // function insertData(){
 //     $('[name="nomer"]').val(1);
