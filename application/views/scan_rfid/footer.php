@@ -15,6 +15,12 @@ let table = new DataTable('#myTable', {
   "info":     false
 });
 
+
+$( document ).ready(function() {
+    $('.rsc').hide();
+    $('.tt').hide();
+});
+
 // function insertData(){
 //     $('[name="nomer"]').val(1);
 // }
@@ -38,6 +44,7 @@ let table = new DataTable('#myTable', {
 // 1000);
 
 function getData(){
+  $('.src').hide();
   data = $("[name='scanrfid']").val();
   if(data != ''){
     $.ajax({
@@ -53,6 +60,9 @@ function getData(){
                 data : {scan:data},
                 dataType:"JSON",
                 success: function(data){
+                  $('.rsc').show();
+                  $('.tt').show();
+                  
                     $(".listtable").html('');
                     $('.total-item').text('Total :'+data.length);
                     var i;

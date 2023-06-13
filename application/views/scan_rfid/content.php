@@ -9,17 +9,17 @@
     </div>
     <div class="col-12">
         <div class="form-group ps-4 mt-2">
-            <a href="javascript:void(0)" class="btn btn-primary btn-sm text-white" style="width:100%;" onclick="getData()">Search</a>
+            <a href="javascript:void(0)" class="btn btn-primary btn-sm text-white src" style="width:100%;" onclick="getData()">Search</a>
         </div>
     </div>
     <div class="col-6">
         <div class="form-group ps-4 mt-2">
-            <a href="<?=base_url('index.php/scan_rfid')?>" class="btn btn-danger btn-sm text-white">Reset Scan</a>
+            <a href="<?=base_url('index.php/scan_rfid')?>" class="btn btn-danger btn-sm text-white rsc">Reset Scan</a>
         </div>
     </div>
     <div class="col-6">
         <div class="form-group ps-4 mt-2">
-            <span class="btn btn-success text-white btn-sm total-item">Total : </span>
+            <span class="btn btn-success text-white btn-sm total-item tt">Total : </span>
         </div>
     </div>
     <div class="col-md-12 mt-3">
