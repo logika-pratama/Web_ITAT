@@ -79,6 +79,8 @@ function getData(){
               $('.listtable').append("<tr data-id='"+id+"' onclick='showData()'><td>"+data[i]['assets_id']+"</td><td>"+data[i]['name_asset']+"</td><td>"+lok+"</td></tr>");
             }
           }
+          $('.fokus').blur();
+          $("#texttags").hide();
         },
     });
   }
@@ -205,7 +207,7 @@ setTimeout(function(){
     this.inputSize = Math.max(1, this.placeholderText.length);
 
     this.$container = $('<div class="bootstrap-tagsinput"></div>');
-    this.$input = $('<input onkeypress="insertData()" type="text" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
+    this.$input = $('<input type="text" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
 
     this.$element.before(this.$container);
 
