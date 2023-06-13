@@ -45,6 +45,8 @@ $( document ).ready(function() {
 
 function getData(){
   $('.src').hide();
+  $('.rsc').show();
+  $('.tt').show();
   data = $("[name='scanrfid']").val();
   if(data != ''){
     $.ajax({
@@ -59,10 +61,7 @@ function getData(){
                 type: "POST",
                 data : {scan:data},
                 dataType:"JSON",
-                success: function(data){
-                  $('.rsc').show();
-                  $('.tt').show();
-                  
+                success: function(data){      
                     $(".listtable").html('');
                     $('.total-item').text('Total :'+data.length);
                     var i;
