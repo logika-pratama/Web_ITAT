@@ -77,7 +77,6 @@ function getData(){
         },
     });
   }
-  $('[name="nomer"]').val(0);
 }
 
 function closeMat(){
@@ -99,6 +98,7 @@ function showData(){
   $('.serial_number').text('');
   $('.year_project').text('');
 
+  setTimeout(function(){ 
   $.ajax({
       url : "<?=base_url()?>index.php/scan_rfid/detailRFID/"+rfid,
       type: "GET",
@@ -115,6 +115,7 @@ function showData(){
       
       },
   });
+  }, 1000);
   
   $.ajax({
       url : "<?=base_url()?>index.php/scan_rfid/setRFID/"+rfid,
