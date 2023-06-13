@@ -15,27 +15,27 @@ let table = new DataTable('#myTable', {
   "info":     false
 });
 
-function insertData(){
-    $('[name="nomer"]').val(1);
-}
+// function insertData(){
+//     $('[name="nomer"]').val(1);
+// }
 
-setInterval(
-  function(){
-    no = $('[name="nomer"]').val();
-    if(no == 1){
-      setTimeout(function(){ 
-        no = $('[name="nomer"]').val(2);
-      }, 2500);
-    }
+// setInterval(
+//   function(){
+//     no = $('[name="nomer"]').val();
+//     if(no == 1){
+//       setTimeout(function(){ 
+//         no = $('[name="nomer"]').val(2);
+//       }, 2500);
+//     }
 
-    if(no == 2){
-      no = $('[name="nomer"]').val(1);
-      getData();
-      $('.fokus').blur();
-      $("#texttags").hide();
-    }
-  }, 
-1000);
+//     if(no == 2){
+//       no = $('[name="nomer"]').val(1);
+//       getData();
+//       $('.fokus').blur();
+//       $("#texttags").hide();
+//     }
+//   }, 
+// 1000);
 
 function getData(){
   data = $("[name='scanrfid']").val();
