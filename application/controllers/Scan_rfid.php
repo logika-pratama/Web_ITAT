@@ -53,6 +53,7 @@ class Scan_rfid extends CI_Controller {
 			$response = curl_exec($curl);
 			curl_close($curl);
 			$rss = json_decode($response);
+			if(!empty($rss->meta)){
 				if($rss->meta->message != 'Asset tidak ditemukan'){
 					if($rss->meta->status == 'success'){
 						$brr[$x]['assets_id'] = $rss->data[0]->asset_id;
@@ -65,6 +66,7 @@ class Scan_rfid extends CI_Controller {
 						$x++;
 					} 
 				}
+			}
 		}
 	
 		$ress = json_encode($brr);
