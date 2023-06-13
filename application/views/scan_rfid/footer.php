@@ -45,8 +45,6 @@ $( document ).ready(function() {
 
 function getData(){
   $('.src').hide();
-  $('.rsc').show();
-  $('.tt').show();
   data = $("[name='scanrfid']").val();
   if(data != ''){
     $.ajax({
@@ -55,6 +53,8 @@ function getData(){
         data : {scan:data},
         dataType:"JSON",
         success: function(data){
+          $('.rsc').show();
+          $('.tt').show();
           if(data == null){
             $.ajax({
                 url : "<?=base_url()?>index.php/scan_rfid/scanRFID/",
