@@ -92,7 +92,7 @@ function closeMat(){
 
 function showData(){
   rfid = event.currentTarget.dataset.id;
-  $(".list-data").html('');
+  $(".list-data").html('loading....');
   $(".list-data-history").html('');
 
   $.ajax({
@@ -100,7 +100,6 @@ function showData(){
       type: "GET",
       dataType:"JSON",
       success: function(data){
-        console.log(data);
         $('.asset_id').text(data['data'][0]['asset_id']);
         $('.name_asset').text(data['data'][0]['name_asset']);
         $('.serial_number').text(data['data'][0]['serial_number']);
