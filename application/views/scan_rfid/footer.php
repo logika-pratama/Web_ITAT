@@ -51,12 +51,11 @@ function getData(){
             lok = '';
           }
           $('.listtable').append("<tr data-id='"+id+"' onclick='showData()'><td>"+data[i]['assets_id']+"</td><td>"+data[i]['name_asset']+"</td><td>"+lok+"</td></tr>");
-        }
-
-       
+        }       
       },
   });
-
+    $('.fokus').blur();
+    $("#texttags").hide();
 }
 
 function closeMat(){
