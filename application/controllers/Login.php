@@ -49,7 +49,7 @@ class Login extends CI_Controller {
 		),
 		));
 		$response = curl_exec($curl);
-		$rss = json_decode($response);
+		$rss = json_decode($response,true);
 		curl_close($curl);
 		if(!empty($rss['jwtTokken'])){	
 		$token = array(
