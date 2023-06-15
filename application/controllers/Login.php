@@ -32,6 +32,7 @@ class Login extends CI_Controller {
 			'email' => $email,
 			'password' => $password
 		);
+		$res = json_encode($arr);
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
 		CURLOPT_URL => 'http://10.230.200.157:8080/api/v1/login',
@@ -43,7 +44,7 @@ class Login extends CI_Controller {
 			CURLOPT_FOLLOWLOCATION => true,
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			CURLOPT_CUSTOMREQUEST => 'POST',
-			CURLOPT_POSTFIELDS => json_encode($arr),
+			CURLOPT_POSTFIELDS => $res,
 			CURLOPT_HTTPHEADER => array(
 				'Content-Type: application/json'
 			),
@@ -51,9 +52,9 @@ class Login extends CI_Controller {
 		$response = curl_exec($curl);
 		$rss = json_decode($response,true);
 		curl_close($curl);
-		if(!empty($rss['jwtTokken'])){	
+		if(!empty($rss)){	
 		$token = array(
-				'token' => $rss['jwtTokken'],
+				'token' => $response,
 				'logged_in' => TRUE,
 			);
 
