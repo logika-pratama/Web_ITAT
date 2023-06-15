@@ -28,7 +28,10 @@ class Login extends CI_Controller {
 	function login(){
 		$email = $this->input->post('email');
 		$password = $this->input->post('password');
-
+		$arr = array(
+			'email' => $email,
+			'password' => $password
+		);
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
 		CURLOPT_URL => 'http://10.230.200.157:8080/api/v1/login',
@@ -39,10 +42,7 @@ class Login extends CI_Controller {
 			CURLOPT_FOLLOWLOCATION => true,
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			CURLOPT_CUSTOMREQUEST => 'POST',
-			CURLOPT_POSTFIELDS =>'{
-				"email":"'.$email.'",
-				"password":"'.$password.'"
-			}',
+			CURLOPT_POSTFIELDS => json_encode($arr),
 			CURLOPT_HTTPHEADER => array(
 				'Content-Type: application/json'
 			),
@@ -61,9 +61,9 @@ class Login extends CI_Controller {
 			}
 			$this->session->set_userdata($token);
 
-			echo json_encode(array('status' => true));
+			echo json_encode(array('status' => true, 'message' => $response));
 		} else {
-			echo json_encode(array('status' => false,'massage' => 'Password anda salah!'));
+			echo json_encode(array('status' => false,'massage' => $response));
 			die;
 		}
 	}
