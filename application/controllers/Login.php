@@ -36,6 +36,7 @@ class Login extends CI_Controller {
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,
 		CURLOPT_TIMEOUT => 0,
+		CURLOPT_SSL_VERIFYHOST => false,
 		CURLOPT_FOLLOWLOCATION => true,
 		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 		CURLOPT_CUSTOMREQUEST => 'POST',
@@ -74,4 +75,6 @@ class Login extends CI_Controller {
 			$this->session->set_flashdata('msg', '<div class="alert alert-success"><p>Anda Berhasil Logout</p></div>');
 			redirect('index.php/login');
 		}
+
+	
 }
