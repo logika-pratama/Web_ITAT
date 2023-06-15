@@ -34,7 +34,7 @@ class Login extends CI_Controller {
 		);
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => 'http://10.230.200.157:8080/api/v1/login',
+		CURLOPT_URL => 'https://10.230.200.157:8080/api/v1/login',
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,
