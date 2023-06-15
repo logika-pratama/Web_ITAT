@@ -24,63 +24,71 @@ $( document ).ready(function() {
   });
 });
 
-let table = new DataTable('#myTable', {
-  "paging":   false,
-  "ordering": false,
-  "bFilter": false,
-  "info":     false
-});
-
 function resetData(){
   location.reload(true);
   location.reload();
 }
 
-$(".kontrak").click(function(){
+$(".kontrak").change(function(){
   $(".fokus").tagsinput('focus');
 });
-
-// function insertData(){
-//     $('[name="nomer"]').val(1);
-// }
-
-// setInterval(
-//   function(){
-//     no = $('[name="nomer"]').val();
-//     if(no == 1){
-//       $('[name="nomer"]').val(2);
-//       setTimeout(function(){ 
-//         getData();
-//         $('.fokus').blur();
-//         $("#texttags").hide();
-//       }, 2500);
-//     }
-//   }, 
-// 1000);
 
 function getData(){
   data = $("[name='scanrfid']").val();
   kontrak = $('.kontrak').val();
-  console.log(kontrak);
-  $.ajax({
-      url : "<?=base_url()?>index.php/scan_rfid/scanRFID/",
-      type: "POST",
-      data : {scan:data,kontrak:kontrak},
-      dataType:"JSON",
-      success: function(data){
-        $(".listtable").html('');
-        $('.total-item').text('Total :'+data.length);
-        var i;
-        for (i = 0; i < data.length; ++i) {
-          id = data[i]['assets_id'];
-          lok = data[i]['location_asset'];
-          if(lok == null){
-            lok = '';
-          }
-          $('.listtable').append("<tr data-id='"+id+"' onclick='showData()'><td>"+data[i]['assets_id']+"</td><td>"+data[i]['name_asset']+"</td><td>"+lok+"</td></tr>");
-        }       
-      },
-  });
+
+  var table = $('#myTable').DataTable({
+        "paging":   false,
+        "ordering": false,
+        "info":     false,
+        "processing": true,
+        "serverSide": true,
+        "ajax":{
+          "url": "<?=base_url()?>index.php/scan_rfid/scanRFID/",
+          "dataType": "json",
+          "type": "POST".
+          "data" : {
+            scan:data,
+            kontrak:kontrak
+          },
+        },
+        "columns": [
+            { 
+              "data": "assets_id",
+              render: function(data, type,row) {
+                    if (type === 'display') {
+                      row.title
+                      return '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
+                    }
+                    return data;
+                }
+            },
+            { 
+              "data": "name_asset",
+              render: function(data, type,row) {
+                  if (type === 'display') {
+                      return '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
+                  }
+                  return data;
+              }
+            },
+            {
+               "data": "location_asset",
+               render: function(data, type,row) {
+                    if (type === 'display') {
+                      return '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
+                    }
+                    return data;
+                } 
+            },
+        ]  
+    });
+
+    setTimeout(
+      function(){
+        $('.total-item').text('Total :'+table.fnGetData().length);
+    }, 1000);
+  
     $('.fokus').blur();
     $("#texttags").hide();
 }
@@ -112,9 +120,10 @@ function showData(){
         $('.year_project').text(data['data'][0]['year_project']);
         var i;
         for (i = 0; i < data['data'][0]['product_attribute'].length; ++i) {
-          $('.list-data').append("<tr><td>"+data['data'][0]['product_attribute'][i]['name']+"</td><td>"+data['data'][0]['product_attribute'][i]['description']+"</td></tr>");
-        }
-      
+          if(data['data'][0]['product_attribute'][i]['description'] != ""){
+            $('.list-data').append("<tr><td>"+data['data'][0]['product_attribute'][i]['name']+"</td><td>"+data['data'][0]['product_attribute'][i]['description']+"</td></tr>");
+          }
+          }
       },
   });
 

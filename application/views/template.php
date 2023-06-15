@@ -128,7 +128,7 @@
                             </div>
                         </div>
                           <div class="video-container frame-template">
-                              <iframe sandbox="allow-same-origin allow-scripts allow-popups allow-forms" class="content-frame" id="frame" style="background-color: #FFFFFF;" src="<?=base_url('index.php/main')?>" frameborder="0" allowfullscreen></iframe>
+                              <iframe class="content-frame" id="frame" style="background-color: #FFFFFF;" src="<?=base_url('index.php/main')?>" frameborder="0"></iframe>
                           </div>
                         </div>
                       </div>

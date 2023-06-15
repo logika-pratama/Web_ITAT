@@ -113,7 +113,6 @@
   padding-top:30px;
   height:78vh;
   background-color:white;
-  overflow:hidden;
 }
 
 .video-container iframe, .video-container object, .video-container embed {

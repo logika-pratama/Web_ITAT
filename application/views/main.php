@@ -3,10 +3,9 @@
   <head>
     <?php $this->load->view($this->uri->segment(1).'/header'); ?>
 	<meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 	</head>
-  <body>
+  <body style="overflow: auto;">
   <section>
     <div id="preloader">
 			<div id="ctn-preloader" class="ctn-preloader">

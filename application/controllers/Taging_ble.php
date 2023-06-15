@@ -12,9 +12,9 @@ class Taging_ble extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
-		if(empty($this->session->userdata('token'))){
-			redirect('login');
-		}
+				// if(empty($this->session->userdata('token'))){
+		// 	redirect('login');
+		// }
 	}
 
 	public function index()
