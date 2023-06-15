@@ -86,7 +86,7 @@ function getData(){
 
     setTimeout(
       function(){
-        $('.total-item').text('Total :'+table.fnGetData().length);
+        // $('.total-item').text('Total :'+table.fnGetData().length);
     }, 1000);
   
     $('.fokus').blur();
