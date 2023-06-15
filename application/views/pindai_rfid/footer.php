@@ -7,97 +7,143 @@
 <script src="<?=base_url()?>assets/js/main.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script type="text/javascript">
-let table = new DataTable('#myTable', {
-  "paging":   false,
-  "ordering": false,
-  "bFilter": false,
-  "info":     false
-});
-
-function insertData(){
-    $('[name="nomer"]').val(1);
-}
-
-setInterval(
-  function(){
-    no = $('[name="nomer"]').val();
-    if(no == 1){
-      $('[name="nomer"]').val(2);
-      setTimeout(function(){ 
-        getData();
-        $('.fokus').blur();
-        $("#texttags").hide();
-      }, 2500);
-    }
-  }, 
-1000);
-
-function getData(){
-  data = $("[name='scanrfid']").val();
-  console.log(data);
+$( document ).ready(function() {
+  $('.kontrak').select2();
   $.ajax({
-      url : "<?=base_url()?>index.php/pindai_rfid/scanRFID/",
-      type: "POST",
-      data : {scan:data},
+      url : "<?=base_url()?>index.php/scan_rfid/getKontrak/",
+      type: "GET",
       dataType:"JSON",
       success: function(data){
-        $(".listtable").html('');
-        $('.total-item').text('Total :'+data.length);
         var i;
         for (i = 0; i < data.length; ++i) {
-          id = data[i]['assets_id'];
-          lok = data[i]['location_asset'];
-          if(lok == null){
-            lok = '';
-          }
-          $('.listtable').append("<tr data-id='"+id+"' onclick='showData()'><td>"+data[i]['assets_id']+"</td><td>"+data[i]['name_asset']+"</td><td>"+lok+"</td></tr>");
-        }
-
-       
+          $('.kontrak').append('<option value="'+data[i]['id']+'">'+data[i]['description']+'</option>');
+        }       
       },
   });
+});
 
+function resetData(){
+  location.reload(true);
+  location.reload();
+}
+
+$(".kontrak").change(function(){
+  $(".fokus").tagsinput('focus');
+});
+
+function getData(){
+  scan = $("[name='scanrfid']").val();
+  kontrak = $('.kontrak').val();
+
+  var table = $('#myTable').DataTable({
+        "paging":   false,
+        "ordering": false,
+        "info":     false,
+        "processing": true,
+        "stateSave": true,
+        "serverSide": true,
+        "ajax":{
+          "url": "<?=base_url()?>index.php/scan_rfid/scanRFID/",
+          "dataType": "json",
+          "type": "POST",
+          "data" : {
+            "scan" : scan,
+            "kontrak" : kontrak
+          },
+        },
+        "columns": [
+            { 
+              data: "assets_id",
+              'render': function(data, type, row, meta){
+                  if(type === 'display'){
+                    data = '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
+                  }
+
+                  return data;
+                } 
+            },
+            { 
+              data: "name_asset",
+              'render': function(data, type, row, meta){
+                  if(type === 'display'){
+                    data = '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
+                  }
+
+                  return data;
+                } 
+            },
+            {
+               data: "location_asset",
+               'render': function(data, type, row, meta){
+                  if(type === 'display'){
+                    data = '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
+                  }
+
+                  return data;
+                } 
+            },
+        ]  
+    });
+
+    setTimeout(
+      function(){
+        // $('.total-item').text('Total :'+table.fnGetData().length);
+    }, 1000);
+  
+    $('.fokus').blur();
+    $("#texttags").hide();
 }
 
 function closeMat(){
   $.ajax({
-      url : "<?=base_url()?>index.php/pindai_rfid/closeMat/",
+      url : "<?=base_url()?>index.php/scan_rfid/closeMat/",
       type: "POST",
       dataType:"JSON",
       success: function(data){
-        console.log(data);
       },
   });
 }
 
 function showData(){
   rfid = event.currentTarget.dataset.id;
-  $(".list-data").html('');
-  $(".list-data-history").html('');
+  $(".list-data").html('loading..');
+  $(".list-data-history").html('loading..');
   $.ajax({
-      url : "<?=base_url()?>index.php/pindai_rfid/detailRFID/"+rfid,
+      url : "<?=base_url()?>index.php/scan_rfid/detailRFID/"+rfid,
       type: "GET",
       dataType:"JSON",
       success: function(data){
-        $('.asset_id').text(data[0]['asset_id']);
-        $('.name_asset').text(data[0]['name_asset']);
-        $('.serial_number').text(data[0]['serial_number']);
-        $('.year_project').text(data[0]['year_project']);
+        $(".list-data").html('');
 
+        $('.asset_id').text(data['data'][0]['asset_id']);
+        $('.name_asset').text(data['data'][0]['name_asset']);
+        $('.serial_number').text(data['data'][0]['serial_number']);
+        $('.year_project').text(data['data'][0]['year_project']);
         var i;
-        for (i = 0; i < data[0]['specification'].length; ++i) {
-          $('.list-data').append("<tr><td>"+data[0]['specification'][i]['name']+"</td><td>"+data[0]['specification'][i]['description']+"</td></tr>");
-        }
-      
+        for (i = 0; i < data['data'][0]['product_attribute'].length; ++i) {
+          if(data['data'][0]['product_attribute'][i]['description'] != ""){
+            $('.list-data').append("<tr><td>"+data['data'][0]['product_attribute'][i]['name']+"</td><td>"+data['data'][0]['product_attribute'][i]['description']+"</td></tr>");
+          }
+          }
       },
   });
 
   $.ajax({
-      url : "<?=base_url()?>index.php/pindai_rfid/historyRFID/"+rfid,
+      url : "<?=base_url()?>index.php/scan_rfid/setRFID/"+rfid,
       type: "GET",
       dataType:"JSON",
       success: function(data){
+      },
+  });
+
+  $.ajax({
+      url : "<?=base_url()?>index.php/scan_rfid/historyRFID/"+rfid,
+      type: "GET",
+      dataType:"JSON",
+      success: function(data){
+        $(".list-data-history").html('');
         var i;
         for (i = 0; i < data.length; ++i) {
 
@@ -168,7 +214,7 @@ setTimeout(function(){
     this.inputSize = Math.max(1, this.placeholderText.length);
 
     this.$container = $('<div class="bootstrap-tagsinput"></div>');
-    this.$input = $('<input onkeypress="insertData()" type="text" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
+    this.$input = $('<input type="text" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
 
     this.$element.before(this.$container);
 
