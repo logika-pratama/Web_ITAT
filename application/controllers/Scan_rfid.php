@@ -71,7 +71,7 @@ class Scan_rfid extends CI_Controller {
 		$ress = array(
 			"data" => $brr
 		);
-		$ress = json_encode($brr);
+		$ress = json_encode($ress);
 		echo $ress;
 	}
 
