@@ -34,7 +34,7 @@ $(".kontrak").change(function(){
 });
 
 function getData(){
-  data = $("[name='scanrfid']").val();
+  scan = $("[name='scanrfid']").val();
   kontrak = $('.kontrak').val();
 
   var table = $('#myTable').DataTable({
@@ -48,8 +48,8 @@ function getData(){
           "dataType": "json",
           "type": "POST".
           "data" : {
-            "scan":data,
-            "kontrak":kontrak
+            "scan" : scan,
+            "kontrak" : kontrak
           },
         },
         "columns": [
