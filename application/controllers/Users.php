@@ -11,7 +11,6 @@ class Users extends CI_Controller {
 		$this->load->library('user_agent');
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		$this->load->model('jwt_model','jwt');
 
 		if(empty($this->session->userdata('token'))){
 			redirect('login');
@@ -20,10 +19,9 @@ class Users extends CI_Controller {
 
 	public function index()
 	{
-		$session = $this->jwt->decodeToken($this->session->userdata('token'));
+		
 		$data = array(
 			'title' => 'Akun Pengguna',
-			'session' => $session,
 			'users' => $this->db->get('users')->result_array(),
 		);
 		$this->load->view('main',$data);

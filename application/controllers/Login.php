@@ -10,7 +10,6 @@ class Login extends CI_Controller {
 		$this->load->library('user_agent');
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		$this->load->model('jwt_model','jwt');
 
 		if(!empty($this->session->userdata('token'))){
 			redirect('index.php/dashboard');
