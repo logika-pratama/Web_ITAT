@@ -97,8 +97,6 @@ class Pindai_rfid extends CI_Controller {
 
 		$response = curl_exec($curl);
 		curl_close($curl);
-		echo $response;
-
 
 		$ress = array(
 			"data" => $brr
