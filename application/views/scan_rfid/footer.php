@@ -57,8 +57,7 @@ function getData(){
               "data": "assets_id",
               render: function(data, type,row) {
                     if (type === 'display') {
-                      row.title
-                      return '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
+                      data = '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
                     }
                     return data;
                 }
@@ -67,7 +66,7 @@ function getData(){
               "data": "name_asset",
               render: function(data, type,row) {
                   if (type === 'display') {
-                      return '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
+                      data = '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
                   }
                   return data;
               }
@@ -76,7 +75,7 @@ function getData(){
                "data": "location_asset",
                render: function(data, type,row) {
                     if (type === 'display') {
-                      return '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
+                      data = '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
                     }
                     return data;
                 } 
