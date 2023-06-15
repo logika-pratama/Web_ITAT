@@ -48,8 +48,8 @@ function getData(){
           "dataType": "json",
           "type": "POST".
           "data" : {
-            scan:data,
-            kontrak:kontrak
+            "scan":data,
+            "kontrak":kontrak
           },
         },
         "columns": [
