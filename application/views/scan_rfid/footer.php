@@ -46,7 +46,7 @@ function getData(){
         "ajax":{
           "url": "<?=base_url()?>index.php/scan_rfid/scanRFID/",
           "dataType": "json",
-          "type": "POST".
+          "type": "POST",
           "data" : {
             "scan" : scan,
             "kontrak" : kontrak
