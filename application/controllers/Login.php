@@ -32,26 +32,25 @@ class Login extends CI_Controller {
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
 		CURLOPT_URL => 'http://10.230.200.157:8080/api/v1/login',
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_ENCODING => '',
-		CURLOPT_MAXREDIRS => 10,
-		CURLOPT_TIMEOUT => 0,
-		CURLOPT_FOLLOWLOCATION => true,
-		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		CURLOPT_CUSTOMREQUEST => 'POST',
-		CURLOPT_POSTFIELDS =>'{
-			"email":"'.$email.'",
-			"password":"'.$password.'"
-		}',
-		CURLOPT_HTTPHEADER => array(
-			'Content-Language: en-US',
-			'Content-Type: application/json'
-		),
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => '',
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 0,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => 'POST',
+			CURLOPT_POSTFIELDS =>'{
+				"email":"'.$email.'",
+				"password":"'.$password.'"
+			}',
+			CURLOPT_HTTPHEADER => array(
+				'Content-Type: application/json'
+			),
 		));
 		$response = curl_exec($curl);
 		$rss = json_decode($response,true);
 		curl_close($curl);
-		if(!empty($rss['jwtTokken'])){
+		if(!empty($rss['jwtTokken'])){	
 		$token = array(
 				'token' => $rss['jwtTokken'],
 				'logged_in' => TRUE,
