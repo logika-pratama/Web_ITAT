@@ -28,6 +28,7 @@ class Login extends CI_Controller {
 	function login(){
 		$email = $this->input->post('email');
 		$password = $this->input->post('password');
+
 		$arr = array(
 			'email' => $email,
 			'password' => $password
@@ -44,7 +45,10 @@ class Login extends CI_Controller {
 			CURLOPT_FOLLOWLOCATION => true,
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			CURLOPT_CUSTOMREQUEST => 'POST',
-			CURLOPT_POSTFIELDS => $res,
+			CURLOPT_POSTFIELDS => '{
+				"email":"sri.murni66@polri.go.id",
+				"password":"Asetpolri2023"
+			}',
 			CURLOPT_HTTPHEADER => array(
 				'Content-Type: application/json'
 			),
