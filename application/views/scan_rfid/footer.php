@@ -7,7 +7,23 @@
 <script src="<?=base_url()?>assets/js/main.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script type="text/javascript">
+$( document ).ready(function() {
+  $('.kontrak').select2();
+  $.ajax({
+      url : "<?=base_url()?>index.php/scan_rfid/getKontrak/",
+      type: "GET",
+      dataType:"JSON",
+      success: function(data){
+        var i;
+        for (i = 0; i < data.length; ++i) {
+          $('.kontrak').append('<option value="'+data[i]['id']+'">'+data[i]['description']+'</option>');
+        }       
+      },
+  });
+});
+
 let table = new DataTable('#myTable', {
   "paging":   false,
   "ordering": false,
@@ -19,6 +35,10 @@ function resetData(){
   location.reload(true);
   location.reload();
 }
+
+$(".kontrak").click(function(){
+  $(".fokus").tagsinput('focus');
+});
 
 // function insertData(){
 //     $('[name="nomer"]').val(1);
@@ -40,10 +60,12 @@ function resetData(){
 
 function getData(){
   data = $("[name='scanrfid']").val();
+  kontrak = $('.kontrak').val();
+  console.log(kontrak);
   $.ajax({
       url : "<?=base_url()?>index.php/scan_rfid/scanRFID/",
       type: "POST",
-      data : {scan:data},
+      data : {scan:data,kontrak:kontrak},
       dataType:"JSON",
       success: function(data){
         $(".listtable").html('');
