@@ -50,8 +50,9 @@ class Login extends CI_Controller {
 		));
 		$response = curl_exec($curl);
 		$rss = json_decode($response,true);
+		var_dump($rss); die;
 		curl_close($curl);
-		if(!empty($rss['jwtTokken'])){	
+		if(!empty($rss['jwtTokken'])){
 		$token = array(
 				'token' => $rss['jwtTokken'],
 				'logged_in' => TRUE,
