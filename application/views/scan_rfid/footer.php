@@ -54,7 +54,7 @@ function getData(){
         },
         "columns": [
             { 
-              "data": "assets_id",
+              data: "assets_id",
               render: function(data, type,row) {
                     if (type === 'display') {
                       data = '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
@@ -63,7 +63,7 @@ function getData(){
                 }
             },
             { 
-              "data": "name_asset",
+              data: "name_asset",
               render: function(data, type,row) {
                   if (type === 'display') {
                       data = '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
@@ -72,7 +72,7 @@ function getData(){
               }
             },
             {
-               "data": "location_asset",
+               data: "location_asset",
                render: function(data, type,row) {
                     if (type === 'display') {
                       data = '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
