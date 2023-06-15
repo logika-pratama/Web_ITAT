@@ -28,22 +28,32 @@ class Login extends CI_Controller {
 	function login(){
 		$email = $this->input->post('email');
 		$password = $this->input->post('password');
-		$this->db->where('username',$email);
-		$cek_email = $this->db->get('users')->row_array();
-		if(empty($cek_email)){
-			echo json_encode(array('status' => false,'massage' => 'Akun tidak dikenali!'));
-			die;
-		}
-		if($password == $cek_email['password']){
-			$data_session = array(
-				'email' => $email,
-			);
-			
 
-			$jwtToken = $this->jwt->generateToken($data_session);
-
-			$token = array(
-				'token' => $jwtToken,
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => '{{url}}/api/v1/login',
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'POST',
+		CURLOPT_POSTFIELDS =>'{
+			"email":"polri@gmail.com",
+			"password":"itat"
+		}',
+		CURLOPT_HTTPHEADER => array(
+			'Content-Language: en-US',
+			'Content-Type: application/json'
+		),
+		));
+		$response = curl_exec($curl);
+		$rss = json_decode($response);
+		curl_close($curl);
+		if(!empty($rss['jwtTokken'])){	
+		$token = array(
+				'token' => $rss['jwtTokken'],
 				'logged_in' => TRUE,
 			);
 
