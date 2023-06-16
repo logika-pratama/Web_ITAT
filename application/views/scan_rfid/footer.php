@@ -42,8 +42,6 @@ function getData(){
         "ordering": false,
         "info":     false,
         "processing": true,
-        "stateSave": true,
-        "serverSide": true,
         "ajax":{
           "url": "<?=base_url()?>index.php/scan_rfid/scanRFID/",
           "dataType": "json",
