@@ -36,6 +36,8 @@ function getData(){
   scan = $("[name='scanrfid']").val();
   kontrak = $('.kontrak').val();
 
+  $('#myTable').DataTable().destroy();
+
   var table = $('#myTable').DataTable({
         "paging":   false,
         "ordering": false,
