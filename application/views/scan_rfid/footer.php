@@ -26,7 +26,6 @@ $( document ).ready(function() {
 
 function resetData(){
   location.reload(true);
-  location.reload();
 }
 
 $(".kontrak").change(function(){
@@ -91,7 +90,7 @@ function getData(){
     }, 1000);
   
     $('.fokus').blur();
-    $("#texttags").hide();
+    // $("#texttags").hide();
 }
 
 function closeMat(){
