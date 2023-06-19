@@ -89,7 +89,7 @@ function getData(){
 
     setTimeout(
       function(){
-        // $('.total-item').text('Total :'+table.fnGetData().length);
+        $('.total-item').text('Total : '+table.rows().count());
     }, 1000);
   
     $('.fokus').blur();

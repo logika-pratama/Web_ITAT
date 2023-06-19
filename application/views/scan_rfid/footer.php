@@ -87,7 +87,7 @@ function getData(){
 
     setTimeout(
       function(){
-        // $('.total-item').text('Total :'+table.fnGetData().length);
+        $('.total-item').text('Total : '+table.rows().count());
     }, 1000);
   
     $('.fokus').blur();
@@ -124,7 +124,7 @@ function showData(){
           if(data['data'][0]['product_attribute'][i]['description'] != ""){
             $('.list-data').append("<tr><td>"+data['data'][0]['product_attribute'][i]['name']+"</td><td>"+data['data'][0]['product_attribute'][i]['description']+"</td></tr>");
           }
-          }
+        }
       },
   });
 
