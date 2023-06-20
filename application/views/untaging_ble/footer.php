@@ -117,28 +117,25 @@ function konfirmasi(){
             icon: 'error',
             title: 'Tags BLE Belum Terisi'
         }) 
+    } else {
+        $.ajax({
+        url : "<?=base_url()?>index.php/taging_ble/konfrim/",
+        type: "POST",
+        data:{
+            ble1:$('.qrcode1').val(),
+        },
+        dataType:"JSON",
+            success: function(data){
+                $('.qrcode1').text('');
+                $('.ble1').val('');
+                
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Untaging BLE dan RFID Berhasil'
+                })
+        },
+        });
     }
-
-    $.ajax({
-      url : "<?=base_url()?>index.php/taging_ble/konfrim/",
-      type: "POST",
-      data:{
-        ble1:$('.qrcode1').val(),
-        ble2:$('.qrcode2').val(),
-      },
-      dataType:"JSON",
-        success: function(data){
-            $('.qrcode1').text('');
-            $('.qrcode2').text('');
-            $('.ble1').val('');
-            $('.ble2').val('');
-            
-            Toast.fire({
-                icon: 'success',
-                title: 'Untaging BLE dan RFID Berhasil'
-            })
-      },
-    });
 }
 
 </script>
