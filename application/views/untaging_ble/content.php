@@ -11,11 +11,11 @@
         <select id="pilihKamera" class="form-control pilihKamera">
         </select>
     </div>
-    <input type="text" name="ble" class="ble" value="">
+    <input type="hidden" name="ble" class="ble" value="">
     <div class="col-md-12 text-center mb-3">
         <button onclick="showData(1)" class="btn btn-primary btn-xl">Pindai Qrcode TAG BLE</button>
         <h5 class="qrcode1"></h5>
-        <input name="ble1" class="qrcode1 ble1" type="text">
+        <input name="ble1" class="qrcode1 ble1" type="hidden">
     </div>
     <div class="col-md-12 text-center mb-3">
         <button onclick="konfirmasi()" class="btn btn-primary btn-xl">Konfirmasi</button>
