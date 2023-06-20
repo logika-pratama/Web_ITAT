@@ -49,7 +49,7 @@ if(empty($this->session->userdata('token'))){
 		);
 
 		$data = json_encode($data);
-		var_dump($data); die;
+
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
 		CURLOPT_URL => 'http://10.230.200.156:8000/track_object',
