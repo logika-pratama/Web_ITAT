@@ -29,16 +29,13 @@ if(empty($this->session->userdata('token'))){
 
 	public function konfrim(){
 		$ble1 = $this->input->post('ble1');
-		$ble2 = "";
 	
-		$name_produk = "";
-		
 		$arr = array();
 		$payload= array(
 			"id" => $ble1,
 			"tag_name" => "",
-			"assetId" => $ble2,
-			"name" => $name_produk,
+			"assetId" => '',
+			"name" => "",
 			"object_name" => "assetA",
 			"object_type" => "assets",
 			"picture" => "/assets/images/ ID-A-0000000000001.png",
@@ -76,5 +73,5 @@ if(empty($this->session->userdata('token'))){
 		
 		echo $response;
 	}
-	
+
 }
