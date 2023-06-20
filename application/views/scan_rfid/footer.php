@@ -31,6 +31,7 @@ $( document ).ready(function() {
 function resetData(){
   $('#myTable').DataTable().destroy();
   $('#tags-input').tagsinput('removeAll');
+  $('.listtable').html('');
 
 }
 
