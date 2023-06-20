@@ -11,7 +11,7 @@
         <select id="pilihKamera" class="form-control pilihKamera">
         </select>
     </div>
-    <input type="hidden" name="ble" class="ble" value="">
+    <input type="text" name="ble" class="ble" value="">
     <div class="col-md-12 text-center mb-3">
         <button onclick="showData(1)" class="btn btn-primary btn-xl">Pindai Qrcode TAG BLE</button>
         <h5 class="qrcode1"></h5>
