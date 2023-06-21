@@ -30,7 +30,7 @@ $( document ).ready(function() {
 
 function resetData(){
   $('#myTable').DataTable().destroy();
-  $('#tags-input').tagsinput('removeAll');
+  $('.fokus').tagsinput('removeAll');
   $('.listtable').html('');
 
 }
