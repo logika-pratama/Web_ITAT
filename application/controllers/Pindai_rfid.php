@@ -33,52 +33,17 @@ class Pindai_rfid extends CI_Controller {
 		$scan = $this->input->post('scan');
 		$kontrak = $this->input->post('kontrak');
 		$arr = explode(",", $scan);
-		foreach($arr as $a){
-			
-			$a = str_replace(" ","",$a);
-			$curl = curl_init();
-			curl_setopt_array($curl, array(
-			CURLOPT_URL => 'http://10.230.200.158:8081/api/asset/detail?asset_id='.$a.'&id_kontrak='.$kontrak,
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_ENCODING => '',
-			CURLOPT_MAXREDIRS => 10,
-			CURLOPT_TIMEOUT => 0,
-			CURLOPT_FOLLOWLOCATION => true,
-			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			CURLOPT_CUSTOMREQUEST => 'GET',
-			CURLOPT_HTTPHEADER => array(
-				'apikey: $pbkdf2-sha512$6000$GMP4/39PSak1ZsyZs1aqVQ$a60XBBB.7SIq0rjWhdoR8vc27x526lcHngEN./Ou2kO2mJaHKww7abLzqvRRZZfaAu/3IXlxq5hOi71F2rStYA'
-			),
-			));
-			$response = curl_exec($curl);
-			curl_close($curl);
-			$rss = json_decode($response);
-			if(!empty($rss->meta)){
-				if($rss->meta->message != 'Asset tidak ditemukan'){
-					if($rss->meta->status == 'success'){
-						$brr[$x]['assets_id'] = $rss->data[0]->asset_id;
-						$brr[$x]['location_asset'] = $rss->data[0]->location_asset;
-						if(!empty($rss->data[0]->name_asset)){
-							$brr[$x]['name_asset'] = $rss->data[0]->name_asset;
-						} else {
-							$brr[$x]['name_asset'] = '';
-						}	
-						$x++;
-					} 
-				}
-			}
-		}
-
 		$arr_gate = array();
 		$z = 0;
-		foreach($brr as $b){
-			$arr_gatep[$z]['tag_number'] = $b['assets_id'];
+		foreach($arr as $b){
+			$arr_gate[$z]['tag_number'] = $b;
 			$z++;
 		}
 
-		$ri = array($arr_gate);
-		$r2 = json_encode($ri);
+		$baru = $arr_gate;
+		$rss = json_encode($baru);
 		$curl = curl_init();
+
 		curl_setopt_array($curl, array(
 		CURLOPT_URL => 'http://10.230.200.157:8080/api/v1/gatescan',
 		CURLOPT_RETURNTRANSFER => true,
@@ -88,7 +53,7 @@ class Pindai_rfid extends CI_Controller {
 		CURLOPT_FOLLOWLOCATION => true,
 		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 		CURLOPT_CUSTOMREQUEST => 'POST',
-		CURLOPT_POSTFIELDS => $r2,
+		CURLOPT_POSTFIELDS => $rss,
 		CURLOPT_HTTPHEADER => array(
 			'Content-Type: application/json',
 			'Authorization: Bearer '.$this->session->userdata('token')
@@ -96,13 +61,9 @@ class Pindai_rfid extends CI_Controller {
 		));
 
 		$response = curl_exec($curl);
-		curl_close($curl);
 
-		$ress = array(
-			"data" => $brr
-		);
-		$ress = json_encode($ress);
-		echo $ress;
+		curl_close($curl);
+		echo $response;
 	}
 
 	public function setRFID($rfid){
