@@ -61,35 +61,15 @@ function getData(){
         },
         "columns": [
             { 
-              data: "assets_id",
+              data: "tag_number",
               'render': function(data, type, row, meta){
                   if(type === 'display'){
-                    data = '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
+                    data = '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.tag_number+'">' + data + '</a> ';
                   }
 
                   return data;
                 } 
-            },
-            { 
-              data: "name_asset",
-              'render': function(data, type, row, meta){
-                  if(type === 'display'){
-                    data = '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
-                  }
-
-                  return data;
-                } 
-            },
-            {
-               data: "location_asset",
-               'render': function(data, type, row, meta){
-                  if(type === 'display'){
-                    data = '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
-                  }
-
-                  return data;
-                } 
-            },
+            }
         ]  
     });
 

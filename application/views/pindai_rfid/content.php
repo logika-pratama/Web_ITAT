@@ -2,14 +2,6 @@
 <div class="row">
     <div class="col-md-12 mt-1">
         <div class="form-group">
-            <select class="form-control kontrak">
-                <option value="">-- Semua Kontrak --</option>
-            </select>
-        </div>    
-    </div>
-
-    <div class="col-md-12 mt-1">
-        <div class="form-group">
             <div id="texttags">
                 <input type="text" name="scanrfid" class="fokus form-control" style="width:100%;" data-role="tagsinput"/>
             </div>
@@ -37,8 +29,6 @@
             <thead style="background-color:#342a29;">
                 <tr>
                     <th style="color:white;">ID Aset</th>
-                    <th style="color:white;">Nama</th>
-                    <th style="color:white;">Lokasi</th>
                 </tr>
             </thead>
             <tbody class="listtable">

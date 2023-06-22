@@ -34,7 +34,7 @@ if(empty($this->session->userdata('token'))){
 		$payload= array(
 			"id" => $ble1,
 			"tag_name" => "",
-			"assetId" => "",
+			"assetId" => '',
 			"name" => "",
 			"object_name" => "assetA",
 			"object_type" => "assets",
@@ -68,7 +68,6 @@ if(empty($this->session->userdata('token'))){
 		));
 
 		$response = curl_exec($curl);
-	
 		curl_close($curl);
 		
 		echo $response;

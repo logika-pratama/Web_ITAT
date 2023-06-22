@@ -30,7 +30,7 @@ $( document ).ready(function() {
 
 function resetData(){
   $('#myTable').DataTable().destroy();
-  $('.fokus').tagsinput('removeAll');
+  $('#tags-input').tagsinput('removeAll');
   $('.listtable').html('');
 
 }
@@ -48,7 +48,7 @@ function getData(){
   table = $('#myTable').DataTable({
         "paging":   false,
         "ordering": false,
-        "info":     true,
+        "info":     false,
         "processing": true,
         "ajax":{
           "url": "<?=base_url()?>index.php/scan_rfid/scanRFID/",
