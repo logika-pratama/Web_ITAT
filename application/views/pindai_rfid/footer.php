@@ -48,7 +48,6 @@ function getData(){
   table = $('#myTable').DataTable({
         "paging":   false,
         "ordering": false,
-        "info":     false,
         "processing": true,
         "ajax":{
           "url": "<?=base_url()?>index.php/pindai_rfid/scanRFID/",

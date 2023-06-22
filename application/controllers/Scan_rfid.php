@@ -28,48 +28,43 @@ class Scan_rfid extends CI_Controller {
 	}
 	
 	public function scanRFID(){
-		$brr = [];
-		$x = 0;
 		$scan = $this->input->post('scan');
 		$kontrak = $this->input->post('kontrak');
 		$arr = explode(",", $scan);
-		foreach($arr as $a){
-			
-			$a = str_replace(" ","",$a);
-			$curl = curl_init();
-			curl_setopt_array($curl, array(
-			CURLOPT_URL => 'http://10.230.200.158:8081/api/asset/detail?asset_id='.$a.'&id_kontrak='.$kontrak,
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_ENCODING => '',
-			CURLOPT_MAXREDIRS => 10,
-			CURLOPT_TIMEOUT => 0,
-			CURLOPT_FOLLOWLOCATION => true,
-			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			CURLOPT_CUSTOMREQUEST => 'GET',
-			CURLOPT_HTTPHEADER => array(
-				'apikey: $pbkdf2-sha512$6000$GMP4/39PSak1ZsyZs1aqVQ$a60XBBB.7SIq0rjWhdoR8vc27x526lcHngEN./Ou2kO2mJaHKww7abLzqvRRZZfaAu/3IXlxq5hOi71F2rStYA'
-			),
-			));
-			$response = curl_exec($curl);
-			curl_close($curl);
-			$rss = json_decode($response);
-			if(!empty($rss->meta)){
-				if($rss->meta->message != 'Asset tidak ditemukan'){
-					if($rss->meta->status == 'success'){
-						$brr[$x]['assets_id'] = $rss->data[0]->asset_id;
-						$brr[$x]['location_asset'] = $rss->data[0]->location_asset;
-						if(!empty($rss->data[0]->name_asset)){
-							$brr[$x]['name_asset'] = $rss->data[0]->name_asset;
-						} else {
-							$brr[$x]['name_asset'] = '';
-						}	
-						$x++;
-					} 
-				}
-			}
+
+		$z = 0;
+		foreach($arr as $b){
+			$arr_gate[$z]['rfid_code'] = $b;
+			$z++;
 		}
+
+		$baru = $arr_gate;
+		$rss = json_encode($baru);
+
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => 'http://10.230.200.158:8081/api/asset/detail_gate_rfid?id_kontrak='.$kontrak,
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'GET',
+		CURLOPT_POSTFIELDS =>$rss,
+		CURLOPT_HTTPHEADER => array(
+			'apikey: $pbkdf2-sha512$6000$GMP4/39PSak1ZsyZs1aqVQ$a60XBBB.7SIq0rjWhdoR8vc27x526lcHngEN./Ou2kO2mJaHKww7abLzqvRRZZfaAu/3IXlxq5hOi71F2rStYA',
+			'Content-Type: application/json'
+		),
+		));
+
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+		$data = json_decode($response,true);
+		$data = $data['data'];
 		$ress = array(
-			"data" => $brr
+			"data" => $data
 		);
 		$ress = json_encode($ress);
 		echo $ress;
