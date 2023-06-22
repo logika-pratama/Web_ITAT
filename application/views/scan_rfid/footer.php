@@ -48,7 +48,6 @@ function getData(){
   table = $('#myTable').DataTable({
         "paging":   false,
         "ordering": false,
-        "info":     false,
         "processing": true,
         "ajax":{
           "url": "<?=base_url()?>index.php/scan_rfid/scanRFID/",
@@ -93,11 +92,6 @@ function getData(){
         ]  
     });
 
-    setTimeout(
-      function(){
-        $('.total-item').text('Total : '+table.rows().count());
-    }, 2000);
-  
     $('.fokus').blur();
     $('#tags-input').tagsinput('removeAll');
 

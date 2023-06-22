@@ -72,11 +72,6 @@ function getData(){
         ]  
     });
 
-    setTimeout(
-      function(){
-        $('.total-item').text('Total : '+table.rows().count());
-    }, 2000);
-  
     $('.fokus').blur();
     $('#tags-input').tagsinput('removeAll');
 

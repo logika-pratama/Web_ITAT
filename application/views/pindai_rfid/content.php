@@ -19,7 +19,6 @@
     </div>
     <div class="col-6">
         <div class="form-group mt-2">
-            <span class="btn btn-success text-white btn-sm total-item">Total : </span>
         </div>
     </div>
     <div class="col-md-12 mt-3">
