@@ -62,9 +62,11 @@ class Scan_rfid extends CI_Controller {
 
 		curl_close($curl);
 		$data = json_decode($response,true);
-		$data = $data['data'];
+		
 		if(empty($data)){
 			$data = array();
+		} else {
+			$data = $data['data'];
 		}
 		$ress = array(
 			"data" => $data
