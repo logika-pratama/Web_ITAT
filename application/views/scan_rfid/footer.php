@@ -109,8 +109,8 @@ function closeMat(){
 
 function showData(){
   rfid = event.currentTarget.dataset.id;
-  $(".list-data").html('loading..');
-  $(".list-data-history").html('loading..');
+  $(".list-data").html('Menunggu Request dari ITAM');
+  $(".list-data-history").html('Menunggu Request dari ITAM');
   $.ajax({
       url : "<?=base_url()?>index.php/scan_rfid/detailRFID/"+rfid,
       type: "GET",
