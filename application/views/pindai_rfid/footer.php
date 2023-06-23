@@ -71,9 +71,9 @@ function getData(){
             }
         ]  
     });
-
-    $('.fokus').blur();
-    $('#tags-input').tagsinput('removeAll');
+    setTimeout(function(){
+      $('.fokus').tagsinput('removeAll');
+    });
 
 }
 
