@@ -63,6 +63,9 @@ class Pindai_rfid extends CI_Controller {
 		$response = curl_exec($curl);
 
 		curl_close($curl);
+		if(empty($baru)){
+			$baru = array();
+		}
 		echo json_encode(array('data' => $baru));
 	}
 
