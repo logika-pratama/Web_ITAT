@@ -191,4 +191,5 @@ class Scan_rfid extends CI_Controller {
 		$rss = json_decode($response,true);
 		echo json_encode($rss['data']);
 	}
+
 }
