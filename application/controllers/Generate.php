@@ -31,7 +31,7 @@ class Generate extends CI_Controller {
 					'created_at' => date('Y-m-d H:i:s'),
 					'updated_at' => date('Y-m-d H:i:s'),
 				);
-				$this->db->insert('log_tag_number');
+				$this->db->insert('log_tag_number',$data);
 			}
 			var_dump($x); die;
 		}
