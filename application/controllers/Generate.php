@@ -24,14 +24,14 @@ class Generate extends CI_Controller {
 			$x = 1;
 			if($check == 0){
 				$x++;
-				// $data = array(
-				// 	'tag_number' => $tag,
-				// 	'flag' => 2,
-				// 	'is_alarm' => true,
-				// 	'created_at' => date('Y-m-d H:i:s'),
-				// 	'updated_at' => date('Y-m-d H:i:s'),
-				// );
-				// $this->db->insert('log_tag_number');
+				$data = array(
+					'tag_number' => $tag,
+					'flag' => 2,
+					'is_alarm' => true,
+					'created_at' => date('Y-m-d H:i:s'),
+					'updated_at' => date('Y-m-d H:i:s'),
+				);
+				$this->db->insert('log_tag_number');
 			}
 			var_dump($x); die;
 		}
