@@ -16,21 +16,24 @@ class Generate extends CI_Controller {
 	
 	public function genLog(){
 		$items = $this->db->get('items')->result_array();
-		var_dump($items); die;
+		
 		foreach($items as $i){
 			$tag = $i['tag_number'];
 			$this->db->where('tag_number',$tag);
 			$check = $this->db->get('log_tag_number')->num_rows();
+			$x = 1;
 			if($check == 0){
-				$data = array(
-					'tag_number' => $tag,
-					'flag' => 2,
-					'is_alarm' => true,
-					'created_at' => date('Y-m-d H:i:s'),
-					'updated_at' => date('Y-m-d H:i:s'),
-				);
-				$this->db->insert('log_tag_number');
+				$x++;
+				// $data = array(
+				// 	'tag_number' => $tag,
+				// 	'flag' => 2,
+				// 	'is_alarm' => true,
+				// 	'created_at' => date('Y-m-d H:i:s'),
+				// 	'updated_at' => date('Y-m-d H:i:s'),
+				// );
+				// $this->db->insert('log_tag_number');
 			}
+			var_dump($x); die;
 		}
 	}
 
