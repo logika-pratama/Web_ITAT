@@ -48,9 +48,6 @@ $(".kontrak").change(function(){
       for (i = 0; i < data.data.length; ++i) {
         $('.sipb').append('<option value="'+data.data[i]['id']+'">['+data.data[i]['name']+'] '+data.data[i]['description']+'</option>');
       }
-      setTimeout(function(){
-        $('#myTable').DataTable();
-      },4000);
     },
     error: function (xhr, status, error){}
     });
@@ -75,6 +72,10 @@ $(".sipb").change(function(){
         $('.listtable').append('<tr><td><input type="checkbox" class="check" name="getId[]" value="'+data.data['sudah'][i]['no_code']+'"></td><td>'+data.data['sudah'][i]['no_code']+'</td><td>'+data.data['sudah'][i]['nama_aset']+'</td></tr>');
       }
       
+      setTimeout(function(){
+        $('#myTable').DataTable();
+      },2000);
+
       $("#loader").hide();
     },
     error: function (xhr, status, error){}
