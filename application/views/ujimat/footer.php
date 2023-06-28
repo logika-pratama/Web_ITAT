@@ -64,10 +64,10 @@ $(".sipb").change(function(){
       },
     success: function(data){
       for (i = 0; i < data.data['belum'].length; ++i) {
-        $('.listtable').append('<tr><td>'+data.data['belum'][i]['no_code']+'</td><td>'+data.data['belum'][i]['nama_aset']+'</td></tr>');
+        $('.listtable').append('<tr><td><input type="checkbox" class="check" name="getId[]" value="'+data.data['belum'][i]['no_code']+'"></td><td>'+data.data['belum'][i]['no_code']+'</td><td>'+data.data['belum'][i]['nama_aset']+'</td></tr>');
       }
       for (i = 0; i < data.data['sudah'].length; ++i) {
-        $('.listtable').append('<tr><td>'+data.data['sudah'][i]['no_code']+'</td><td>'+data.data['sudah'][i]['nama_aset']+'</td></tr>');
+        $('.listtable').append('<tr><td><input type="checkbox" class="check" name="getId[]" value="'+data.data['sudah'][i]['no_code']+'"></td><td>'+data.data['sudah'][i]['no_code']+'</td><td>'+data.data['sudah'][i]['nama_aset']+'</td></tr>');
       }
       
       $("#loader").hide();
