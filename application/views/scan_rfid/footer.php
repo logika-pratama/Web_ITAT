@@ -32,7 +32,6 @@ function resetData(){
   $('#myTable').DataTable().destroy();
   $('#tags-input').tagsinput('removeAll');
   $('.listtable').html('');
-
 }
 
 $(".kontrak").change(function(){
