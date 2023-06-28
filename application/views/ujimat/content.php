@@ -38,6 +38,25 @@
     </div>
 </div>
 
+<div class="modal fade" id="modal-ujimat" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen" role="document">
+    <div class="modal-content ">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalLongTitle">Scan RFID</h5>
+        </div>
+        <div class="modal-body">
+
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+            Close
+        </button>
+        </div>
+    </div>
+    </div>
+</div>
+
+
 <div class="modal fade" id="modalLong" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen" role="document">
     <div class="modal-content ">

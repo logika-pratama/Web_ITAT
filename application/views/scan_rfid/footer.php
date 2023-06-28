@@ -160,7 +160,7 @@ function showData(){
       },
   });
 
-  $('#modalLong').modal('show');
+  $('#modal-ujimat').modal('show');
 }
 
 setTimeout(function(){
