@@ -6,6 +6,7 @@
 <script src="<?=base_url()?>assets/vendor/js/menu.js"></script>
 <script src="<?=base_url()?>assets/js/main.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.5/sweetalert2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
 
 <script type="text/javascript">
@@ -18,7 +19,7 @@ const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 1000,
+    timer: 2000,
     timerProgressBar: true,
     didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -58,14 +59,25 @@ function initScanner() {
                 .decodeOnceFromVideoDevice(selectedDeviceId, 'previewKamera')
                 .then(result => {
 
+                    let kontrakId = $('.kontrak').find(":selected").val();
+                    if (kontrakId == -1) {
+                        Toast.fire({
+                            icon: 'error',
+                            title: "Kontrak wajib dipilih"
+                        })
+                    } else {
                         console.log("==========================");
                         console.log(result);
+                        // getUjiMaterial();
                         $('.content').text(result.text)
 
-                        $('.camp').hide();
-                        if(codeReader){
-                            codeReader.reset();
-                        }
+                    }
+                    
+                    $('.camp').hide();
+                    if(codeReader){
+                        codeReader.reset();
+                    }
+
                 })
                 .catch(err => {
                     if (err.message == 'Could not start video source') {
@@ -82,9 +94,29 @@ function initScanner() {
     .catch(err => console.error(err));
 }
 
+function setKontrak() {
+    $.ajax({
+        url : "<?=base_url()?>index.php/ujimat_scanqr/getKontrak/",
+        type: "GET",
+        dataType:"JSON",
+        success: function(data){
+            console.log(data)
+            var i;
+            for (i = 0; i < data.length; ++i) {
+                console.log(data[i])
+                $('.kontrak').append('<option value="'+data[i]['id']+'">'+data[i]['description']+'</option>');
+            }       
+        }
+    });
+}
+
+function getUjiMaterial() {
+
+}
 
 $(document).ready(function() {
     $('.camp').show();
+    setKontrak();
 });
 
 $(document).on('change','#pilihKamera',function(){
@@ -98,7 +130,17 @@ $(document).on('change','#pilihKamera',function(){
 $(document).on('click','#resetScan',function(){
     if(codeReader){
         codeReader.reset();
+        $(".kontrak").val("-1").change(); // set nilai kontrak ke "Pilih Kontrak" 
         $('.camp').show();
+        initScanner();
+        $('.content').text('');
+    }
+})
+
+$(document).on('change','.kontrak',function(){
+    if(codeReader){
+        $('.camp').show();
+        codeReader.reset();
         initScanner();
         $('.content').text('');
     }
@@ -110,48 +152,5 @@ if (navigator.mediaDevices) {
     alert('Cannot access camera.');
 }
 
-
-
-function konfirmasi(){
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 1000,
-        timerProgressBar: true,
-    didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    });
-
-    if($('.ble1').val() == '' || $('.ble2').val() == ''){
-        Toast.fire({
-            icon: 'error',
-            title: 'Tags RFID atau BLE Belum Terisi'
-        }) 
-    }
-
-    $.ajax({
-      url : "<?=base_url()?>index.php/taging_ble/konfrim/",
-      type: "POST",
-      data:{
-        ble1:$('.qrcode1').val(),
-        ble2:$('.qrcode2').val(),
-      },
-      dataType:"JSON",
-        success: function(data){
-            $('.qrcode1').text('');
-            $('.qrcode2').text('');
-            $('.ble1').val('');
-            $('.ble2').val('');
-            
-            Toast.fire({
-                icon: 'success',
-                title: 'Taging BLE dan RFID Berhasil'
-            })
-      },
-    });
-}
 
 </script>

@@ -2,24 +2,38 @@
     <div class="col-md-12">
         <h5 class="card-header m-0"><?=$title?></h5>
     </div>
+
+    <!-- Kontrak -->
+    <div class="col-md-12 mb-1 text-center">
+        <div class="p-1 m-3">
+            <label class="form-label">Pilih Kontrak</label>
+            <select class="form-control kontrak">
+                <option value="-1">-- Pilih Kontrak --</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Kamera -->
     <div class="col-md-12 mb-2 camp text-center visible">
         <div class="p-2 m-3">
             <video id="previewKamera" style="width: 100%;"></video>
         </div>
-        <br>
-        <label class="form-label">Pilih Kamera</label>
-        <select id="pilihKamera" class="form-control pilihKamera">
-        </select>
-    </div>
-    <!-- <input type="hidden" name="ble" class="ble" value=""> -->
-
-    <div class="content">
-
+        <div class="p-1 m-3">
+            <label class="form-label">Pilih Kamera</label>
+            <select id="pilihKamera" class="form-control pilihKamera">
+            </select>
+        </div>
     </div>
 
+    <!-- Reset Scan -->
     <div class="col-md-12 text-center mb-3">
         <button id="resetScan" class="btn btn-primary btn-xl">Reset Scan</button>
     </div>
+
+    <!-- Content -->
+    <div class="col-md-12 mb-3 content"></div>
+
+
 
     <!-- <div class="col-md-12 text-center mb-3">
         <button onclick="showData(1)" class="btn btn-primary btn-xl">Pindai Qrcode TAG BLE</button>
