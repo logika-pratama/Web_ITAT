@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
@@ -7,7 +7,7 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => 'root',
-	'password' => 'P@ssw0rd',
+	'password' => '',
 	'database' => 'rfid_db',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
