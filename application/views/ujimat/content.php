@@ -8,26 +8,8 @@
         </div>    
     </div>
     <div class="col-md-12">
-        <label>SIPB</label>
         <select class="default-select sipb" style="width:100%;" name="SIPB">
         </select>
-    </div>
-    <div class="col-md-12 mt-1">
-        <div class="form-group">
-            <div id="texttags">
-                <input type="text" name="scanrfid" class="fokus form-control" style="width:100%;" data-role="tagsinput"/>
-            </div>
-        </div>    
-    </div>
-    <div class="col-12">
-        <div class="form-group mt-2">
-            <a href="javascript:void(0)" class="btn btn-primary btn-sm text-white" style="width:100%;" onclick="getData()">Search</a>
-        </div>
-    </div>
-    <div class="col-6">
-        <div class="form-group mt-2">
-            <a href="javascript:void(0)" onclick="resetData()" class="btn btn-danger btn-sm text-white">Reset Scan</a>
-        </div>
     </div>
     <div class="col-6">
         <div class="form-group mt-2">

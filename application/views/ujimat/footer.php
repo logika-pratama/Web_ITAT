@@ -15,6 +15,7 @@ var table;
 var BASEURL = 'https://aset.divtik.polri.go.id/api_itam/api/';
 $( document ).ready(function() {
   $('.kontrak').select2();
+  $('.sipb').select2();
   $.ajax({
       url : "<?=base_url()?>index.php/<?=$this->uri->segment(1)?>/getKontrak/",
       type: "GET",
@@ -62,6 +63,13 @@ $(".sipb").change(function(){
         "apikey": "$pbkdf2-sha512$6000$GMP4/39PSak1ZsyZs1aqVQ$a60XBBB.7SIq0rjWhdoR8vc27x526lcHngEN./Ou2kO2mJaHKww7abLzqvRRZZfaAu/3IXlxq5hOi71F2rStYA"
       },
     success: function(data){
+      for (i = 0; i < data.data['belum'].length; ++i) {
+        $('.listtable').append('<tr><td>'+data.data['belum'][i]['no_code']+'</td><td>'+data.data['belum'][i]['nama_aset']+'</td></tr>');
+      }
+      for (i = 0; i < data.data['sudah'].length; ++i) {
+        $('.listtable').append('<tr><td>'+data.data['sudah'][i]['no_code']+'</td><td>'+data.data['sudah'][i]['nama_aset']+'</td></tr>');
+      }
+      
       $("#loader").hide();
     },
     error: function (xhr, status, error){}
