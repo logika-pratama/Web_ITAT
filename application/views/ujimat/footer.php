@@ -73,11 +73,11 @@ $(".sipb").change(function(){
       }
       
       setTimeout(function(){
-        $('#myTable').DataTable(
+        $('#myTable').DataTable({
           "paging":   false,
           "ordering": false,
           "processing": true,
-        );
+        });
       },2000);
 
       $("#loader").hide();
