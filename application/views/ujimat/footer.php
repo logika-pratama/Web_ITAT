@@ -14,7 +14,13 @@
 var table;
 var BASEURL = 'https://aset.divtik.polri.go.id/api_itam/api/';
 $( document ).ready(function() {
-  $('#myTable').DataTable();
+  $('#myTable').DataTable(
+    {
+      "paging":   false,
+      "ordering": false,
+      "processing": true,
+    }
+  );
   $('.kontrak').select2();
   $('.sipb').select2();
   $.ajax({
@@ -78,7 +84,7 @@ $(".sipb").change(function(){
           "ordering": false,
           "processing": true,
         });
-      },2000);
+      },1000);
 
       $("#loader").hide();
     },
