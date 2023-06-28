@@ -14,6 +14,7 @@
 var table;
 var BASEURL = 'https://aset.divtik.polri.go.id/api_itam/api/';
 $( document ).ready(function() {
+  $('#myTable').DataTable();
   $('.kontrak').select2();
   $('.sipb').select2();
   $.ajax({
@@ -30,6 +31,7 @@ $( document ).ready(function() {
 });
 
 $(".kontrak").change(function(){
+  $('#myTable').DataTable().destroy();
     $("#loader").show();
     $('.sipb').html('');
     id = $(this).val();
@@ -46,6 +48,9 @@ $(".kontrak").change(function(){
       for (i = 0; i < data.data.length; ++i) {
         $('.sipb').append('<option value="'+data.data[i]['id']+'">['+data.data[i]['name']+'] '+data.data[i]['description']+'</option>');
       }
+      setTimeout(function(){
+        $('#myTable').DataTable();
+      },2000);
     },
     error: function (xhr, status, error){}
     });
