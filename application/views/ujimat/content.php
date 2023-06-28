@@ -13,7 +13,7 @@
     </div>
 
     <div class="col-md-12 mt-2">
-        <a hre="javascript:void(0)" class="btn btn-primary btm-lg" onclick="ujimat()">Uji Material</a>
+        <a hre="javascript:void(0)" class="btn btn-primary btm-lg" style="color:white; width:100%;" onclick="ujimat()">Uji Material</a>
     </div>
 
     <div class="col-6">

@@ -50,7 +50,7 @@ $(".kontrak").change(function(){
       }
       setTimeout(function(){
         $('#myTable').DataTable();
-      },2000);
+      },4000);
     },
     error: function (xhr, status, error){}
     });
