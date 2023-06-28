@@ -102,7 +102,6 @@ $("#checkAll").click(function() {
 });
 
 function ujimat(){
-  $('#modalLong').modal('show');
+  $('#modal-ujimat').modal('show');
 }
-
 </script>

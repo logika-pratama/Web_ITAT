@@ -32,7 +32,6 @@ function resetData(){
   $('#myTable').DataTable().destroy();
   $('.fokus').tagsinput('removeAll');
   $('.listtable').html('');
-  $(".fokus").tagsinput('focus');
 }
 
 $(".kontrak").change(function(){
@@ -110,6 +109,7 @@ function showData(){
   rfid = event.currentTarget.dataset.id;
   $(".list-data").html('Menunggu Request dari ITAM');
   $(".list-data-history").html('Menunggu Request dari ITAM');
+  $('#modalLong').modal('show');
   $.ajax({
       url : "<?=base_url()?>index.php/scan_rfid/detailRFID/"+rfid,
       type: "GET",
@@ -160,7 +160,7 @@ function showData(){
       },
   });
 
-  $('#modal-ujimat').modal('show');
+  
 }
 
 setTimeout(function(){
