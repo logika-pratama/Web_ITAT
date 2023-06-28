@@ -68,7 +68,7 @@ function initScanner() {
                     } else {
                         console.log("==========================");
                         console.log(result);
-                        // getUjiMaterial();
+                        getUjiMaterial(kontrakId, result.text);
                         $('.content').text(result.text)
 
                     }
@@ -100,19 +100,42 @@ function setKontrak() {
         type: "GET",
         dataType:"JSON",
         success: function(data){
-            console.log(data)
-            var i;
-            for (i = 0; i < data.length; ++i) {
-                console.log(data[i])
+            for (let i in data) {
                 $('.kontrak').append('<option value="'+data[i]['id']+'">'+data[i]['description']+'</option>');
             }       
         }
     });
 }
 
-function getUjiMaterial() {
+function getUjiMaterial(kontrakId, assetId) {
+    $.ajax({
+        url : "<?=base_url()?>index.php/ujimat_scanqr/getUjiMaterial/",
+        type: "GET",
+        dataType:"JSON",
+        data: {
+            kontrakId: kontrakId,
+            assetId: assetId
+        },
+        success: function(data){
+            console.log(data)
+            if (!data.isAvailable) {
+                Toast.fire({
+                    icon: 'error',
+                    title: "Data tidak ditemukan"
+                })
+            } else {
 
+            }
+            // var i;
+            // for (i = 0; i < data.length; ++i) {
+            //     console.log(data[i])
+            //     $('.kontrak').append('<option value="'+data[i]['id']+'">'+data[i]['description']+'</option>');
+            // }       
+        }
+    });
 }
+
+
 
 $(document).ready(function() {
     $('.camp').show();

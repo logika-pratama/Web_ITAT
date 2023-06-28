@@ -13,6 +13,16 @@
         </div>
     </div>
 
+    <!-- <div class="col-md-12 mb-1 text-center">
+        <div class="p-1 m-3">
+            <div class="form-group">
+                <div id="texttags">
+                    <input type="text" name="scanrfid" class="fokus form-control" style="width:100%;" data-role="tagsinput"/>
+                </div>
+            </div>  
+        </div>  
+    </div> -->
+
     <!-- Kamera -->
     <div class="col-md-12 mb-2 camp text-center visible">
         <div class="p-2 m-3">
@@ -26,9 +36,17 @@
     </div>
 
     <!-- Reset Scan -->
-    <div class="col-md-12 text-center mb-3">
-        <button id="resetScan" class="btn btn-primary btn-xl">Reset Scan</button>
+    <div class="col-md-12 mb-3 text-end">
+        <div class="p-1 m-3">
+            <button id="resetScan" class="btn btn-danger btn-sm text-white">Reset Scan</button>
+        </div>
     </div>
+
+    <!-- <div class="col-md-12 text-center mb-3">
+        <div class="form-group mt-2">
+            <a href="javascript:void(0)" onclick="resetScan()" class="btn btn-danger btn-sm text-white">Reset Scan</a>
+        </div>
+    </div> -->
 
     <!-- Content -->
     <div class="col-md-12 mb-3 content"></div>
