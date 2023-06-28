@@ -35,9 +35,9 @@
             <input name="nomer" type="hidden" value="0">
             <thead style="background-color:#342a29;">
                 <tr>
+                    <th style="color:white;"><input type="checkbox" id="checkAll"></th>
                     <th style="color:white;">ID Aset</th>
                     <th style="color:white;">Nama</th>
-                    <th style="color:white;">Lokasi</th>
                 </tr>
             </thead>
             <tbody class="listtable">

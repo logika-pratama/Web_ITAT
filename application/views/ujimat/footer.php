@@ -16,7 +16,7 @@ var table;
 $( document ).ready(function() {
   $('.kontrak').select2();
   $.ajax({
-      url : "<?=base_url()?>index.php/scan_rfid/getKontrak/",
+      url : "<?=base_url()?>index.php/<?=$this->uri->segment(1)?>/getKontrak/",
       type: "GET",
       dataType:"JSON",
       success: function(data){
@@ -37,20 +37,15 @@ function resetData(){
 
 $(".kontrak").change(function(){
   $(".fokus").tagsinput('focus');
-});
-
-function getData(){
-  scan = $("[name='scanrfid']").val();
   kontrak = $('.kontrak').val();
-
   $('#myTable').DataTable().destroy();
 
-  table = $('#myTable').DataTable({
+    table = $('#myTable').DataTable({
         "paging":   false,
         "ordering": false,
         "processing": true,
         "ajax":{
-          "url": "<?=base_url()?>index.php/scan_rfid/scanRFID/",
+          "url": "<?=base_url()?>index.php/<?=$this->uri->segment(1)?>/scanRFID/",
           "dataType": "json",
           "type": "POST",
           "data" : {
@@ -63,7 +58,17 @@ function getData(){
               data: "asset_id",
               'render': function(data, type, row, meta){
                   if(type === 'display'){
-                    data = '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.asset_id+'">' + data + '</a> ';
+                    data ='<input type="checkbox" class="check" name="getId[]" value="'+row.asset_id+'">';
+                  }
+
+                  return data;
+                } 
+            },
+            { 
+              data: "asset_id",
+              'render': function(data, type, row, meta){
+                  if(type === 'display'){
+                    data = '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
                   }
 
                   return data;
@@ -79,39 +84,17 @@ function getData(){
                   return data;
                 } 
             },
-            {
-               data: "location_asset",
-               'render': function(data, type, row, meta){
-                  if(type === 'display'){
-                    data = '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
-                  }
-
-                  return data;
-                } 
-            },
         ]  
     });
-    setTimeout(function(){
-      $('.fokus').tagsinput('removeAll');
-    });
-}
+});
 
-function closeMat(){
-  $.ajax({
-      url : "<?=base_url()?>index.php/scan_rfid/closeMat/",
-      type: "POST",
-      dataType:"JSON",
-      success: function(data){
-      },
-  });
-}
 
 function showData(){
   rfid = event.currentTarget.dataset.id;
   $(".list-data").html('Menunggu Request dari ITAM');
   $(".list-data-history").html('Menunggu Request dari ITAM');
   $.ajax({
-      url : "<?=base_url()?>index.php/scan_rfid/detailRFID/"+rfid,
+      url : "<?=base_url()?>index.php/<?=$this->uri->segment(1)?>/detailRFID/"+rfid,
       type: "GET",
       dataType:"JSON",
       success: function(data){
@@ -131,7 +114,7 @@ function showData(){
   });
 
   $.ajax({
-      url : "<?=base_url()?>index.php/scan_rfid/setRFID/"+rfid,
+      url : "<?=base_url()?>index.php/<?=$this->uri->segment(1)?>/setRFID/"+rfid,
       type: "GET",
       dataType:"JSON",
       success: function(data){
@@ -139,7 +122,7 @@ function showData(){
   });
 
   $.ajax({
-      url : "<?=base_url()?>index.php/scan_rfid/historyRFID/"+rfid,
+      url : "<?=base_url()?>index.php/<?=$this->uri->segment(1)?>/historyRFID/"+rfid,
       type: "GET",
       dataType:"JSON",
       success: function(data){
@@ -163,8 +146,14 @@ function showData(){
   $('#modalLong').modal('show');
 }
 
-setTimeout(function(){
-    $(".fokus").tagsinput('focus');
-},1000);
+
+$("#checkAll").click(function() {
+    status = $(this).is(":checked");
+    if (status == 'true') {
+      $('.check').prop('checked', true);
+    } else {
+      $('.check').prop('checked', false);
+    }
+});
 
 </script>
