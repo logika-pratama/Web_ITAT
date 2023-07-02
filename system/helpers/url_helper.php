@@ -567,3 +567,13 @@ if ( ! function_exists('redirect'))
 		exit;
 	}
 }
+
+
+if (!function_exists('itamURL'))
+{
+	function itamURL()
+	{
+		 return 'https://itam.digiprimatera.co.id:8081/';
+		// return itamUrl().'';
+	}
+}

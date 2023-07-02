@@ -80,7 +80,7 @@ if(empty($this->session->userdata('token'))){
 	public function detailRFID($rfid){
 			$curl = curl_init();
 			curl_setopt_array($curl, array(
-			CURLOPT_URL => 'http://10.230.200.158:8081/api/asset/detail?asset_id='.$rfid,
+			CURLOPT_URL => itamUrl().'api/asset/detail?asset_id='.$rfid,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,

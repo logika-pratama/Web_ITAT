@@ -73,7 +73,7 @@ class Pindai_rfid extends CI_Controller {
 		
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => 'http://10.230.200.158:8081/api/ujimat/set_view_ujimat?asset_id='.$rfid,
+		CURLOPT_URL => itamUrl().'api/ujimat/set_view_ujimat?asset_id='.$rfid,
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,
@@ -94,7 +94,7 @@ class Pindai_rfid extends CI_Controller {
 	public function detailRFID($rfid){
 		$curl = curl_init();
 
-		$url = 'http://10.230.200.158:8081/api/asset/detail?asset_id='.$rfid;
+		$url = itamUrl().'api/asset/detail?asset_id='.$rfid;
 		
 		curl_setopt_array($curl, array(
 		CURLOPT_URL => $url,
@@ -146,7 +146,7 @@ class Pindai_rfid extends CI_Controller {
 	public function closeMat(){
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => 'http://10.230.200.158:8081/api/ujimat/unset_view_ujimat',
+		CURLOPT_URL => itamUrl().'api/ujimat/unset_view_ujimat',
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,
@@ -168,7 +168,7 @@ class Pindai_rfid extends CI_Controller {
 	public function getKontrak(){
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => 'http://10.230.200.158:8081/api/kontrak',
+		CURLOPT_URL => itamUrl().'api/kontrak',
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,
