@@ -12,8 +12,18 @@
         </select>
     </div>
 
+    <div class="col-md-12 mb-2 camp text-center visible">
+        <div class="p-2 m-3">
+            <video id="previewKamera" style="width: 100%;"></video>
+        </div>
+        <br>
+        <label class="form-label">Pilih Kamera</label>
+        <select id="pilihKamera" class="form-control pilihKamera">
+        </select>
+    </div>
+
     <div class="col-md-12 mt-2">
-        <a hre="javascript:void(0)" class="btn btn-primary btm-lg" style="color:white; width:100%;" onclick="ujimat()">Uji Material</a>
+        <a hre="javascript:void(0)" class="btn btn-primary btm-lg" style="color:white; width:100%;" onclick="showData(1)">Scan Qrcode</a>
     </div>
 
     <div class="col-6">
