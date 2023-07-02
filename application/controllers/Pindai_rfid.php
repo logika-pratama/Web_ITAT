@@ -12,9 +12,9 @@ class Pindai_rfid extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
-		if(empty($this->session->userdata('token'))){
-			redirect('login');
-		}
+		// if(empty($this->session->userdata('token'))){
+		// 	redirect('login');
+		// }
 	}
 
 	public function index()
@@ -39,6 +39,43 @@ class Pindai_rfid extends CI_Controller {
 			$arr_gate[$z]['tag_number'] = $b;
 			$z++;
 		}
+
+		$baru = $arr_gate;
+		$rss = json_encode($baru);
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => 'http://10.230.200.157:8080/api/v1/gatescan',
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'POST',
+		CURLOPT_POSTFIELDS => $rss,
+		CURLOPT_HTTPHEADER => array(
+			'Content-Type: application/json',
+			'Authorization: Bearer '.$this->session->userdata('token')
+		),
+		));
+
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+		if(empty($baru)){
+			$baru = array();
+		}
+		echo json_encode(array('data' => $baru));
+	}
+
+	public function scanQRcode(){
+		$brr = [];
+		$x = 0;
+		$scan = $this->input->post('scan');
+		$arr_gate = array();
+		$z = 0;
+		$arr_gate[0]['tag_number'] = $scan;
 
 		$baru = $arr_gate;
 		$rss = json_encode($baru);

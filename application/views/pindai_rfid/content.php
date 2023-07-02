@@ -7,11 +7,27 @@
             </div>
         </div>    
     </div>
+
+    <div class="col-md-12 mb-2 camp text-center visible">
+        <div class="p-2 m-3">
+            <video id="previewKamera" style="width: 100%;"></video>
+        </div>
+        <br>
+        <label class="form-label">Pilih Kamera</label>
+        <select id="pilihKamera" class="form-control pilihKamera">
+        </select>
+    </div>
+
+    <div class="col-md-12 mt-2">
+        <a hre="javascript:void(0)" class="btn btn-primary btn-sm" style="color:white; width:100%;" onclick="showData(1)">Pindai Gate Scan Qrcode</a>
+    </div>
+
     <div class="col-12">
         <div class="form-group mt-2">
             <a href="javascript:void(0)" class="btn btn-primary btn-sm text-white" style="width:100%;" onclick="getData()">Search</a>
         </div>
     </div>
+
     <div class="col-6">
         <div class="form-group mt-2">
             <a href="javascript:void(0)" onclick="resetData()" class="btn btn-danger btn-sm text-white">Reset Scan</a>

@@ -14,7 +14,7 @@
 var table;
 var BASEURL = 'https://aset.divtik.polri.go.id/api_itam/api/';
 $( document ).ready(function() {
-  $('#myTable').DataTable(
+  table = $('#myTable').DataTable(
     {
       "paging":   false,
       "ordering": false,
@@ -165,10 +165,13 @@ function initScanner() {
             codeReader
                 .decodeOnceFromVideoDevice(selectedDeviceId, 'previewKamera')
                 .then(result => {
-
-                        var no = $('.ble').val();
-                        $('.qrcode'+no).text(result.text);
-                        $('.qrcode'+no).val(result.text);
+                        $('.dataTables_filter input').val(result.text);
+                        setTimeout(function(){
+                          $('.dataTables_filter input')
+                          .on('change', function() {
+                              table.search(result.text, true, true).draw();
+                          });    
+                        },1000);
                         $('.camp').hide();
                         if(codeReader){
                             codeReader.reset()
