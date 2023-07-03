@@ -37,7 +37,6 @@ $( document ).ready(function() {
 });
 
 $(".kontrak").change(function(){
-  $('#myTable').DataTable().destroy();
     $("#loader").show();
     $('.sipb').html('');
     id = $(this).val();
@@ -60,6 +59,7 @@ $(".kontrak").change(function(){
 });
 
 $(".sipb").change(function(){
+  $('#myTable').DataTable().destroy();
     $("#loader").show();
     id = $(this).val();
     $('.belum').html('');
@@ -72,10 +72,12 @@ $(".sipb").change(function(){
       },
     success: function(data){
       for (i = 0; i < data.data['belum'].length; ++i) {
-        $('.listtable').append('<tr><td><input type="checkbox" class="check" name="getId[]" value="'+data.data['belum'][i]['no_code']+'"></td><td>'+data.data['belum'][i]['no_code']+'</td><td>'+data.data['belum'][i]['nama_aset']+'</td></tr>');
+        rfid = data.data['belum'][i]['no_code'];
+        $('.listtable').append('<tr><td><input type="checkbox" class="check '+rfid+'" name="getId[]" value="'+data.data['belum'][i]['no_code']+'"></td><td onclick="showData()" data-id="'+rfid+'">'+data.data['belum'][i]['no_code']+'</td><td>'+data.data['belum'][i]['nama_aset']+'</td></tr>');
       }
       for (i = 0; i < data.data['sudah'].length; ++i) {
-        $('.listtable').append('<tr><td><input type="checkbox" class="check" name="getId[]" value="'+data.data['sudah'][i]['no_code']+'"></td><td>'+data.data['sudah'][i]['no_code']+'</td><td>'+data.data['sudah'][i]['nama_aset']+'</td></tr>');
+        rfid = data.data['sudah'][i]['no_code'];
+        $('.listtable').append('<tr><td><input type="checkbox" class="check '+rfid+'" name="getId[]" value="'+data.data['sudah'][i]['no_code']+'"></td><td onclick="showData()" data-id="'+rfid+'">'+data.data['sudah'][i]['no_code']+'</td><td>'+data.data['sudah'][i]['nama_aset']+'</td></tr>');
       }
       
       setTimeout(function(){
@@ -84,7 +86,7 @@ $(".sipb").change(function(){
           "ordering": false,
           "processing": true,
         });
-      },1000);
+      },500);
 
       $("#loader").hide();
     },
@@ -110,7 +112,7 @@ $( document ).ready(function() {
     $('.camp').hide();
 });
 
-function showData(num){
+function scanQrcode(num){
     $('.ble').val(num);
     $('.camp').show();
     var pk = $('.pilihKamera').val();
@@ -166,12 +168,13 @@ function initScanner() {
                 .decodeOnceFromVideoDevice(selectedDeviceId, 'previewKamera')
                 .then(result => {
                         $('.dataTables_filter input').val(result.text);
+
+                        $('.'+result.text).prop('checked', true);
+                        
                         setTimeout(function(){
-                          $('.dataTables_filter input')
-                          .on('change', function() {
-                              table.search(result.text, true, true).draw();
-                          });    
-                        },1000);
+                          $('.dataTables_filter input').focus();
+                          showData(result.text);
+                        },500);
                         $('.camp').hide();
                         if(codeReader){
                             codeReader.reset()
@@ -195,6 +198,66 @@ if (navigator.mediaDevices) {
 
 } else {
     alert('Cannot access camera.');
+}
+
+function showData(rfid){
+  if(rfid == null){
+    rfid = event.currentTarget.dataset.id;
+  }
+  $(".list-data").html('Menunggu Request dari ITAM');
+  $(".list-data-history").html('Menunggu Request dari ITAM');
+  $('#modalLong').modal('show');
+  $.ajax({
+      url : "<?=base_url()?>index.php/scan_rfid/detailRFID/"+rfid,
+      type: "GET",
+      dataType:"JSON",
+      success: function(data){
+        $(".list-data").html('');
+
+        $('.asset_id').text(data['data'][0]['asset_id']);
+        $('.name_asset').text(data['data'][0]['name_asset']);
+        $('.serial_number').text(data['data'][0]['serial_number']);
+        $('.year_project').text(data['data'][0]['year_project']);
+        $('.ppk_user').text(data['data'][0]['ppk_user']);
+        $('.name_project').text(data['data'][0]['name_project']);
+        var i;
+        for (i = 0; i < data['data'][0]['product_attribute'].length; ++i) {
+          if(data['data'][0]['product_attribute'][i]['description'] != ""){
+            $('.list-data').append("<tr><td>"+data['data'][0]['product_attribute'][i]['name']+"</td><td>"+data['data'][0]['product_attribute'][i]['description']+"</td></tr>");
+          }
+        }
+      },
+  });
+
+  $.ajax({
+      url : "<?=base_url()?>index.php/scan_rfid/setRFID/"+rfid,
+      type: "GET",
+      dataType:"JSON",
+      success: function(data){
+      },
+  });
+
+  $.ajax({
+      url : "<?=base_url()?>index.php/scan_rfid/historyRFID/"+rfid,
+      type: "GET",
+      dataType:"JSON",
+      success: function(data){
+        $(".list-data-history").html('');
+        var i;
+        for (i = 0; i < data.length; ++i) {
+
+          var todaydate = new Date(data[i]['tanggal']); 
+          var dd = todaydate .getDate();
+          var mm = todaydate .getMonth()+1;
+          var yyyy = todaydate .getFullYear();
+          if(dd<10){  dd='0'+dd } 
+          if(mm<10){  mm='0'+mm } 
+          var date = dd+'-'+mm+'-'+yyyy+' '+todaydate.getHours() + ':' + todaydate.getMinutes();
+
+          $('.list-data-history').append("<tr><td>"+data[i]['location_awal']+"</td><td>"+data[i]['location_tujuan']+"</td><td>"+date+"</td></tr>");
+        }
+      },
+  });
 }
 
 </script>

@@ -15,18 +15,6 @@
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
             <li>
-                <a class="dropdown-item" href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/gate_out')?>">
-                <i class="bx bx-power-off me-2"></i>
-                <span class="align-middle">Dashboard Gate In</span>
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-item"  href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/gate_out')?>">
-                <i class="bx bx-power-off me-2"></i>
-                <span class="align-middle">Dashboard Gate Out</span>
-                </a>
-            </li>
-            <li>
                 <a class="dropdown-item" href="<?=base_url('index.php/dashboard/logout')?>">
                 <i class="bx bx-power-off me-2"></i>
                 <span class="align-middle">Keluar</span>

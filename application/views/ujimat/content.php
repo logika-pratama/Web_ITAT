@@ -23,7 +23,7 @@
     </div>
 
     <div class="col-md-12 mt-2">
-        <a hre="javascript:void(0)" class="btn btn-primary btm-lg" style="color:white; width:100%;" onclick="showData(1)">Scan Qrcode</a>
+        <a hre="javascript:void(0)" class="btn btn-primary btm-lg" style="color:white; width:100%;" onclick="scanQrcode(1)">Scan Qrcode</a>
     </div>
 
     <div class="col-6">
@@ -87,6 +87,14 @@
                 <tr>
                     <td>Serial Number</td>
                     <td> : <span class="serial_number"></span></td>
+                </tr>
+                <tr>
+                    <td>PPK</td>
+                    <td> : <span class="ppk_user"></span></td>
+                </tr>
+                <tr>
+                    <td>Proyek</td>
+                    <td> : <span class="name_project"></span></td>
                 </tr>
                 <tr>
                     <td>Tahun Project</td>
