@@ -85,6 +85,12 @@
                                                 </a>
                                             </div>
                                             <div class="col-4">
+                                                <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/ujimat')?>"  class="btn btn-primary btn-sm mb-2" style="height:85px; width:100%;">
+                                                    <i class="bx bx-package bx-md mb-1"></i>
+                                                    <p class="icon-name text-capitalize">Uji Mat</p>
+                                                </a>
+                                            </div>
+                                            <div class="col-4">
                                                 <a href="<?=base_url('index.php/searching/waiting?url=')?>https://10.230.200.158:8082/login" class="btn btn-warning btn-sm mb-2" style="height:85px; width:100%;">
                                                     <i class="bx bxs-box bx-md mb-1"></i>
                                                     <p class="icon-name text-capitalize">Aset Gudang</p>
@@ -100,12 +106,6 @@
                                                 <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/untaging_ble')?>" class="btn btn-info btn-sm mb-2" style="height:85px; width:100%;">
                                                     <i class="bx bx-qr bx-md mb-1"></i>
                                                     <p class="icon-name text-capitalize">Pelepasan Tag BLE</p>
-                                                </a>
-                                            </div>
-                                            <div class="col-4">
-                                                <a href="<?=base_url('index.php/searching/waiting?url=')?>http://10.230.200.158:8081/login"  class="btn btn-primary btn-sm mb-2" style="height:85px; width:100%;">
-                                                    <i class="bx bx-package bx-md mb-1"></i>
-                                                    <p class="icon-name text-capitalize">Aset Luar Gudang</p>
                                                 </a>
                                             </div>
                                             <div class="col-4">

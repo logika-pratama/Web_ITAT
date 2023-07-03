@@ -2,10 +2,14 @@
 <div class="row">
     <div class="col-md-12 mt-1">
         <div class="form-group">
-            <div id="texttags">
-                <input type="text" name="scanrfid" class="fokus form-control" style="width:100%;" data-role="tagsinput"/>
-            </div>
+            <select class="form-control kontrak">
+                <option value="">-- Semua Kontrak --</option>
+            </select>
         </div>    
+    </div>
+    <div class="col-md-12 mt-2">
+        <select class="default-select sipb" style="width:100%;" name="SIPB">
+        </select>
     </div>
 
     <div class="col-md-12 mb-2 camp text-center visible">
@@ -19,20 +23,9 @@
     </div>
 
     <div class="col-md-12 mt-2">
-        <a hre="javascript:void(0)" class="btn btn-primary btn-sm" style="color:white; width:100%;" onclick="showData(1)">Pindai Gate Scan Qrcode</a>
+        <a hre="javascript:void(0)" class="btn btn-primary btm-lg" style="color:white; width:100%;" onclick="showData(1)">Scan Qrcode</a>
     </div>
 
-    <div class="col-12">
-        <div class="form-group mt-2">
-            <a href="javascript:void(0)" class="btn btn-primary btn-sm text-white" style="width:100%;" onclick="getData()">Search</a>
-        </div>
-    </div>
-
-    <div class="col-6">
-        <div class="form-group mt-2">
-            <a href="javascript:void(0)" onclick="resetData()" class="btn btn-danger btn-sm text-white">Reset Scan</a>
-        </div>
-    </div>
     <div class="col-6">
         <div class="form-group mt-2">
         </div>
@@ -43,7 +36,9 @@
             <input name="nomer" type="hidden" value="0">
             <thead style="background-color:#342a29;">
                 <tr>
+                    <th style="color:white;"><input type="checkbox" id="checkAll"></th>
                     <th style="color:white;">ID Aset</th>
+                    <th style="color:white;">Nama</th>
                 </tr>
             </thead>
             <tbody class="listtable">
@@ -52,6 +47,25 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modal-ujimat" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen" role="document">
+    <div class="modal-content ">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalLongTitle">Scan RFID</h5>
+        </div>
+        <div class="modal-body">
+
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+            Close
+        </button>
+        </div>
+    </div>
+    </div>
+</div>
+
 
 <div class="modal fade" id="modalLong" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen" role="document">

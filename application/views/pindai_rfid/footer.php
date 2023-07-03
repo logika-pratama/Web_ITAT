@@ -9,6 +9,7 @@
 <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.5/sweetalert2.min.js"></script>
 
 <script type="text/javascript">
 var table;
@@ -35,13 +36,8 @@ function resetData(){
 
 }
 
-$(".kontrak").change(function(){
-  $(".fokus").tagsinput('focus');
-});
-
 function getData(){
   scan = $("[name='scanrfid']").val();
-  kontrak = $('.kontrak').val();
 
   $('#myTable').DataTable().destroy();
 
@@ -55,7 +51,6 @@ function getData(){
           "type": "POST",
           "data" : {
             "scan" : scan,
-            "kontrak" : kontrak
           },
         },
         "columns": [
@@ -147,5 +142,136 @@ function showData(){
 setTimeout(function(){
     $(".fokus").tagsinput('focus');
 },1000);
+
+
+
+$( document ).ready(function() {
+    $('.camp').hide();
+});
+
+function showData(num){
+    $('.ble').val(num);
+    $('.camp').show();
+    var pk = $('.pilihKamera').val();
+    $('.pilihKamera').val(pk).change();
+}
+
+let selectedDeviceId = null;
+const codeReader = new ZXing.BrowserMultiFormatReader();
+const sourceSelect = $("#pilihKamera");
+
+$(document).on('change','#pilihKamera',function(){
+    selectedDeviceId = $(this).val();
+    if(codeReader){
+        codeReader.reset()
+        initScanner()
+    }
+})
+
+function initScanner() {
+    codeReader
+    .listVideoInputDevices()
+    .then(videoInputDevices => {
+        videoInputDevices.forEach(device =>
+            console.log(`${device.label}, ${device.deviceId}`)
+        );
+
+        if(videoInputDevices.length > 0){
+                
+            if(selectedDeviceId == null){
+                if(videoInputDevices.length > 1){
+                    selectedDeviceId = videoInputDevices[1].deviceId
+                } else {
+                    selectedDeviceId = videoInputDevices[0].deviceId
+                }
+            }
+                
+                
+            if (videoInputDevices.length >= 1) {
+                sourceSelect.html('');
+                videoInputDevices.forEach((element) => {
+                    const sourceOption = document.createElement('option')
+                    sourceOption.text = element.label
+                    sourceOption.value = element.deviceId
+                    if(element.deviceId == selectedDeviceId){
+                        sourceOption.selected = 'selected';
+                    }
+                    sourceSelect.append(sourceOption)
+                })
+            
+            }
+
+            codeReader
+                .decodeOnceFromVideoDevice(selectedDeviceId, 'previewKamera')
+                .then(result => {
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 1000,
+                        timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    });
+                    
+                        $('#myTable').DataTable().destroy();
+                        table = $('#myTable').DataTable({
+                              "paging":   false,
+                              "ordering": false,
+                              "processing": true,
+                              "ajax":{
+                                "url": "<?=base_url()?>index.php/pindai_rfid/scanQRcode/",
+                                "dataType": "json",
+                                "type": "POST",
+                                "data" : {
+                                  "scan" : result.text,
+                                },
+                              },
+                              "columns": [
+                                  { 
+                                    data: "tag_number",
+                                    'render': function(data, type, row, meta){
+                                        if(type === 'display'){
+                                          data = '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.tag_number+'">' + data + '</a> ';
+                                        }
+
+                                        return data;
+                                      } 
+                                  }
+                              ]  
+                          });
+                          setTimeout(function(){
+                            $('.fokus').tagsinput('removeAll');
+                          });
+          
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Pemindai Scan Qrcode' +result.text+ ' Berhasil' 
+                        })
+                        
+                        $('.camp').hide();
+                        if(codeReader){
+                            codeReader.reset()
+                        }
+                })
+                .catch(err => console.error(err));
+                
+        } else {
+            alert("Camera not found!")
+        }
+    })
+    .catch(err => console.error(err));
+}
+
+
+if (navigator.mediaDevices) {
+    initScanner()
+} else {
+    alert('Cannot access camera.');
+}
+
 
 </script>

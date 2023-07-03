@@ -12,7 +12,7 @@ class Dashboard extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
-if(empty($this->session->userdata('token'))){
+		if(empty($this->session->userdata('token'))){
 			redirect('login');
 		}
 	}

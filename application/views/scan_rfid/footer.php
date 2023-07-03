@@ -30,9 +30,8 @@ $( document ).ready(function() {
 
 function resetData(){
   $('#myTable').DataTable().destroy();
-  $('#tags-input').tagsinput('removeAll');
+  $('.fokus').tagsinput('removeAll');
   $('.listtable').html('');
-
 }
 
 $(".kontrak").change(function(){
@@ -73,7 +72,7 @@ function getData(){
               data: "name_asset",
               'render': function(data, type, row, meta){
                   if(type === 'display'){
-                    data = '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
+                    data = '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.asset_id+'">' + data + '</a> ';
                   }
 
                   return data;
@@ -83,7 +82,7 @@ function getData(){
                data: "location_asset",
                'render': function(data, type, row, meta){
                   if(type === 'display'){
-                    data = '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.assets_id+'">' + data + '</a> ';
+                    data = '<a href="javascript:void(0)" onclick="showData()" data-id="'+row.asset_id+'">' + data + '</a> ';
                   }
 
                   return data;
@@ -110,6 +109,7 @@ function showData(){
   rfid = event.currentTarget.dataset.id;
   $(".list-data").html('Menunggu Request dari ITAM');
   $(".list-data-history").html('Menunggu Request dari ITAM');
+  $('#modalLong').modal('show');
   $.ajax({
       url : "<?=base_url()?>index.php/scan_rfid/detailRFID/"+rfid,
       type: "GET",
@@ -160,7 +160,7 @@ function showData(){
       },
   });
 
-  $('#modalLong').modal('show');
+  
 }
 
 setTimeout(function(){
