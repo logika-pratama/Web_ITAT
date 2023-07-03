@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="<?=base_url()?>assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.5/sweetalert2.min.css"/>
     <!-- Page CSS -->
+    <link rel="stylesheet" href="<?=base_url()?>assets/css/main.css" />
     <!-- Helpers -->
     <script src="<?=base_url()?>assets/vendor/js/helpers.js"></script>
     <script src="<?=base_url()?>assets/js/config.js"></script>

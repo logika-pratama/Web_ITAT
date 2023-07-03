@@ -123,16 +123,9 @@
                                             </div>
                                             <?php } ?>
                                             <div class="col-4">
-                                                <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/ujimat_scanqr')?>" class="btn btn-secondary btn-sm mb-2" style="height:85px; width:100%;">
+                                                <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/ujimat_scanqr')?>" class="btn btn-warning btn-sm mb-2" style="height:85px; width:100%;">
                                                     <i class="bx bx-search bx-md mb-1"></i>
-                                                    <p class="icon-name text-capitalize">Ujimat - Scan Qrcode</p>
-                                                </a>
-                                            </div>
-                                            <div class="col-4">
-                                                <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/untaging_ble')?>" class="btn btn-secondary btn-sm mb-2" style="height:85px; width:100%;">
-                                                    <!-- <i class="bx bx-qr bx-md mb-1"></i> -->
-                                                    <i class="bx bx-notepad bx-md mb-1"></i>
-                                                    <p class="icon-name text-capitalize">Cek Aset</p>
+                                                    <p class="icon-name text-capitalize">Uji Mat (QR Code)</p>
                                                 </a>
                                             </div>
                                         </div> <!-- end row -->
