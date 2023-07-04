@@ -29,7 +29,10 @@ $( document ).ready(function() {
       dataType:"JSON",
       success: function(data){
         var i;
+        rss = JSON.stringify(data);
+        $('.kontrak-data').val(rss);
         for (i = 0; i < data.length; ++i) {
+         
           $('.kontrak').append('<option value="'+data[i]['id']+'">'+data[i]['description']+'</option>');
         }       
       },
@@ -40,6 +43,17 @@ $(".kontrak").change(function(){
     $("#loader").show();
     $('.sipb').html('');
     id = $(this).val();
+
+    $.ajax({
+      url : "<?=base_url()?>index.php/<?=$this->uri->segment(1)?>/addKontrak/"+id,
+      type: "POST",
+      data:{ rss:$('.kontrak-data').val()},
+    success: function(data){
+     
+    },
+    error: function (xhr, status, error){}
+    });
+
     $.ajax({
       url : BASEURL+'sipb?id_kontrak='+id,
       type: "GET",
@@ -72,12 +86,12 @@ $(".sipb").change(function(){
       },
     success: function(data){
       for (i = 0; i < data.data['belum'].length; ++i) {
-        rfid = data.data['belum'][i]['no_code'];
-        $('.listtable').append('<tr><td><input type="checkbox" class="check '+rfid+'" name="getId[]" value="'+data.data['belum'][i]['no_code']+'"></td><td onclick="showData()" data-id="'+rfid+'">'+data.data['belum'][i]['no_code']+'</td><td>'+data.data['belum'][i]['nama_aset']+'</td></tr>');
+        rfid = data.data['belum'][i]['no_code'].toString();
+        $('.listtable').append('<tr><td><input type="checkbox" onclick="addItem()" data-id="'+rfid+'" class="check '+rfid+'" name="getId[]" value="'+data.data['belum'][i]['no_code']+'"></td><td onclick="showData()" data-id="'+rfid+'">'+data.data['belum'][i]['no_code']+'</td><td>'+data.data['belum'][i]['nama_aset']+'</td></tr>');
       }
       for (i = 0; i < data.data['sudah'].length; ++i) {
         rfid = data.data['sudah'][i]['no_code'];
-        $('.listtable').append('<tr><td><input type="checkbox" class="check '+rfid+'" name="getId[]" value="'+data.data['sudah'][i]['no_code']+'"></td><td onclick="showData()" data-id="'+rfid+'">'+data.data['sudah'][i]['no_code']+'</td><td>'+data.data['sudah'][i]['nama_aset']+'</td></tr>');
+        $('.listtable').append('<tr><td><input type="checkbox" onclick="addItem()" data-id="'+rfid+'" class="check '+rfid+'" name="getId[]" value="'+data.data['sudah'][i]['no_code']+'"></td><td onclick="showData()" data-id="'+rfid+'">'+data.data['sudah'][i]['no_code']+'</td><td>'+data.data['sudah'][i]['nama_aset']+'</td></tr>');
       }
       
       setTimeout(function(){
@@ -174,7 +188,10 @@ function initScanner() {
                         setTimeout(function(){
                           $('.dataTables_filter input').focus();
                           showData(result.text);
+                          addItem(result.text);
                         },500);
+
+                        
                         $('.camp').hide();
                         if(codeReader){
                             codeReader.reset()
@@ -260,4 +277,47 @@ function showData(rfid){
   });
 }
 
+function addItem(rfid){
+  if(rfid == null){
+    rfid = event.currentTarget.dataset.id;
+  }
+  status = $('.'+rfid).is(":checked");
+    if (status == 'true') {
+      url = "<?=base_url()?>index.php/ujimat/addItem/"+rfid+"/1";
+    } else {
+      url = "<?=base_url()?>index.php/ujimat/addItem/"+rfid+"/0";
+    }
+    
+    $.ajax({
+      url : url,
+      type: "GET",
+      dataType:"JSON",
+      success: function(data){
+      },
+    });
+
+}
+
+window.onbeforeunload = function (e) {
+    var message = "Apa kamu yakin ?";
+    var firefox = /Firefox[\/\s](\d+)/.test(navigator.userAgent);
+    if (firefox) {
+        var dialog = document.createElement("div");
+        document.body.appendChild(dialog);
+        dialog.id = "dialog";
+        dialog.style.visibility = "hidden";
+        dialog.innerHTML = message;
+        var left = document.body.clientWidth / 2 - dialog.clientWidth / 2;
+        dialog.style.left = left + "px";
+        dialog.style.visibility = "visible";
+        var shadow = document.createElement("div");
+        document.body.appendChild(shadow);
+        shadow.id = "shadow";
+        setTimeout(function () {
+            document.body.removeChild(document.getElementById("dialog"));
+            document.body.removeChild(document.getElementById("shadow"));
+        }, 0);
+    }
+    return message;
+};
 </script>

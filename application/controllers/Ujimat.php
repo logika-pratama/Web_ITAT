@@ -12,9 +12,9 @@ class Ujimat extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
-		if(empty($this->session->userdata('token'))){
-			redirect('login');
-		}
+		// if(empty($this->session->userdata('token'))){
+		// 	redirect('login');
+		// }
 	}
 
 	public function index()
@@ -94,79 +94,7 @@ class Ujimat extends CI_Controller {
 
 		$response = curl_exec($curl);
 		curl_close($curl);
-
-	}
-
-	public function detailRFID($rfid){
-		$curl = curl_init();
-
-		$url = itamUrl().'api/asset/detail?asset_id='.$rfid;
-		curl_setopt_array($curl, array(
-		CURLOPT_URL => $url,
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_ENCODING => '',
-		CURLOPT_MAXREDIRS => 10,
-		CURLOPT_TIMEOUT => 0,
-		CURLOPT_FOLLOWLOCATION => true,
-		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		CURLOPT_CUSTOMREQUEST => 'GET',
-		CURLOPT_HTTPHEADER => array(
-			'apikey: $pbkdf2-sha512$6000$P4cQYmzN.X8v5bw3xhijtA$PzGUd4dnuuvvEDgwhUsvDafEKu4W4Z5McvDO5nchfAlllfNsbCXBeB5XE/KrbtFEqfM4ymR2IMzGsKWT0vXKFA'
-		),
-		));
-
-		$response = curl_exec($curl);
-
-		curl_close($curl);
-		$rss = json_decode($response);
-		echo json_encode($rss);
-	}
-
-	public function historyRFID($rfid){
-		$curl = curl_init();
-		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'https://aset.divtik.polri.go.id/api_itam/api/asset/asset_move?asset_id='.$rfid,
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_ENCODING => '',
-			CURLOPT_MAXREDIRS => 10,
-			CURLOPT_TIMEOUT => 0,
-			CURLOPT_FOLLOWLOCATION => true,
-			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			CURLOPT_CUSTOMREQUEST => 'GET',
-			CURLOPT_HTTPHEADER => array(
-				'apikey: $pbkdf2-sha512$6000$P4cQYmzN.X8v5bw3xhijtA$PzGUd4dnuuvvEDgwhUsvDafEKu4W4Z5McvDO5nchfAlllfNsbCXBeB5XE/KrbtFEqfM4ymR2IMzGsKWT0vXKFA'
-			),
-		));
-		$response = curl_exec($curl);
-		curl_close($curl);
-		$rss = json_decode($response);
-		if($rss->meta->status == 'success'){
-			echo json_encode($rss->data);
-		} else {
-			echo json_encode($rss);
-		}
-	}
-
-	public function closeMat(){
-		$curl = curl_init();
-		curl_setopt_array($curl, array(
-		CURLOPT_URL => itamUrl().'api/ujimat/unset_view_ujimat',
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_ENCODING => '',
-		CURLOPT_MAXREDIRS => 10,
-		CURLOPT_TIMEOUT => 0,
-		CURLOPT_FOLLOWLOCATION => true,
-		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		CURLOPT_CUSTOMREQUEST => 'POST',
-		CURLOPT_HTTPHEADER => array(
-			'apikey: $pbkdf2-sha512$6000$P4cQYmzN.X8v5bw3xhijtA$PzGUd4dnuuvvEDgwhUsvDafEKu4W4Z5McvDO5nchfAlllfNsbCXBeB5XE/KrbtFEqfM4ymR2IMzGsKWT0vXKFA'
-		),
-		));
-
-		$response = curl_exec($curl);
-
-		curl_close($curl);
-		echo $response;
+		return $response;
 	}
 
 	public function getKontrak(){
@@ -192,4 +120,45 @@ class Ujimat extends CI_Controller {
 		echo json_encode($rss['data']);
 	}
 
+	public function addKontrak($id){
+		$rss = $this->input->post('rss');
+		$rss = json_decode($rss,true);
+		$kontrak = '';
+		foreach($rss as $r){
+			if($r['id'] == $id){
+				$kontrak = $r;
+			}
+		}
+
+		$this->db->truncate('ujimat');
+
+		$kontrak = json_encode($kontrak);
+		$data = array(
+			'status' => 0,
+			'response' => $kontrak,
+			'status_ujimat' => 1,
+		);
+		$this->db->update('kontrak',$data);
+	}
+
+	public function addItem($rfid,$status){
+		if($status == 1){
+			$rss = $this->setRFID($rfid);
+			$data = array(
+				'rfid' => $rfid,
+				'rss' => $rss,
+			);
+			$this->db->insert('ujimat',$data);
+		
+		} else {
+			$this->db->where('rfid',$rfid);
+			$this->db->delete('ujimat');
+		}
+
+		
+		$data = array(
+			'status_ujimat' => 0,
+		);
+		$this->db->update('kontrak',$data);
+	}
 }

@@ -5,6 +5,7 @@
             <select class="form-control kontrak">
                 <option value="">-- Semua Kontrak --</option>
             </select>
+            <input type="hidden" class="kontrak-data">
         </div>    
     </div>
     <div class="col-md-12 mt-2">
