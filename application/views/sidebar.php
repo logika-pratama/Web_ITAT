@@ -88,7 +88,7 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/cek_aset')?>"  class="menu-link">
+            <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/scan_aset')?>"  class="menu-link">
             <div data-i18n="Container">Cek Aset (QR Code)</div>
             </a>
         </li>

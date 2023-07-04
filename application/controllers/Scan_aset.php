@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Cek_aset extends CI_Controller {
+class Scan_aset extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
@@ -19,7 +19,7 @@ class Cek_aset extends CI_Controller {
 
 	public function index() {
 		$data = array(
-			'title' => 'Cek Aset (QR Code)',
+			'title' => 'Scan Aset (QR Code)',
 		
 		);
 		$this->load->view('main',$data);
