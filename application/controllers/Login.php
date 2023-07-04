@@ -52,6 +52,11 @@ class Login extends CI_Controller {
 		$response = curl_exec($curl);
 		$rss = json_decode($response,true);
 		curl_close($curl);
+
+		// BYPASS LOGIN
+		// $rss['jwtTokken'] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic3JpIG11cm5pIiwiaWRfdXNlciI6IjMzIiwiaWRhY2NvdW50IjoiMDAwOSIsInJvbGUiOiIzIiwiRGV2aWNlX0lEIjoiMDAwN2I2IiwibW9kdWxfbmFtZSI6IldJTTIiLCJpYXQiOjE2ODc4Mzg1NzMsImV4cCI6MTY4NzkyNDk3M30.K4Q7CgeaYNtlKmeKgr66zRZfKE3NMwLb1qEtFRFjqzA";
+
+
 		if(!empty($rss['jwtTokken'])){	
 		$token = array(
 				'token' => $rss['jwtTokken'],
