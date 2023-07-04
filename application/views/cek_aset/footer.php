@@ -17,7 +17,6 @@ let selectedDeviceId = null;
 const codeReader = new ZXing.BrowserMultiFormatReader();
 const sourceSelect = $("#pilihKamera");
 const form = {
-    kontrakId: -1,
     assetId: null
 }
 
@@ -25,7 +24,7 @@ const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 20000,
+    timer: 2000,
     timerProgressBar: true,
     didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -88,8 +87,8 @@ function initScanner() {
                     $('#resultAssetId').text(result.text);
 
                     form.assetId = result.text;
-                    form.kontrakId = $('.kontrak').find(":selected").val();
-                    getUjiMaterial(form.kontrakId, form.assetId);
+                    // console.log(form.assetId, "sdasda")
+                    getUjiMaterial(form.assetId);
                     
                     $('.camp').hide();
                     if (codeReader){
@@ -112,26 +111,14 @@ function initScanner() {
     .catch(err => console.error(err));
 }
 
-function setKontrak() {
-    $.ajax({
-        url : "<?=base_url()?>index.php/ujimat_scanqr/getKontrak/",
-        type: "GET",
-        dataType:"JSON",
-        success: function(data){
-            for (let i in data) {
-                $('.kontrak').append('<option style="padding-left: 100px; !important" value="'+data[i]['id']+'">'+data[i]['description']+'</option>');
-            }       
-        }
-    });
-}
 
-function getUjiMaterial(kontrakId, assetId) {
+function getUjiMaterial(assetId) {
+    // console.log(assetId, "2")
     $.ajax({
-        url : "<?=base_url()?>index.php/ujimat_scanqr/getUjiMaterial/",
+        url : "<?=base_url()?>index.php/cek_aset/getUjiMaterial/",
         type: "GET",
         dataType:"JSON",
         data: {
-            kontrakId: kontrakId,
             assetId: assetId
         },
         success: function(data){
@@ -149,7 +136,7 @@ function getUjiMaterial(kontrakId, assetId) {
                 //     title: "Data ditemukan!!!"
                 // })
                 // setContent(data);
-                setContent2(data.data);
+                setContent(data.data);
             }   
         }
     });
@@ -160,97 +147,6 @@ function resetContent() {
 }
 
 function setContent(data) {
-    // $('.content').text(form.assetId)
-    $('.content').append('\
-        <div class="p-1 m-3">\
-            <h5>Detail Data</h5>\
-            <table>\
-                <tbody>\
-                    <tr class="table-font-weight-bold">\
-                        <td style="vertical-align: top;">ASSET ID</td>\
-                        <td><span class="asset_id">442520000000000000000007</span></td>\
-                    </tr>\
-                    <tr>\
-                        <td class="table-font-weight-bold" style="vertical-align: top;">Nama Aset</td>\
-                        <td> : <span class="name_asset">Lap top Asus</span></td>\
-                    </tr>\
-                    <tr>\
-                        <td class="table-font-weight-bold" style="vertical-align: top;">Kode Lokasi</td>\
-                        <td> : <span class="kode_lokasi">A-03-A</span></td>\
-                    </tr>\
-                    <tr>\
-                        <td class="table-font-weight-bold" style="vertical-align: top;">Nama Lokasi</td>\
-                        <td> : <span class="nama_lokasi">WHC-A-03-A</span></td>\
-                    </tr>\
-                    <tr>\
-                        <td class="table-font-weight-bold" style="vertical-align: top;">No Kontrak</td>\
-                        <td> : <span class="no_kontrak">SP/78/APBN/II/HUK.11.8./2023/Div TIK</span></td>\
-                    </tr>\
-                    <tr>\
-                        <td class="table-font-weight-bold" style="vertical-align: top;">Nama Proyek</td>\
-                        <td> : <span class="nama_proyek">Pengadaan Perangkat Hyper Converged Infrastruktur Private Cloud untuk Virtual Developer Worksapce Pada Private Cloud T.A. 2023</span></td>\
-                    </tr>\
-                    <tr>\
-                        <td class="table-font-weight-bold" style="vertical-align: top;">Tahun Proyek</td>\
-                        <td> : <span class="year_proyek">2023</span></td>\
-                    </tr>\
-                    <tr>\
-                        <td class="table-font-weight-bold" style="vertical-align: top;">Nilai Proyek</td>\
-                        <td> : <span class="nilai_proyek">Rp32.670.000</span></td>\
-                    </tr>\
-                    <tr>\
-                        <td class="table-font-weight-bold" style="vertical-align: top;">PPK</td>\
-                        <td> : <span class="ppk">Mario Prahatinto</span></td>\
-                    </tr>\
-                    <tr>\
-                        <td class="table-font-weight-bold" style="vertical-align: top;">Nama Vendor</td>\
-                        <td> : <span class="nama_vendor">PT. AKA KARYA GEMILANG</span></td>\
-                    </tr>\
-                </tbody>\
-            </table>\
-            <h5 class="mt-3">Spek Tek</h5>\
-            <table class="table table-striped table-bordered mt-3">\
-                <thead>\
-                </thead>\
-                <tbody class="list-data">\
-                    <tr>\
-                        <td class="table-font-weight-bold">Keterangan</td>\
-                        <td>Laptop 15,6-in, AMD Ryzen™ 7 6800H</td>\
-                    </tr>\
-                    <tr>\
-                        <td class="table-font-weight-bold">Tipe Laptop</td>\
-                        <td>ASUS / ROG STRIX G15</td>\
-                    </tr>\
-                </tbody>\
-            </table>\
-            <h5 class="mt-3">History</h5>\
-            <table class="table table-striped table-bordered mt-3">\
-                <thead>\
-                    <tr class="table-font-weight-bold">\
-                        <td>Dari</td>\
-                        <td>Ke</td>\
-                        <td>Tanggal / Jam</td>\
-                    </tr>\
-                </thead>\
-                <tbody class="list-data-history">\
-                    <tr>\
-                        <td>Partner Locations/Vendors</td>\
-                        <td>WHC-A-03-A</td>\
-                        <td>2023-06-21 16:20:02</td>\
-                    </tr>\
-                    <tr>\
-                        <td>WHC-A-03-A</td>\
-                        <td>WHC/ujimat area</td>\
-                        <td>2023-06-23 03:38:21</td>\
-                    </tr>\
-                </tbody>\
-            </table>\
-        </div>\
-    ');
-    // $('.content').append('<div class="p-1 m-3">goblok</div>')
-}
-
-function setContent2(data) {
     let content = '<div class="p-1 m-3">';
     content += `
     <h5>Detail Data</h5>\
@@ -382,7 +278,6 @@ function formatDate(value) {
 
 $(document).ready(function() {
     $('.camp').show();
-    setKontrak();
 });
 
 $(document).on('change','#pilihKamera',function(){
@@ -396,7 +291,6 @@ $(document).on('change','#pilihKamera',function(){
 $(document).on('click','#resetScan',function(){
     if(codeReader){
         codeReader.reset();
-        // $(".kontrak").val("-1").change(); // set nilai kontrak ke "Pilih Kontrak" 
         $('.camp').show();
         initScanner();
         resetContent();
@@ -408,22 +302,6 @@ $(document).on('click','#resetScan',function(){
         imgElement.src = null;
 
         $('#resultAssetId').text('');
-    }
-})
-
-$(document).on('change','.kontrak',function(){
-    if (codeReader){
-        form.kontrakId = $('.kontrak').find(":selected").val();
-        if (form.assetId != null) {
-            getUjiMaterial(form.kontrakId, form.assetId);
-            // $('.content').text(form.assetId)
-        } else {
-            resetContent();
-        }
-        // $('.camp').show();
-        // codeReader.reset();
-        // initScanner();
-        // $('.content').text('');
     }
 })
 
