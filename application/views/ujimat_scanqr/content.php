@@ -7,7 +7,7 @@
     <div class="col-md-12 mb-1 text-center">
         <div class="p-1 m-3">
             <label class="form-label">Pilih Kontrak</label>
-            <select class="form-control kontrak ellipsis-option">
+            <select class="form-control kontrak">
                 <option value="-1">-- Pilih Kontrak --</option>
             </select>
         </div>
@@ -35,16 +35,22 @@
         </div>
     </div>
 
-    <div class="col-md-12 mb-2 text-center" id="qrcodeContainer">
+    <!-- <div class="col-md-12 mb-2 text-center" id="qrcodeContainer">
         <img id="resultImg" src="" alt="" style="max-width: 93.5%; max-height: 93.5%;"/>
         <p id="resultAssetId"></p>
-    </div>
+    </div> -->
 
     <!-- Reset Scan -->
-    <div class="col-md-12 mb-3 text-end">
+    <!-- <div class="col-md-12 mb-3 text-end">
         <div class="p-1 m-3">
             <button id="resetScan" class="btn btn-danger btn-sm text-white">Reset Scan</button>
         </div>
+    </div> -->
+
+    <div class="col-md-12 mb-3 text-end tutupHasil">
+        <!-- <div class="p-1 m-3">
+            <button id="tutupHasil" class="btn btn-danger btn-sm text-white">Tutup Hasil</button>
+        </div> -->
     </div>
 
     <!-- <div class="col-md-12 text-center mb-3">

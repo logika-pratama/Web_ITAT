@@ -8,6 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.5/sweetalert2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <!-- <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script> -->
+
 </head>
 <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
 
@@ -25,7 +26,7 @@ const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 20000,
+    timer: 2000,
     timerProgressBar: true,
     didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -68,33 +69,37 @@ function initScanner() {
 
                     console.log(result);
 
-                    const videoElement = document.getElementById('previewKamera');
-                    const imgElement = document.getElementById('resultImg');
-                    const canvas = document.createElement('canvas');
-                    const context = canvas.getContext('2d');
-
-                    function captureFrame() {
-                        canvas.width = videoElement.videoWidth;
-                        canvas.height = videoElement.videoHeight;
-
-                        context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-                        // context.drawImage(videoElement, 0, 0);
-                        return canvas.toDataURL(); // Convert canvas to data URL
-                    }
-
-                    const imageDataUrl = captureFrame();
-                    imgElement.src = imageDataUrl;
-
-                    $('#resultAssetId').text(result.text);
-
                     form.assetId = result.text;
                     form.kontrakId = $('.kontrak').find(":selected").val();
                     getUjiMaterial(form.kontrakId, form.assetId);
+
+                    // const videoElement = document.getElementById('previewKamera');
+                    // const imgElement = document.getElementById('resultImg');
+                    // const canvas = document.createElement('canvas');
+                    // const context = canvas.getContext('2d');
+
+                    // function captureFrame() {
+                    //     canvas.width = videoElement.videoWidth;
+                    //     canvas.height = videoElement.videoHeight;
+
+                    //     context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+                    //     // context.drawImage(videoElement, 0, 0);
+                    //     return canvas.toDataURL(); // Convert canvas to data URL
+                    // }
+
+                    // const imageDataUrl = captureFrame();
+                    // imgElement.src = imageDataUrl;
+
+                    // $('#resultAssetId').text(result.text);
+
+                    // form.assetId = result.text;
+                    // form.kontrakId = $('.kontrak').find(":selected").val();
+                    // getUjiMaterial(form.kontrakId, form.assetId);
                     
-                    $('.camp').hide();
-                    if (codeReader){
-                        codeReader.reset();
-                    }
+                    // $('.camp').show();
+                    // if (codeReader){
+                    //     codeReader.reset();
+                    // }
 
                 })
                 .catch(err => {
@@ -110,6 +115,27 @@ function initScanner() {
         }
     })
     .catch(err => console.error(err));
+}
+
+function captureQRCode() {
+    const videoElement = document.getElementById('previewKamera');
+    const imgElement = document.getElementById('resultImg');
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+
+    function captureFrame() {
+        canvas.width = videoElement.videoWidth;
+        canvas.height = videoElement.videoHeight;
+
+        context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+        // context.drawImage(videoElement, 0, 0);
+        return canvas.toDataURL(); // Convert canvas to data URL
+    }
+
+    const imageDataUrl = captureFrame();
+    imgElement.src = imageDataUrl;
+
+    // $('#resultAssetId').text(result.text);
 }
 
 function setKontrak() {
@@ -144,19 +170,39 @@ function getUjiMaterial(kontrakId, assetId) {
                     title: data.meta.message
                 })
             } else {
-                // Toast.fire({
-                //     icon: 'success',
-                //     title: "Data ditemukan!!!"
-                // })
+                Toast.fire({
+                    icon: 'success',
+                    title: "Data aset ditemukan"
+                })
                 // setContent(data);
+                createTutupHasil();
                 setContent2(data.data);
+                captureQRCode();
             }   
+
+            codeReader.reset();
+            $('.camp').show();
+            initScanner();
         }
     });
 }
 
 function resetContent() {
     $('.content').html('');
+}
+
+function resetTutupHasil() {
+    $('.tutupHasil').html('');
+}
+
+function createTutupHasil() {
+    const tutupHasil = `
+        <div class="p-1 m-3">
+            <button id="tutupHasil" class="btn btn-danger btn-sm text-white">Tutup Hasil</button>
+        </div>
+    `;
+
+    $('.tutupHasil').html(tutupHasil);
 }
 
 function setContent(data) {
@@ -254,6 +300,10 @@ function setContent2(data) {
     let content = '<div class="p-1 m-3">';
     content += `
     <h5>Detail Data</h5>\
+    <div class="col-md-12 mb-2 text-center" id="qrcodeContainer">
+        <img id="resultImg" src="" alt="" style="max-width: 93.5%; max-height: 93.5%;"/>
+        <p id="resultAssetId"></p>
+    </div>
     <table>\
         <tbody>\
             <tr class="table-font-weight-bold">\
@@ -382,7 +432,11 @@ function formatDate(value) {
 
 $(document).ready(function() {
     $('.camp').show();
+    $('.kontrak').select2();
+    // let $kontrak = $(".kontrak");
+    // $kontrak.select2();
     setKontrak();
+
 });
 
 $(document).on('change','#pilihKamera',function(){
@@ -408,6 +462,17 @@ $(document).on('click','#resetScan',function(){
         imgElement.src = null;
 
         $('#resultAssetId').text('');
+    }
+})
+
+$(document).on('click','#tutupHasil',function(){
+    if(codeReader){
+        codeReader.reset();
+        $('.camp').show();
+        initScanner();
+        resetContent();
+        form.assetId = null;
+        resetTutupHasil();
     }
 })
 
