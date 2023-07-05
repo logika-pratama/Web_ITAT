@@ -16,17 +16,21 @@
 
 let selectedDeviceId = null;
 const codeReader = new ZXing.BrowserMultiFormatReader();
+// const hints = new Map();
+// hints.set(ZXing.DecodeHintType.TRY_HARDER, true); // Increases sensitivity
+// hints.set(ZXing.DecodeHintType.ALLOWED_EAN_EXTENSIONS, 5);
 const sourceSelect = $("#pilihKamera");
 const form = {
     kontrakId: -1,
-    assetId: null
+    assetId: null,
+    img: null
 }
 
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 2000,
+    timer: 20000,
     timerProgressBar: true,
     didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -117,7 +121,7 @@ function initScanner() {
     .catch(err => console.error(err));
 }
 
-function captureQRCode() {
+function captureQRCode(isNewCaptureQRCode) {
     const videoElement = document.getElementById('previewKamera');
     const imgElement = document.getElementById('resultImg');
     const canvas = document.createElement('canvas');
@@ -133,7 +137,13 @@ function captureQRCode() {
     }
 
     const imageDataUrl = captureFrame();
-    imgElement.src = imageDataUrl;
+    if (isNewCaptureQRCode) {
+        imgElement.src = imageDataUrl;
+        form.img = imageDataUrl
+    } else {
+        imgElement.src = form.img;
+    }
+    // imgElement.src = imageDataUrl;
 
     // $('#resultAssetId').text(result.text);
 }
@@ -178,9 +188,10 @@ function getUjiMaterial(kontrakId, assetId, isResetCaptureQR = true) {
                 // setContent(data);
                 createTutupHasil();
                 setContent2(data.data);
-                if (isResetCaptureQR) {
-                    captureQRCode();
-                }
+                // if (isResetCaptureQR) {
+                //     captureQRCode();
+                // }
+                captureQRCode(isResetCaptureQR);
             }   
 
             codeReader.reset();
