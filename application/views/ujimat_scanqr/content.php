@@ -3,15 +3,7 @@
         <h5 class="card-header m-0"><?=$title?></h5>
     </div>
 
-    <!-- Kontrak -->
-    <div class="col-md-12 mb-1">
-        <div class="p-1 m-3">
-            <label class="form-label">Pilih Kontrak</label>
-            <select class="form-control kontrak" style="width:100%;">
-                <option value="-1">-- Pilih Kontrak --</option>
-            </select>
-        </div>
-    </div>
+
 
     <!-- <div class="col-md-12 mb-1 text-center">
         <div class="p-1 m-3">
@@ -31,6 +23,16 @@
         <div class="p-1 m-3">
             <label class="form-label">Pilih Kamera</label>
             <select id="pilihKamera" class="form-control pilihKamera">
+            </select>
+        </div>
+    </div>
+
+    <!-- Kontrak -->
+    <div class="col-md-12 mb-1">
+        <div class="p-1 m-3">
+            <label class="form-label" style="display: block; text-align: center;">Pilih Kontrak</label>
+            <select class="form-control kontrak" style="width:100%;">
+                <option value="-1">-- Pilih Kontrak --</option>
             </select>
         </div>
     </div>
