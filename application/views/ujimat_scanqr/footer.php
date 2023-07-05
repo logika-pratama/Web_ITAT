@@ -310,11 +310,11 @@ function setContent2(data) {
     <table>\
         <tbody>\
             <tr class="table-font-weight-bold">\
-                <td style="vertical-align: top;">ASSET ID</td>\
+                <td style="vertical-align: top;">ID</td>\
                 <td><span class="asset_id">${data.asset.asset_id}</span></td>\
             </tr>\
             <tr>\
-                <td class="table-font-weight-bold" style="vertical-align: top;">No Serial</td>\
+                <td class="table-font-weight-bold" style="vertical-align: top;">Serial</td>\
                 <td> : <span class="serial_number">${data.asset.serial_number}</span></td>\
             </tr>\
             <tr>\
