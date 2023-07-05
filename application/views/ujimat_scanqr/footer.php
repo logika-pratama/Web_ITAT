@@ -318,15 +318,15 @@ function setContent2(data) {
                 <td> : <span class="serial_number">${data.asset.serial_number}</span></td>\
             </tr>\
             <tr>\
-                <td class="table-font-weight-bold" style="vertical-align: top;">Nama Aset</td>\
+                <td class="table-font-weight-bold" style="vertical-align: top;">Aset</td>\
                 <td> : <span class="name_asset">${data.asset.name_asset}</span></td>\
             </tr>\
             <tr>\
-                <td class="table-font-weight-bold" style="vertical-align: top;">Kode Lokasi</td>\
+                <td class="table-font-weight-bold" style="vertical-align: top;">Rak</td>\
                 <td> : <span class="kode_location">${data.asset.kode_location}</span></td>\
             </tr>\
             <tr>\
-                <td class="table-font-weight-bold" style="vertical-align: top;">Nama Lokasi</td>\
+                <td class="table-font-weight-bold" style="vertical-align: top;">No Rak</td>\
                 <td> : <span class="location_asset">${data.asset.location_asset}</span></td>\
             </tr>\
             <tr>\
@@ -338,11 +338,11 @@ function setContent2(data) {
                 <td> : <span class="name_project">${data.asset.name_project}</span></td>\
             </tr>\
             <tr>\
-                <td class="table-font-weight-bold" style="vertical-align: top;">Tahun Proyek</td>\
+                <td class="table-font-weight-bold" style="vertical-align: top;">Tahun</td>\
                 <td> : <span class="year_proyek">${data.asset.year_project}</span></td>\
             </tr>\
             <tr>\
-                <td class="table-font-weight-bold" style="vertical-align: top;">Nilai Proyek</td>\
+                <td class="table-font-weight-bold" style="vertical-align: top;">Nilai</td>\
                 <td> : <span class="price">${formatPriceToIDR(data.asset.price)}</span></td>\
             </tr>\
             <tr>\
@@ -350,7 +350,7 @@ function setContent2(data) {
                 <td> : <span class="ppk_user">${data.asset.ppk_user}</span></td>\
             </tr>\
             <tr>\
-                <td class="table-font-weight-bold" style="vertical-align: top;">Nama Vendor</td>\
+                <td class="table-font-weight-bold" style="vertical-align: top;">Vendor</td>\
                 <td> : <span class="name_vendor">${data.asset.name_vendor}</span></td>\
             </tr>\
         </tbody>\
