@@ -68,63 +68,63 @@
                                             </div>
                                             <div class="col-4">
                                                 <a href="<?=base_url('index.php/searching/waiting?url=')?>https://depo.divtik.polri.go.id/" class="btn btn-success btn-sm mb-2" style="height:107px; width:100%;">
-                                                    <i class="bx bxs-file-find bx-md mb-1 mt-2"></i>
+                                                    <i class="bx bxs-file-find bx-sm mb-1 mt-2" style="font-size: 200px;"></i>
                                                     <p class="icon-name text-capitalize">Pelacakan BLE</p>
                                                 </a>
                                             </div>
                                             <div class="col-4">
                                                 <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/pindai_rfid')?>" class="btn btn-danger btn-sm mb-2" style="height:107px; width:100%;">
-                                                    <i class="bx bx-scan bx-md mb-1 mt-2"></i>
+                                                    <i class="bx bx-scan bx-sm mb-1 mt-2" style="font-size: 200px;"></i>
                                                     <p class="icon-name text-capitalize">Pemindai RFID</p>
                                                 </a>
                                             </div>
                                             <div class="col-4">
                                                 <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/scan_rfid')?>" class="btn btn-secondary btn-sm mb-2" style="height:107px; width:100%;">
-                                                    <i class="bx bx-scan bx-md mb-1 mt-2"></i>
+                                                    <i class="bx bx-scan bx-sm mb-1 mt-2" style="font-size: 200px;"></i>
                                                     <p class="icon-name text-capitalize">Scan RFID</p>
                                                 </a>
                                             </div>
                                             <!-- <div class="col-4">
                                                 <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/ujimat')?>"  class="btn btn-primary btn-sm mb-2" style="height:85px; width:100%;">
-                                                    <i class="bx bx-package bx-md mb-1"></i>
+                                                    <i class="bx bx-package bx-sm mb-1"></i>
                                                     <p class="icon-name text-capitalize">Uji Mat</p>
                                                 </a>
                                             </div> -->
                                             <div class="col-4">
                                                 <a href="<?=base_url('index.php/searching/waiting?url=')?>https://10.230.200.158:8082/login" class="btn btn-warning btn-sm mb-2" style="height:107px; width:100%;">
-                                                    <i class="bx bxs-box bx-md mb-1 mt-2"></i>
+                                                    <i class="bx bxs-box bx-sm mb-1 mt-2" style="font-size: 200px;"></i>
                                                     <p class="icon-name text-capitalize">Aset Gudang</p>
                                                 </a>
                                             </div>
                                             <div class="col-4">
                                                 <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/taging_ble')?>" class="btn btn-dark btn-sm mb-2" style="height:107px; width:100%;">
-                                                    <i class="bx bx-qr-scan bx-md mb-1 mt-2"></i>
+                                                    <i class="bx bx-qr-scan bx-sm mb-1 mt-2" style="font-size: 200px;"></i>
                                                     <p class="icon-name text-capitalize">Penandaan Tag BLE</p>
                                                 </a>
                                             </div>
                                             <div class="col-4">
                                                 <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/untaging_ble')?>" class="btn btn-info btn-sm mb-2" style="height:107px; width:100%;">
-                                                    <i class="bx bx-qr bx-md mb-1 mt-2"></i>
+                                                    <i class="bx bx-qr bx-sm mb-1 mt-2" style="font-size: 200px;"></i>
                                                     <p class="icon-name text-capitalize">Pelepasan Tag BLE</p>
                                                 </a>
                                             </div>
                                             <div class="col-4">
                                                 <a href="<?=base_url('index.php/searching/waiting?url=')?>https://10.230.200.158/web?db=polri_prod#action=912&cids=1&menu_id=280" class="btn btn-light btn-sm mb-2" style="height:107px; width:100%;">
-                                                    <i class="bx bxl-algolia bx-md mb-1 mt-2"></i>
+                                                    <i class="bx bxl-algolia bx-sm mb-1 mt-2" style="font-size: 200px;"></i>
                                                     <p class="icon-name text-capitalize">Pelacakan Aset</p>
                                                 </a>
                                             </div>
                                             <?php if($this->session->userdata('role') == 'superadmin'){ ?>
                                             <div class="col-4">
                                                 <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/users')?>" class="btn btn-secondary btn-sm mb-2" style="height:107px; width:100%;">
-                                                    <i class="bx bxl-algolia bx-md mb-1 mt-2"></i>
+                                                    <i class="bx bxl-algolia bx-sm mb-1 mt-2" style="font-size: 200px;"></i>
                                                     <p class="icon-name text-capitalize">Akun Pengguna</p>
                                                 </a>
                                             </div>
                                             <?php } ?>
                                             <div class="col-4 align-items-center">
                                                 <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/ujimat_scanqr')?>" class="btn btn-primary btn-sm mb-2" style="height:107px; width:100%;">
-                                                    <i class="bx bx-search bx-md mb-1 mt-2"></i>
+                                                    <i class="bx bx-search bx-sm mb-1 mt-2" style="font-size: 200px;"></i>
                                                     <p class="icon-name text-capitalize">Uji Mat (QR Code)</p>
                                                     <!-- <p class="icon-name text-capitalize">Uji Mat</p> -->
                                                 </a>
