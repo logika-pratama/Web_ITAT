@@ -151,7 +151,7 @@ function setKontrak() {
     });
 }
 
-function getUjiMaterial(kontrakId, assetId) {
+function getUjiMaterial(kontrakId, assetId, isResetCaptureQR = true) {
     $.ajax({
         url : "<?=base_url()?>index.php/ujimat_scanqr/getUjiMaterial/",
         type: "GET",
@@ -169,6 +169,7 @@ function getUjiMaterial(kontrakId, assetId) {
                     // title: "Data tidak ditemukan"
                     title: data.meta.message
                 })
+                form.assetId = null;
             } else {
                 Toast.fire({
                     icon: 'success',
@@ -177,7 +178,9 @@ function getUjiMaterial(kontrakId, assetId) {
                 // setContent(data);
                 createTutupHasil();
                 setContent2(data.data);
-                captureQRCode();
+                if (isResetCaptureQR) {
+                    captureQRCode();
+                }
             }   
 
             codeReader.reset();
@@ -482,7 +485,7 @@ $(document).on('change','.kontrak',function(){
     if (codeReader){
         form.kontrakId = $('.kontrak').find(":selected").val();
         if (form.assetId != null) {
-            getUjiMaterial(form.kontrakId, form.assetId);
+            getUjiMaterial(form.kontrakId, form.assetId, false);
             // $('.content').text(form.assetId)
         } else {
             resetContent();
