@@ -311,6 +311,10 @@ function setContent2(data) {
                 <td><span class="asset_id">${data.asset.asset_id}</span></td>\
             </tr>\
             <tr>\
+                <td class="table-font-weight-bold" style="vertical-align: top;">No Serial</td>\
+                <td> : <span class="serial_number">${data.asset.serial_number}</span></td>\
+            </tr>\
+            <tr>\
                 <td class="table-font-weight-bold" style="vertical-align: top;">Nama Aset</td>\
                 <td> : <span class="name_asset">${data.asset.name_asset}</span></td>\
             </tr>\
@@ -433,8 +437,6 @@ function formatDate(value) {
 $(document).ready(function() {
     $('.camp').show();
     $('.kontrak').select2();
-    // let $kontrak = $(".kontrak");
-    // $kontrak.select2();
     setKontrak();
 
 });
