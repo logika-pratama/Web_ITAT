@@ -84,7 +84,8 @@
         </li>
         <li class="menu-item">
             <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/ujimat_scanqr')?>"  class="menu-link">
-            <div data-i18n="Container">Uji Mat (QR Code)</div>
+            <!-- <div data-i18n="Container">Uji Mat (QR Code)</div> -->
+            <div data-i18n="Container">Uji Mat</div>
             </a>
         </li>
         <!-- <li class="menu-item">
