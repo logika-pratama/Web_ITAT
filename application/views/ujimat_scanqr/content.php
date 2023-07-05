@@ -4,10 +4,10 @@
     </div>
 
     <!-- Kontrak -->
-    <div class="col-md-12 mb-1 text-center">
+    <div class="col-md-12 mb-1">
         <div class="p-1 m-3">
             <label class="form-label">Pilih Kontrak</label>
-            <select class="form-control kontrak">
+            <select class="form-control kontrak" style="width:100%;">
                 <option value="-1">-- Pilih Kontrak --</option>
             </select>
         </div>

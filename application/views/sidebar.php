@@ -50,11 +50,11 @@
             </a>
         </li>
 
-        <li class="menu-item">
+        <!-- <li class="menu-item">
             <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/ujimat')?>" class="menu-link">
             <div data-i18n="Without menu">Ujimat</div>
             </a>
-        </li>
+        </li> -->
         
         <li class="menu-item">
             <a href="<?=base_url('index.php/searching/waiting?url=')?>https://10.230.200.158:8082/" class="menu-link">
@@ -87,11 +87,11 @@
             <div data-i18n="Container">Uji Mat (QR Code)</div>
             </a>
         </li>
-        <li class="menu-item">
+        <!-- <li class="menu-item">
             <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/scan_aset')?>"  class="menu-link">
-            <div data-i18n="Container">Cek Aset (QR Code)</div>
+            <div data-i18n="Container">Scan Aset (QR Code)</div>
             </a>
-        </li>
+        </li> -->
         </ul>
 
         <li class="menu-item">
