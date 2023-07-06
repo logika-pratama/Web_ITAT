@@ -84,12 +84,12 @@
                                                     <p class="icon-name text-capitalize">Scan RFID</p>
                                                 </a>
                                             </div>
-                                            <!-- <div class="col-4">
+                                            <div class="col-4">
                                                 <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/ujimat')?>"  class="btn btn-primary btn-sm mb-2" style="height:85px; width:100%;">
                                                     <i class="bx bx-package bx-sm mb-1"></i>
                                                     <p class="icon-name text-capitalize">Uji Mat</p>
                                                 </a>
-                                            </div> -->
+                                            </div>
                                             <div class="col-4">
                                                 <a href="<?=base_url('index.php/searching/waiting?url=')?>https://10.230.200.158:8082/login" class="btn btn-warning btn-sm mb-2" style="height:107px; width:100%;">
                                                     <i class="bx bxs-box bx-sm mb-1 mt-2" style="font-size: 200px;"></i>
@@ -122,13 +122,13 @@
                                                 </a>
                                             </div>
                                             <?php } ?>
-                                            <div class="col-4 align-items-center">
+                                            <!-- <div class="col-4 align-items-center">
                                                 <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/ujimat_scanqr')?>" class="btn btn-primary btn-sm mb-2" style="height:107px; width:100%;">
                                                     <i class="bx bx-search bx-sm mb-1 mt-2" style="font-size: 200px;"></i>
-                                                    <p class="icon-name text-capitalize">Uji Mat (QR Code)</p>
+                                                    <p class="icon-name text-capitalize">Uji Mat (QR Code)</p> -->
                                                     <!-- <p class="icon-name text-capitalize">Uji Mat</p> -->
-                                                </a>
-                                            </div>
+                                                <!-- </a>
+                                            </div> -->
                                             <!-- <div class="col-4">
                                                 <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/scan_aset')?>" class="btn btn-secondary btn-sm mb-2" style="height:85px; width:100%;">
                                                     <i class="bx bx-notepad bx-md mb-1"></i>
