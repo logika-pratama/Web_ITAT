@@ -35,7 +35,7 @@ class Pindai_rfid extends CI_Controller {
 		$arr_gate = array();
 		$z = 0;
 		foreach($arr as $b){
-			$arr_gate[$z]['tag_number'] = $b;
+			$arr_gate[$z]['tag_number'] = strtolower($b);
 			$z++;
 		}
 
