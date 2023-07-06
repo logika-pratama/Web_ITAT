@@ -580,7 +580,7 @@ if (!function_exists('itamURL'))
 
 if (!function_exists('itamURLLocal'))
 {
-	function itamURL()
+	function itamURLLocal()
 	{
 		 return 'http://10.230.200.158:8081/';
 		// return itamUrl().'';
