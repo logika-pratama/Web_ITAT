@@ -172,7 +172,7 @@ function getUjiMaterial(kontrakId, assetId, isResetCaptureQR = true) {
         },
         success: function(data){
             resetContent();
-            unsetMon();
+            // unsetMon();
             console.log(data);
             if (data.meta.code == 404) {
                 Toast.fire({
@@ -189,7 +189,7 @@ function getUjiMaterial(kontrakId, assetId, isResetCaptureQR = true) {
                 // setContent(data);
                 createTutupHasil();
                 setContent2(data.data);
-                setMon();
+                // setMon();
                 // if (isResetCaptureQR) {
                 //     captureQRCode();
                 // }
@@ -491,7 +491,7 @@ $(document).on('click','#tutupHasil',function(){
         resetContent();
         form.assetId = null;
         resetTutupHasil();
-        unsetMon();
+        // unsetMon();
     }
 })
 
@@ -517,26 +517,26 @@ if (navigator.mediaDevices) {
     alert('Cannot access camera.');
 }
 
-function unsetMon(){
-    $.ajax({
-        url : "<?=base_url()?>index.php/scan_rfid/closeMat/",
-        type: "GET",
-        dataType:"JSON",
-        success: function(data){
+// function unsetMon(){
+//     $.ajax({
+//         url : "<?=base_url()?>index.php/scan_rfid/closeMat/",
+//         type: "GET",
+//         dataType:"JSON",
+//         success: function(data){
               
-        }
-    });
-}
+//         }
+//     });
+// }
 
-function setMon(){
-    $.ajax({
-        url : "<?=base_url()?>index.php/scan_rfid/setRFID/",
-        type: "GET",
-        dataType:"JSON",
-        success: function(data){
+// function setMon(){
+//     $.ajax({
+//         url : "<?=base_url()?>index.php/scan_rfid/setRFID/",
+//         type: "GET",
+//         dataType:"JSON",
+//         success: function(data){
             
-        }
-    });
-}
+//         }
+//     });
+// }
 
 </script>
