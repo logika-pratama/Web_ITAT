@@ -577,3 +577,12 @@ if (!function_exists('itamURL'))
 		// return itamUrl().'';
 	}
 }
+
+if (!function_exists('itamURLLocal'))
+{
+	function itamURL()
+	{
+		 return 'http://10.230.200.158:8081/';
+		// return itamUrl().'';
+	}
+}

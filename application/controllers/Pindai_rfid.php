@@ -31,7 +31,6 @@ class Pindai_rfid extends CI_Controller {
 		$brr = [];
 		$x = 0;
 		$scan = $this->input->post('scan');
-		$kontrak = $this->input->post('kontrak');
 		$arr = explode(",", $scan);
 		$arr_gate = array();
 		$z = 0;

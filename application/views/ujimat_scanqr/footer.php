@@ -30,7 +30,7 @@ const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 20000,
+    timer: 2000,
     timerProgressBar: true,
     didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -172,6 +172,7 @@ function getUjiMaterial(kontrakId, assetId, isResetCaptureQR = true) {
         },
         success: function(data){
             resetContent();
+            unsetMon();
             console.log(data);
             if (data.meta.code == 404) {
                 Toast.fire({
@@ -188,6 +189,7 @@ function getUjiMaterial(kontrakId, assetId, isResetCaptureQR = true) {
                 // setContent(data);
                 createTutupHasil();
                 setContent2(data.data);
+                setMon();
                 // if (isResetCaptureQR) {
                 //     captureQRCode();
                 // }
@@ -489,6 +491,7 @@ $(document).on('click','#tutupHasil',function(){
         resetContent();
         form.assetId = null;
         resetTutupHasil();
+        unsetMon();
     }
 })
 
@@ -514,5 +517,26 @@ if (navigator.mediaDevices) {
     alert('Cannot access camera.');
 }
 
+function unsetMon(){
+    $.ajax({
+        url : "<?=base_url()?>index.php/scan_rfid/closeMat/",
+        type: "GET",
+        dataType:"JSON",
+        success: function(data){
+              
+        }
+    });
+}
+
+function setMon(){
+    $.ajax({
+        url : "<?=base_url()?>index.php/scan_rfid/setRFID/",
+        type: "GET",
+        dataType:"JSON",
+        success: function(data){
+            
+        }
+    });
+}
 
 </script>
