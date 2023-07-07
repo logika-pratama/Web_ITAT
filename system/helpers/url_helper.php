@@ -573,8 +573,8 @@ if (!function_exists('itamURL'))
 {
 	function itamURL()
 	{
-		 return 'https://itam.digiprimatera.co.id:8081/';
-		// return itamUrl().'';
+		 //return 'https://itam.digiprimatera.co.id:8081/';
+		 return 'http://10.230.200.158:8081/';
 	}
 }
 
