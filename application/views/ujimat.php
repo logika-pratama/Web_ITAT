@@ -147,8 +147,8 @@
 
     let selectedDeviceId = null;
     var hints = new Map();
-    hints.set(ZXing.DecodeHintType.ASSUME_GS1, true)
-    hints.set(ZXing.DecodeHintType.TRY_HARDER, true)
+    hints.set(ZXing.DecodeHintType.ASSUME_GS1, false)
+    hints.set(ZXing.DecodeHintType.TRY_HARDER, false)
     const codeReader = new ZXing.BrowserMultiFormatReader(hints);
     const sourceSelect = $("#pilihKamera");
 
