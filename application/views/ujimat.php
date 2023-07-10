@@ -138,13 +138,20 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
   <script>
-    $( document ).ready(function() {
-      initScanner();
-    });
+   
 
     let selectedDeviceId = null;
     const codeReader = new ZXing.BrowserMultiFormatReader();
-    // const sourceSelect = $("#pilihKamera");
+    const sourceSelect = $("#pilihKamera");
+
+    $( document ).ready(function() {
+      selectedDeviceId = $('#pilihKamera').val();
+        if(codeReader){
+            codeReader.reset()
+            initScanner();
+        }
+      initScanner();
+    });
 
     // $(document).on('change','#pilihKamera',function(){
     //     selectedDeviceId = $(this).val();
