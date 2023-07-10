@@ -138,9 +138,12 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
   <script>
-    setTimeout(function(){
-      initScanner();
-    },2000)
+
+    $( document ).ready(function() {
+      setTimeout(function(){
+          initScanner();
+        },1000)
+    });
 
     let selectedDeviceId = null;
     const codeReader = new ZXing.BrowserMultiFormatReader();
