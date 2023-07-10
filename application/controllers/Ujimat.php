@@ -6,12 +6,6 @@ class Ujimat extends CI_Controller {
 	public function __construct() {
         parent::__construct();
 		$this->load->helper('url');
-		$this->load->helper('tgl_indo');
-		$this->load->helper('login');
-		$this->load->library('user_agent');
-		$this->load->helper('form');
-		$this->load->library('form_validation');
-
 		// if(empty($this->session->userdata('token'))){
 		// 	redirect('login');
 		// }
@@ -24,7 +18,7 @@ class Ujimat extends CI_Controller {
 			'title' => 'Pemindai Data',
 		
 		);
-		$this->load->view('main',$data);
+		$this->load->view('ujimat',$data);
 	}
 	
 	public function scanRFID(){
