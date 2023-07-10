@@ -61,9 +61,8 @@
   <div class="half-black">
     <img src="<?=base_url('assets/img/qrcode.png')?>" class="imgqrcode"/>
     <div class="scan"></div>
+
     <video id="previewKamera" class="video"></video>
-    <select type="hidden" id="pilihKamera">
-    </select>
   </div>
   <div class="modal fade" id="modalLong" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
       <div class="modal-dialog modal-fullscreen" role="document">
@@ -139,21 +138,21 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
   <script>
-    setTimeout(function(){
+    $( document ).ready(function() {
       initScanner();
-    },3000)
+    });
 
     let selectedDeviceId = null;
     const codeReader = new ZXing.BrowserMultiFormatReader();
-    const sourceSelect = $("#pilihKamera");
+    // const sourceSelect = $("#pilihKamera");
 
-    $(document).on('change','#pilihKamera',function(){
-        selectedDeviceId = $(this).val();
-        if(codeReader){
-            codeReader.reset()
-            initScanner();
-        }
-    })
+    // $(document).on('change','#pilihKamera',function(){
+    //     selectedDeviceId = $(this).val();
+    //     if(codeReader){
+    //         codeReader.reset()
+    //         initScanner();
+    //     }
+    // })
 
     
     function initScanner() {
