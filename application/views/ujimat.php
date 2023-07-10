@@ -141,7 +141,8 @@
   <script>
     setTimeout(function(){
       initScanner();
-    },1000)
+    },3000)
+
     let selectedDeviceId = null;
     const codeReader = new ZXing.BrowserMultiFormatReader();
     const sourceSelect = $("#pilihKamera");
