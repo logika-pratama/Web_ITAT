@@ -146,7 +146,10 @@
     });
 
     let selectedDeviceId = null;
-    const codeReader = new ZXing.BrowserMultiFormatReader();
+    var hints = new Map();
+    hints.set(ZXing.DecodeHintType.ASSUME_GS1, true)
+    hints.set(ZXing.DecodeHintType.TRY_HARDER, true)
+    const codeReader = new ZXing.BrowserMultiFormatReader(hints);
     const sourceSelect = $("#pilihKamera");
 
     $(document).on('change','#pilihKamera',function(){
