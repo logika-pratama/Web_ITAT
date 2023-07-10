@@ -143,7 +143,7 @@
     const sourceSelect = $("#pilihKamera");
 
     $(document).on('change','#pilihKamera',function(){
-        selectedDeviceId = $(this).val('');
+        selectedDeviceId = $(this).val();
         if(codeReader){
             codeReader.reset()
             initScanner()
