@@ -186,7 +186,7 @@
                 // f35bf484feac18e2f9421957fcfd60e67a21fd32a88551baf200e6cbf9c853f8
                 // selectedDeviceId
                 codeReader
-                    .decodeOnceFromVideoDevice('f35bf484feac18e2f9421957fcfd60e67a21fd32a88551baf200e6cbf9c853f8', 'previewKamera')
+                    .decodeOnceFromVideoDevice(selectedDeviceId, 'previewKamera')
                     .then(result => {
                             showData(result.text);
                             setTimeout(function(){
