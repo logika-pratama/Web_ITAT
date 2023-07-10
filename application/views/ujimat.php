@@ -61,8 +61,9 @@
   <div class="half-black">
     <img src="<?=base_url('assets/img/qrcode.png')?>" class="imgqrcode"/>
     <div class="scan"></div>
-
     <video id="previewKamera" class="video"></video>
+    <select type="hidden" id="pilihKamera">
+    </select>
   </div>
   <div class="modal fade" id="modalLong" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
       <div class="modal-dialog modal-fullscreen" role="document">
