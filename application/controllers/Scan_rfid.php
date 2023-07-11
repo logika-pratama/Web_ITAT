@@ -34,7 +34,7 @@ class Scan_rfid extends CI_Controller {
 
 		$z = 0;
 		foreach($arr as $b){
-			$arr_gate[$z]['rfid_code'] = $b;
+			$arr_gate[$z]['rfid_code'] = strtolower($b);
 			$z++;
 		}
 
