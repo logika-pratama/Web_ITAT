@@ -125,7 +125,7 @@ class Scan_rfid extends CI_Controller {
 	public function historyRFID($rfid){
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => itamURL().'/api/asset/asset_move?asset_id='.$rfid,
+			CURLOPT_URL => 'https://aset.divtik.polri.go.id/api_itam/api/asset/asset_move?asset_id='.$rfid,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,
