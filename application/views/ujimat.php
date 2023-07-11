@@ -94,6 +94,10 @@
                       <td> : <span class="name_project"></span></td>
                   </tr>
                   <tr>
+                      <td>Nilai Proyek</td>
+                      <td> : <span class="price"></span></td>
+                  </tr>
+                  <tr>
                       <td>Tahun Project</td>
                       <td> : <span class="year_project"></span></td>
                   </tr>

@@ -79,7 +79,7 @@ class Scan_rfid extends CI_Controller {
 	public function setRFID($rfid){
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => itamURLLocal().'api/ujimat/set_view_ujimat?asset_id='.$rfid,
+		CURLOPT_URL => itamURL().'api/ujimat/set_view_ujimat?asset_id='.$rfid,
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,
@@ -150,7 +150,7 @@ class Scan_rfid extends CI_Controller {
 	public function closeMat(){
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => itamURLLocal().'api/ujimat/unset_view_ujimat',
+		CURLOPT_URL => itamURL().'api/ujimat/unset_view_ujimat',
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,

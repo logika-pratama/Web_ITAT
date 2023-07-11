@@ -233,6 +233,7 @@ function showData(rfid){
 
         $('.asset_id').text(data['data'][0]['asset_id']);
         $('.name_asset').text(data['data'][0]['name_asset']);
+        $('.price').text(data['data'][0]['price']);
         $('.serial_number').text(data['data'][0]['serial_number']);
         $('.year_project').text(data['data'][0]['year_project']);
         $('.ppk_user').text(data['data'][0]['ppk_user']);
