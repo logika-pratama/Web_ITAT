@@ -249,7 +249,7 @@ function showData(rfid){
 
   $.ajax({
       url : "<?=base_url()?>index.php/scan_rfid/setRFID/"+rfid,
-      type: "GET",
+      type: "POST",
       dataType:"JSON",
       success: function(data){
       },
