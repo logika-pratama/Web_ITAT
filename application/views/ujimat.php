@@ -264,7 +264,6 @@
             if(data['data']['detail'][0]['asset_id'] != null){
                 $('#modalLong').modal('show');
             } else {
-                initScanner();
                 Toast.fire({
                     icon: 'error',
                     title: 'Request data dari ITAM gagal lakukan scan ulang'
@@ -302,13 +301,14 @@
 
           },
           error: function (xhr, ajaxOptions, thrownError) {
-            initScanner();
             Toast.fire({
                 icon: 'error',
                 title: 'Request data dari ITAM gagal lakukan scan ulang'
             })
           }
       });
+      initScanner();
+
     }
 
     function closeMat(){
@@ -318,6 +318,8 @@
           type: "POST",
           dataType:"JSON",
           success: function(data){
+            initScanner();
+
           },
       });
     }
