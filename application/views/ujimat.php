@@ -241,15 +241,33 @@
           toast.addEventListener('mouseleave', Swal.resumeTimer)
           }
       });
-      $(".list-data").html('Menunggu Request dari ITAM');
-      $(".list-data-history").html('Menunggu Request dari ITAM');
+    
+        $(".list-data").html('Menunggu Request dari ITAM');
+        $(".list-data-history").html('Menunggu Request dari ITAM');
+
+        $('.asset_id').text('');
+        $('.name_asset').text('');
+        $('.price').text('');
+        $('.serial_number').text('');
+        $('.year_project').text('');
+        $('.ppk_user').text('');
+        $('.name_project').text('');
+
       $.ajax({
           url : "<?=base_url()?>index.php/scan_rfid/detailRFID/"+rfid,
           type: "GET",
           dataType:"JSON",
           success: function(data){
               $('.scan').hide();
-              $('#modalLong').modal('show');
+              if(data['data'][0]['asset_id'] == null){
+                $('#modalLong').modal('show');
+              } else {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Tidak didapatkan dari ITAM'
+                })
+              }
+
               $(".list-data").html('');
               $('.asset_id').text(data['data'][0]['asset_id']);
               $('.name_asset').text(data['data'][0]['name_asset']);
@@ -286,7 +304,7 @@
           type: "GET",
           dataType:"JSON",
           success: function(data){
-            $(".list-data-history").html('');
+            
             var i;
             for (i = 0; i < data.length; ++i) {
 
