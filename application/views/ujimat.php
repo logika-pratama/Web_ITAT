@@ -142,6 +142,19 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
   <script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    });
+    
+    
     $( document ).ready(function() {
       setTimeout(function(){
           initScanner();
@@ -247,22 +260,11 @@
           dataType:"JSON",
           success: function(data){
             $('.scan').hide();
+            
             if(data['data']['detail'][0]['asset_id'] != null){
                 $('#modalLong').modal('show');
             } else {
                 initScanner();
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 1000,
-                    timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-                
                 Toast.fire({
                     icon: 'error',
                     title: 'Request data dari ITAM gagal lakukan scan ulang'
@@ -301,17 +303,10 @@
           },
           error: function (xhr, ajaxOptions, thrownError) {
             initScanner();
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 1000,
-                timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            });
+            Toast.fire({
+                icon: 'error',
+                title: 'Request data dari ITAM gagal lakukan scan ulang'
+            })
           }
       });
     }
