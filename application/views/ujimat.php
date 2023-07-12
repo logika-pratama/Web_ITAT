@@ -251,7 +251,6 @@
                 $('#modalLong').modal('show');
             } else {
                 initScanner();
-
                 const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',
@@ -301,10 +300,18 @@
 
           },
           error: function (xhr, ajaxOptions, thrownError) {
-            Toast.fire({
-                icon: 'error',
-                title: 'Request data dari ITAM gagal lakukan scan ulang'
-            })
+            initScanner();
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
           }
       });
     }
