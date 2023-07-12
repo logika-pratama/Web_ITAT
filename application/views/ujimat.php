@@ -261,13 +261,8 @@
           success: function(data){
             $('.scan').hide();
             if(data['data'][0]['asset_id'] != null){
-            $('#modalLong').modal('show');
-            } else {
-            Toast.fire({
-                icon: 'error',
-                title: 'Request data dari ITAM gagal lakukan scan ulang'
-            })
-            }
+                $('#modalLong').modal('show');
+            } 
             
             $(".list-data").html('');
             $('.asset_id').text(data['data']['detail'][0]['asset_id']);
@@ -302,7 +297,7 @@
           error: function (xhr, ajaxOptions, thrownError) {
             Toast.fire({
                 icon: 'error',
-                title: 'Request RFID gagal'
+                title: 'Request data dari ITAM gagal lakukan scan ulang'
             })
           }
       });
