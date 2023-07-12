@@ -260,11 +260,11 @@
           dataType:"JSON",
           success: function(data){
             $('.scan').hide();
-            alert(data['data'][0]['asset_id']);
-            // if(data['data'][0]['asset_id'] != null){
-            //     $('#modalLong').modal('show');
-            // } 
-            
+            if(data['data']['detail'][0]['asset_id'] != null){
+                $('#modalLong').modal('show');
+            } 
+            $(".list-data").html('');
+           
             $(".list-data").html('');
             $('.asset_id').text(data['data']['detail'][0]['asset_id']);
             $('.name_asset').text(data['data']['detail'][0]['name_asset']);
