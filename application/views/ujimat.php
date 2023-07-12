@@ -244,7 +244,8 @@
     
         $(".list-data").html('Menunggu Request dari ITAM');
         $(".list-data-history").html('Menunggu Request dari ITAM');
-
+        $(".list-data").html('');
+        
         $('.asset_id').text('');
         $('.name_asset').text('');
         $('.price').text('');
@@ -263,9 +264,7 @@
             if(data['data']['detail'][0]['asset_id'] != null){
                 $('#modalLong').modal('show');
             } 
-            $(".list-data").html('');
-           
-            $(".list-data").html('');
+
             $('.asset_id').text(data['data']['detail'][0]['asset_id']);
             $('.name_asset').text(data['data']['detail'][0]['name_asset']);
             $('.price').text(formatPriceToIDR(data['data']['detail'][0]['price']));
