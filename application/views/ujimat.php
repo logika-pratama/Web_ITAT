@@ -260,9 +260,10 @@
           dataType:"JSON",
           success: function(data){
             $('.scan').hide();
-            if(data['data'][0]['asset_id'] != null){
-                $('#modalLong').modal('show');
-            } 
+            alert(data['data'][0]['asset_id']);
+            // if(data['data'][0]['asset_id'] != null){
+            //     $('#modalLong').modal('show');
+            // } 
             
             $(".list-data").html('');
             $('.asset_id').text(data['data']['detail'][0]['asset_id']);
