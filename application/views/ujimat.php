@@ -262,12 +262,6 @@
               if(data['data'][0]['asset_id'] != null){
                 $('#modalLong').modal('show');
               } else {
-
-                Toast.fire({
-                    icon: 'error',
-                    title: 'Request data dari ITAM gagal lakukan scan ulang'
-                })
-                
                 Toast.fire({
                     icon: 'error',
                     title: 'Request data dari ITAM gagal lakukan scan ulang'
@@ -303,14 +297,19 @@
           dataType:"JSON",
           success: function(data){
           },
+          error: function (xhr, ajaxOptions, thrownError) {
+            Toast.fire({
+                icon: 'error',
+                title: 'RFID tidak bisa diset'
+            })
+          }
       });
 
       $.ajax({
           url : "<?=base_url()?>index.php/scan_rfid/historyRFID/"+rfid,
           type: "GET",
           dataType:"JSON",
-          success: function(data){
-            
+          success: function(data){ 
             var i;
             for (i = 0; i < data.length; ++i) {
 
@@ -325,6 +324,12 @@
               $('.list-data-history').append("<tr><td>"+data[i]['location_awal']+"</td><td>"+data[i]['location_tujuan']+"</td><td>"+date+"</td></tr>");
             }
           },
+          error: function (xhr, ajaxOptions, thrownError) {
+            Toast.fire({
+                icon: 'error',
+                title: 'History tidak bisa dimuat'
+            })
+          }
       });
     }
 
