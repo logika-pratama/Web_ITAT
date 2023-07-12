@@ -259,7 +259,7 @@
           dataType:"JSON",
           success: function(data){
               $('.scan').hide();
-              if(data['data'][0]['asset_id'] == null){
+              if(data['data'][0]['asset_id'] != null){
                 $('#modalLong').modal('show');
               } else {
                 Toast.fire({
