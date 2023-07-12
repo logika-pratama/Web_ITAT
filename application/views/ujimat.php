@@ -242,10 +242,9 @@
         rfid = event.currentTarget.dataset.id;
       }
     
-        $(".list-data").html('Menunggu Request dari ITAM');
-        $(".list-data-history").html('Menunggu Request dari ITAM');
+        $(".list-data-history").html('');
         $(".list-data").html('');
-        
+
         $('.asset_id').text('');
         $('.name_asset').text('');
         $('.price').text('');
@@ -272,10 +271,11 @@
             $('.year_project').text(data['data']['detail'][0]['year_project']);
             $('.ppk_user').text(data['data']['detail'][0]['ppk_user']);
             $('.name_project').text(data['data']['detail'][0]['name_project']);
+
             var i;
 
             for (i = 0; i < data['data']['detail'][0]['product_attribute'].length; ++i) {
-                if(data['data'][0]['product_attribute'][i]['description'] != ""){
+                if(data['data']['detail'][0]['product_attribute'][i]['description'] != ""){
                     $('.list-data').append("<tr><td>"+data['data']['detail'][0]['product_attribute'][i]['name']+"</td><td>"+data['data']['detail'][0]['product_attribute'][i]['description']+"</td></tr>");
                 }
             }
