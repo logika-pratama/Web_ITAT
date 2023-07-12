@@ -253,84 +253,86 @@
         $('.ppk_user').text('');
         $('.name_project').text('');
 
-      $.ajax({
-          url : "<?=base_url()?>index.php/scan_rfid/detailRFID/"+rfid,
-          type: "GET",
-          dataType:"JSON",
-          success: function(data){
-              $('.scan').hide();
-              if(data['data'][0]['asset_id'] != null){
-                $('#modalLong').modal('show');
-              } else {
-                Toast.fire({
-                    icon: 'error',
-                    title: 'Request data dari ITAM gagal lakukan scan ulang'
-                })
-              }
-
-              $(".list-data").html('');
-              $('.asset_id').text(data['data'][0]['asset_id']);
-              $('.name_asset').text(data['data'][0]['name_asset']);
-              $('.price').text(formatPriceToIDR(data['data'][0]['price']));
-              $('.serial_number').text(data['data'][0]['serial_number']);
-              $('.year_project').text(data['data'][0]['year_project']);
-              $('.ppk_user').text(data['data'][0]['ppk_user']);
-              $('.name_project').text(data['data'][0]['name_project']);
-              var i;
-              for (i = 0; i < data['data'][0]['product_attribute'].length; ++i) {
-                if(data['data'][0]['product_attribute'][i]['description'] != ""){
-                  $('.list-data').append("<tr><td>"+data['data'][0]['product_attribute'][i]['name']+"</td><td>"+data['data'][0]['product_attribute'][i]['description']+"</td></tr>");
-                }
-              }
-          },
-          error: function (xhr, ajaxOptions, thrownError) {
-            Toast.fire({
-                icon: 'error',
-                title: 'Data '+rfid+' tidak ditemukan'
-            })
-          }
-      });
 
       $.ajax({
           url : "<?=base_url()?>index.php/scan_rfid/setRFID/"+rfid,
           type: "GET",
           dataType:"JSON",
           success: function(data){
-          },
-          error: function (xhr, ajaxOptions, thrownError) {
+            $('.scan').hide();
+            if(data['data'][0]['asset_id'] != null){
+            $('#modalLong').modal('show');
+            } else {
             Toast.fire({
                 icon: 'error',
-                title: 'RFID tidak bisa diset'
+                title: 'Request data dari ITAM gagal lakukan scan ulang'
             })
-          }
-      });
-
-      $.ajax({
-          url : "<?=base_url()?>index.php/scan_rfid/historyRFID/"+rfid,
-          type: "GET",
-          dataType:"JSON",
-          success: function(data){ 
-            var i;
-            for (i = 0; i < data.length; ++i) {
-
-              var todaydate = new Date(data[i]['tanggal']); 
-              var dd = todaydate .getDate();
-              var mm = todaydate .getMonth()+1;
-              var yyyy = todaydate .getFullYear();
-              if(dd<10){  dd='0'+dd } 
-              if(mm<10){  mm='0'+mm } 
-              var date = dd+'-'+mm+'-'+yyyy+' '+todaydate.getHours() + ':' + todaydate.getMinutes();
-
-              $('.list-data-history').append("<tr><td>"+data[i]['location_awal']+"</td><td>"+data[i]['location_tujuan']+"</td><td>"+date+"</td></tr>");
             }
+            
+            $(".list-data").html('');
+            $('.asset_id').text(data['data']['detail'][0]['asset_id']);
+            $('.name_asset').text(data['data']['detail'][0]['name_asset']);
+            $('.price').text(formatPriceToIDR(data['data']['detail'][0]['price']));
+            $('.serial_number').text(data['data']['detail'][0]['serial_number']);
+            $('.year_project').text(data['data']['detail'][0]['year_project']);
+            $('.ppk_user').text(data['data']['detail'][0]['ppk_user']);
+            $('.name_project').text(data['data']['detail'][0]['name_project']);
+            var i;
+
+            for (i = 0; i < data['data']['detail'][0]['product_attribute'].length; ++i) {
+                if(data['data'][0]['product_attribute'][i]['description'] != ""){
+                    $('.list-data').append("<tr><td>"+data['data']['detail'][0]['product_attribute'][i]['name']+"</td><td>"+data['data']['detail'][0]['product_attribute'][i]['description']+"</td></tr>");
+                }
+            }
+
+            var z;
+            for (z = 0; data['data']['move'].length; ++z) {
+                var todaydate = new Date(data['data']['move'][z]['tanggal']); 
+                var dd = todaydate .getDate();
+                var mm = todaydate .getMonth()+1;
+                var yyyy = todaydate .getFullYear();
+                if(dd<10){  dd='0'+dd } 
+                if(mm<10){  mm='0'+mm } 
+                var date = dd+'-'+mm+'-'+yyyy+' '+todaydate.getHours() + ':' + todaydate.getMinutes();
+
+                $('.list-data-history').append("<tr><td>"+data['data']['move'][z]['location_awal']+"</td><td>"+data['data']['move'][z]['location_tujuan']+"</td><td>"+date+"</td></tr>");
+            }
+
           },
           error: function (xhr, ajaxOptions, thrownError) {
             Toast.fire({
                 icon: 'error',
-                title: 'History tidak bisa dimuat'
+                title: 'Request RFID gagal'
             })
           }
       });
+
+    //   $.ajax({
+    //       url : "<?=base_url()?>index.php/scan_rfid/historyRFID/"+rfid,
+    //       type: "GET",
+    //       dataType:"JSON",
+    //       success: function(data){ 
+    //         var i;
+    //         for (i = 0; i < data.length; ++i) {
+
+    //           var todaydate = new Date(data[i]['tanggal']); 
+    //           var dd = todaydate .getDate();
+    //           var mm = todaydate .getMonth()+1;
+    //           var yyyy = todaydate .getFullYear();
+    //           if(dd<10){  dd='0'+dd } 
+    //           if(mm<10){  mm='0'+mm } 
+    //           var date = dd+'-'+mm+'-'+yyyy+' '+todaydate.getHours() + ':' + todaydate.getMinutes();
+
+    //           $('.list-data-history').append("<tr><td>"+data[i]['location_awal']+"</td><td>"+data[i]['location_tujuan']+"</td><td>"+date+"</td></tr>");
+    //         }
+    //       },
+    //       error: function (xhr, ajaxOptions, thrownError) {
+    //         Toast.fire({
+    //             icon: 'error',
+    //             title: 'History tidak bisa dimuat'
+    //         })
+    //       }
+    //   });
     }
 
     function closeMat(){
