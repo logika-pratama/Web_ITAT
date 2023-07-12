@@ -158,7 +158,7 @@
     $( document ).ready(function() {
       setTimeout(function(){
           initScanner();
-        },1000)
+        },500)
     });
 
     let selectedDeviceId = null;
@@ -260,15 +260,7 @@
           dataType:"JSON",
           success: function(data){
             $('.scan').hide();
-            
-            if(data['data']['detail'][0]['asset_id'] != null){
-                $('#modalLong').modal('show');
-            } else {
-                Toast.fire({
-                    icon: 'error',
-                    title: 'Request data dari ITAM gagal lakukan scan ulang'
-                })
-            }
+            $('#modalLong').modal('show');
 
             $('.asset_id').text(data['data']['detail'][0]['asset_id']);
             $('.name_asset').text(data['data']['detail'][0]['name_asset']);
@@ -307,8 +299,6 @@
             })
           }
       });
-      initScanner();
-
     }
 
     function closeMat(){
@@ -319,7 +309,6 @@
           dataType:"JSON",
           success: function(data){
             initScanner();
-
           },
       });
     }
