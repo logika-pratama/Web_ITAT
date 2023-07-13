@@ -357,12 +357,13 @@
 
     function closeMat(){
       $('.scan').show();
+      initScanner();
       $.ajax({
           url : "<?=base_url()?>index.php/pindai_rfid/closeMat/",
           type: "POST",
           dataType:"JSON",
           success: function(data){
-            initScanner();
+            
           },
       });
     }
