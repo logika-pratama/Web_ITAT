@@ -308,7 +308,7 @@
             } else if (!data?.data?.detail[0]?.asset_id) {
                 Toast.fire({
                     icon: 'error',
-                    title: 'Permintaan data dari ITAM gagal, scan ulang setelah beberapa saat'
+                    title: 'Permintaan data gagal, scan ulang setelah beberapa saat'
                 })
                 $('.scan').show();
                 initScanner();
