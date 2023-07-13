@@ -208,6 +208,7 @@
                 if(selectedDeviceId == null){
                     if(videoInputDevices.length > 1){
                         selectedDeviceId = videoInputDevices[1].deviceId
+                        // selectedDeviceId = videoInputDevices[0].deviceId
                     } else {
                         selectedDeviceId = videoInputDevices[0].deviceId
                     }
@@ -294,12 +295,20 @@
           type: "GET",
           dataType:"JSON",
           success: function(data){
-            // console.log(data)
+            console.log(data)
             // $('.scan').hide();
-            if (!data?.data?.detail[0]?.asset_id) {
+            if (!data?.data?.detail[0]?.asset_id && data?.meta?.code == 200) {
                 Toast.fire({
                     icon: 'error',
-                    title: 'Request data dari ITAM gagal, scan ulang'
+                    // title: 'Request data dari ITAM gagal, scan ulang'
+                    title: data?.meta?.message
+                })
+                $('.scan').show();
+                initScanner();
+            } else if (!data?.data?.detail[0]?.asset_id) {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Permintaan data dari ITAM gagal, scan ulang setelah beberapa saat'
                 })
                 $('.scan').show();
                 initScanner();
@@ -342,7 +351,7 @@
           error: function (xhr, ajaxOptions, thrownError) {
             Toast.fire({
                 icon: 'error',
-                title: 'Data tidak ditemukan pada ITAM'
+                title: 'Data RFID tidak ditemukan 2'
             })
             // console.log(thrownError)
             // console.log(xhr)
