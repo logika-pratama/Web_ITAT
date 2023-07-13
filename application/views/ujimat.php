@@ -8,7 +8,12 @@
 	  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="icon" type="image/x-icon" href="<?=base_url()?>assets/img/favicon/favicon.ico" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="<?=base_url()?>assets/css/main.css" />
     <style>
+
+        .detail-data-rfid > tr > td {
+            width: 1%;
+        }
 
       video {
         width:100vw;
@@ -72,8 +77,8 @@
           </div>
           <div class="modal-body">
           <table>
-              <tbody>
-                  <tr>
+              <tbody class="detail-data-rfid">
+                  <!-- <tr>
                       <td>ASSET ID</td>
                       <td><span class="asset_id"></span></td>
                   </tr>
@@ -100,7 +105,79 @@
                   <tr>
                       <td>Tahun Project</td>
                       <td> : <span class="year_project"></span></td>
-                  </tr>
+                  </tr> -->
+                    <!-- <tr class="table-font-weight-bold">
+                        <td style="vertical-align: top;">ID</td>
+                        <td><span class="asset_id"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Aset</td>
+                        <td> : <span class="name_asset"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Serial</td>
+                        <td> : <span class="serial_number"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">PPK</td>
+                        <td> : <span class="ppk_user"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Proyek</td>
+                        <td> : <span class="name_project"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Nilai</td>
+                        <td> : <span class="price"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Tahun</td>
+                        <td> : <span class="year_project"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Vendor</td>
+                        <td> : <span class="name_vendor"></span></td>
+                    </tr> -->
+                    <tr class="table-font-weight-bold">
+                        <td style="vertical-align: top;">ID</td>
+                        <td style="vertical-align: top;">:</td>
+                        <td><span class="asset_id"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Aset</td>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
+                        <td><span class="name_asset"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Serial</td>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
+                        <td><span class="serial_number"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">PPK</td>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
+                        <td><span class="ppk_user"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Proyek</td>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
+                        <td><span class="name_project"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Nilai</td>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
+                        <td><span class="price"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Tahun</td>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
+                        <td><span class="year_project"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Vendor</td>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
+                        <td><span class="name_vendor"></span></td>
+                    </tr>
               </tbody>
           </table>
 
@@ -146,20 +223,21 @@
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 1000,
+        timer: 2000,
         timerProgressBar: true,
-    didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
     });
     
     
-    $( document ).ready(function() {
-      setTimeout(function(){
-          initScanner();
-        },500)
-    });
+    // $( document ).ready(function() {
+    // //   setTimeout(function(){
+    // //       initScanner();
+    // //     },500)
+    //     initScanner();
+    // });
 
     let selectedDeviceId = null;
     var hints = new Map();
@@ -181,18 +259,19 @@
         codeReader
         .listVideoInputDevices()
         .then(videoInputDevices => {
-            videoInputDevices.forEach(device =>
-                console.log(`${device.label}, ${device.deviceId}`)
-            );
+            // videoInputDevices.forEach(device =>
+            //     console.log(`${device.label}, ${device.deviceId}`)
+            // );
 
             if(videoInputDevices.length > 0){
                     
                 if(selectedDeviceId == null){
-                    if(videoInputDevices.length > 1){
-                        selectedDeviceId = videoInputDevices[1].deviceId
-                    } else {
-                        selectedDeviceId = videoInputDevices[0].deviceId
-                    }
+                    // if(videoInputDevices.length > 1){
+                    //     selectedDeviceId = videoInputDevices[1].deviceId
+                    // } else {
+                    //     selectedDeviceId = videoInputDevices[0].deviceId
+                    // }
+                    selectedDeviceId = videoInputDevices[0].deviceId
                 }
                     
                     
@@ -214,13 +293,19 @@
                 codeReader
                     .decodeOnceFromVideoDevice(selectedDeviceId, 'previewKamera')
                     .then(result => {
+                            $('.scan').hide();
+                            codeReader.reset();
+
                             showData(result.text);
-                            setTimeout(function(){
-                              initScanner()
-                              if(codeReader){
-                                  codeReader.reset()
-                              }
-                            },1000)
+                            
+                            // console.log(result.text);
+                            // codeReader.reset();
+                            // setTimeout(function(){
+                            //   initScanner()
+                            //   if(codeReader){
+                            //       codeReader.reset()
+                            //   }
+                            // },1000)
                             
                     })
                     .catch(err => console.error(err));
@@ -235,6 +320,15 @@
         initScanner()
     } else {
         alert('Cannot access camera.');
+    }
+
+    // sleep tanpa async await
+    function sleep(milliseconds) {
+        const date = Date.now();
+        let currentDate = null;
+        do {
+            currentDate = Date.now();
+        } while (currentDate - date < milliseconds);
     }
 
     function showData(rfid){
@@ -252,6 +346,7 @@
         $('.year_project').text('');
         $('.ppk_user').text('');
         $('.name_project').text('');
+        $('.name_vendor').text('');
 
 
       $.ajax({
@@ -259,7 +354,8 @@
           type: "GET",
           dataType:"JSON",
           success: function(data){
-            $('.scan').hide();
+            // console.log(data)
+            // $('.scan').hide();
             $('#modalLong').modal('show');
 
             $('.asset_id').text(data['data']['detail'][0]['asset_id']);
@@ -269,17 +365,19 @@
             $('.year_project').text(data['data']['detail'][0]['year_project']);
             $('.ppk_user').text(data['data']['detail'][0]['ppk_user']);
             $('.name_project').text(data['data']['detail'][0]['name_project']);
+            $('.name_vendor').text(data['data']['detail'][0]['name_vendor']);
 
-            var i;
+            // var i;
 
-            for (i = 0; i < data['data']['detail'][0]['product_attribute'].length; ++i) {
+            for (let i = 0; i < data['data']['detail'][0]['product_attribute'].length; ++i) {
                 if(data['data']['detail'][0]['product_attribute'][i]['description'] != ""){
                     $('.list-data').append("<tr><td>"+data['data']['detail'][0]['product_attribute'][i]['name']+"</td><td>"+data['data']['detail'][0]['product_attribute'][i]['description']+"</td></tr>");
                 }
             }
 
-            var z;
-            for (z = 0; data['data']['move'].length; ++z) {
+            // console.log(data.data.move)
+            for (let z = 0; z < data['data']['move'].length; ++z) {
+                // console.log(data['data']['move'][z])
                 var todaydate = new Date(data['data']['move'][z]['tanggal']); 
                 var dd = todaydate .getDate();
                 var mm = todaydate .getMonth()+1;
@@ -295,8 +393,15 @@
           error: function (xhr, ajaxOptions, thrownError) {
             Toast.fire({
                 icon: 'error',
-                title: 'Request data dari ITAM gagal lakukan scan ulang'
+                title: 'Data tidak ditemukan pada ITAM'
             })
+            // console.log(thrownError)
+            // console.log(xhr)
+            // console.log(ajaxOptions)
+            $('.scan').show();
+            // sleep(1500);
+            initScanner();
+
           }
       });
     }
