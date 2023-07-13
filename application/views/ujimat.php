@@ -302,6 +302,7 @@
                     title: 'Request data dari ITAM gagal, scan ulang'
                 })
                 $('.scan').show();
+                initScanner();
             } else {
                 $('.asset_id').text(data['data']['detail'][0]['asset_id']);
                 $('.name_asset').text(data['data']['detail'][0]['name_asset']);
