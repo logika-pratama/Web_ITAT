@@ -103,11 +103,11 @@
                         <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
                         <td><span class="name_project"></span></td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <td class="table-font-weight-bold" style="vertical-align: top;">Nilai</td>
                         <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
                         <td><span class="price"></span></td>
-                    </tr>
+                    </tr> -->
                     <tr>
                         <td class="table-font-weight-bold" style="vertical-align: top;">Tahun</td>
                         <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
@@ -282,7 +282,7 @@
 
         $('.asset_id').text('');
         $('.name_asset').text('');
-        $('.price').text('');
+        // $('.price').text('');
         $('.serial_number').text('');
         $('.year_project').text('');
         $('.ppk_user').text('');
@@ -315,7 +315,7 @@
             } else {
                 $('.asset_id').text(data['data']['detail'][0]['asset_id']);
                 $('.name_asset').text(data['data']['detail'][0]['name_asset']);
-                $('.price').text(formatPriceToIDR(data['data']['detail'][0]['price']));
+                // $('.price').text(formatPriceToIDR(data['data']['detail'][0]['price']));
                 $('.serial_number').text(data['data']['detail'][0]['serial_number']);
                 $('.year_project').text(data['data']['detail'][0]['year_project']);
                 $('.ppk_user').text(data['data']['detail'][0]['ppk_user']);
