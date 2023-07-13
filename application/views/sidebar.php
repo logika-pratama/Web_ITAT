@@ -52,7 +52,7 @@
 
         <li class="menu-item">
             <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/ujimat')?>" class="menu-link">
-            <div data-i18n="Without menu">Ujimat</div>
+            <div data-i18n="Without menu">Uji Mat (QR Code)</div>
             </a>
         </li>
         

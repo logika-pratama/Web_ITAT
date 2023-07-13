@@ -8,7 +8,12 @@
 	  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="icon" type="image/x-icon" href="<?=base_url()?>assets/img/favicon/favicon.ico" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="<?=base_url()?>assets/css/main.css" />
     <style>
+
+        .detail-data-rfid > tr > td {
+            width: 1%;
+        }
 
       video {
         width:100vw;
@@ -72,8 +77,8 @@
           </div>
           <div class="modal-body">
           <table>
-              <tbody>
-                  <tr>
+              <tbody class="detail-data-rfid">
+                  <!-- <tr>
                       <td>ASSET ID</td>
                       <td><span class="asset_id"></span></td>
                   </tr>
@@ -100,7 +105,79 @@
                   <tr>
                       <td>Tahun Project</td>
                       <td> : <span class="year_project"></span></td>
-                  </tr>
+                  </tr> -->
+                    <!-- <tr class="table-font-weight-bold">
+                        <td style="vertical-align: top;">ID</td>
+                        <td><span class="asset_id"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Aset</td>
+                        <td> : <span class="name_asset"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Serial</td>
+                        <td> : <span class="serial_number"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">PPK</td>
+                        <td> : <span class="ppk_user"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Proyek</td>
+                        <td> : <span class="name_project"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Nilai</td>
+                        <td> : <span class="price"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Tahun</td>
+                        <td> : <span class="year_project"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Vendor</td>
+                        <td> : <span class="name_vendor"></span></td>
+                    </tr> -->
+                    <tr class="table-font-weight-bold">
+                        <td style="vertical-align: top;">ID</td>
+                        <td style="vertical-align: top;">:</td>
+                        <td><span class="asset_id"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Aset</td>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
+                        <td><span class="name_asset"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Serial</td>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
+                        <td><span class="serial_number"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">PPK</td>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
+                        <td><span class="ppk_user"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Proyek</td>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
+                        <td><span class="name_project"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Nilai</td>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
+                        <td><span class="price"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Tahun</td>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
+                        <td><span class="year_project"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">Vendor</td>
+                        <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
+                        <td><span class="name_vendor"></span></td>
+                    </tr>
               </tbody>
           </table>
 
@@ -269,6 +346,7 @@
         $('.year_project').text('');
         $('.ppk_user').text('');
         $('.name_project').text('');
+        $('.name_vendor').text('');
 
 
       $.ajax({
@@ -287,6 +365,7 @@
             $('.year_project').text(data['data']['detail'][0]['year_project']);
             $('.ppk_user').text(data['data']['detail'][0]['ppk_user']);
             $('.name_project').text(data['data']['detail'][0]['name_project']);
+            $('.name_vendor').text(data['data']['detail'][0]['name_vendor']);
 
             // var i;
 
