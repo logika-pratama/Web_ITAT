@@ -176,7 +176,7 @@
       setTimeout(function(){
           initScanner();
         },500)
-        initScanner();
+        // initScanner();
     });
 
     let selectedDeviceId = null;
@@ -206,12 +206,12 @@
             if(videoInputDevices.length > 0){
                     
                 if(selectedDeviceId == null){
-                    // if(videoInputDevices.length > 1){
-                    //     selectedDeviceId = videoInputDevices[1].deviceId
-                    // } else {
-                    //     selectedDeviceId = videoInputDevices[0].deviceId
-                    // }
-                    selectedDeviceId = videoInputDevices[0].deviceId
+                    if(videoInputDevices.length > 1){
+                        selectedDeviceId = videoInputDevices[1].deviceId
+                    } else {
+                        selectedDeviceId = videoInputDevices[0].deviceId
+                    }
+                    // selectedDeviceId = videoInputDevices[0].deviceId
                 }
                     
                     
