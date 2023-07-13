@@ -173,8 +173,14 @@
     
     
     $( document ).ready(function() {
-      setTimeout(function(){
-          initScanner();
+        $.ajax({
+            url : "<?=base_url()?>index.php/pindai_rfid/closeMat/",
+            type: "POST",
+            dataType:"JSON",
+            success: function(data){},
+        });
+        setTimeout(function(){
+                initScanner();
         },500)
         // initScanner();
     });
