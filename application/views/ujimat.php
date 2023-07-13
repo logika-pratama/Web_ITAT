@@ -146,20 +146,21 @@
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 1000,
+        timer: 2000,
         timerProgressBar: true,
-    didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
     });
     
     
-    $( document ).ready(function() {
-      setTimeout(function(){
-          initScanner();
-        },500)
-    });
+    // $( document ).ready(function() {
+    // //   setTimeout(function(){
+    // //       initScanner();
+    // //     },500)
+    //     initScanner();
+    // });
 
     let selectedDeviceId = null;
     var hints = new Map();
@@ -181,18 +182,19 @@
         codeReader
         .listVideoInputDevices()
         .then(videoInputDevices => {
-            videoInputDevices.forEach(device =>
-                console.log(`${device.label}, ${device.deviceId}`)
-            );
+            // videoInputDevices.forEach(device =>
+            //     console.log(`${device.label}, ${device.deviceId}`)
+            // );
 
             if(videoInputDevices.length > 0){
                     
                 if(selectedDeviceId == null){
-                    if(videoInputDevices.length > 1){
-                        selectedDeviceId = videoInputDevices[1].deviceId
-                    } else {
-                        selectedDeviceId = videoInputDevices[0].deviceId
-                    }
+                    // if(videoInputDevices.length > 1){
+                    //     selectedDeviceId = videoInputDevices[1].deviceId
+                    // } else {
+                    //     selectedDeviceId = videoInputDevices[0].deviceId
+                    // }
+                    selectedDeviceId = videoInputDevices[0].deviceId
                 }
                     
                     
@@ -214,13 +216,19 @@
                 codeReader
                     .decodeOnceFromVideoDevice(selectedDeviceId, 'previewKamera')
                     .then(result => {
+                            $('.scan').hide();
+                            codeReader.reset();
+
                             showData(result.text);
-                            setTimeout(function(){
-                              initScanner()
-                              if(codeReader){
-                                  codeReader.reset()
-                              }
-                            },1000)
+                            
+                            // console.log(result.text);
+                            // codeReader.reset();
+                            // setTimeout(function(){
+                            //   initScanner()
+                            //   if(codeReader){
+                            //       codeReader.reset()
+                            //   }
+                            // },1000)
                             
                     })
                     .catch(err => console.error(err));
@@ -235,6 +243,15 @@
         initScanner()
     } else {
         alert('Cannot access camera.');
+    }
+
+    // sleep tanpa async await
+    function sleep(milliseconds) {
+        const date = Date.now();
+        let currentDate = null;
+        do {
+            currentDate = Date.now();
+        } while (currentDate - date < milliseconds);
     }
 
     function showData(rfid){
@@ -259,7 +276,8 @@
           type: "GET",
           dataType:"JSON",
           success: function(data){
-            $('.scan').hide();
+            // console.log(data)
+            // $('.scan').hide();
             $('#modalLong').modal('show');
 
             $('.asset_id').text(data['data']['detail'][0]['asset_id']);
@@ -270,16 +288,17 @@
             $('.ppk_user').text(data['data']['detail'][0]['ppk_user']);
             $('.name_project').text(data['data']['detail'][0]['name_project']);
 
-            var i;
+            // var i;
 
-            for (i = 0; i < data['data']['detail'][0]['product_attribute'].length; ++i) {
+            for (let i = 0; i < data['data']['detail'][0]['product_attribute'].length; ++i) {
                 if(data['data']['detail'][0]['product_attribute'][i]['description'] != ""){
                     $('.list-data').append("<tr><td>"+data['data']['detail'][0]['product_attribute'][i]['name']+"</td><td>"+data['data']['detail'][0]['product_attribute'][i]['description']+"</td></tr>");
                 }
             }
 
-            var z;
-            for (z = 0; data['data']['move'].length; ++z) {
+            // console.log(data.data.move)
+            for (let z = 0; z < data['data']['move'].length; ++z) {
+                // console.log(data['data']['move'][z])
                 var todaydate = new Date(data['data']['move'][z]['tanggal']); 
                 var dd = todaydate .getDate();
                 var mm = todaydate .getMonth()+1;
@@ -295,8 +314,15 @@
           error: function (xhr, ajaxOptions, thrownError) {
             Toast.fire({
                 icon: 'error',
-                title: 'Request data dari ITAM gagal lakukan scan ulang'
+                title: 'Data tidak ditemukan pada ITAM'
             })
+            // console.log(thrownError)
+            // console.log(xhr)
+            // console.log(ajaxOptions)
+            $('.scan').show();
+            // sleep(1500);
+            initScanner();
+
           }
       });
     }

@@ -71,6 +71,7 @@ class Scan_aset_v2 extends CI_Controller {
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
 		// CURLOPT_URL => 'https://itam.digiprimatera.co.id:8081/api/asset/detail?asset_id='.$assetId,
+		// CURLOPT_URL => 'http://10.230.200.158:8081/api/asset/detail?asset_id='.$assetId,
 		CURLOPT_URL => 'https://itam.digiprimatera.co.id:8081/api/asset/detail?asset_id='.$assetId,
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
@@ -96,6 +97,7 @@ class Scan_aset_v2 extends CI_Controller {
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
 		// CURLOPT_URL => 'https://aset.divtik.polri.go.id/api_itam/api/asset/asset_move?asset_id='.$assetId,
+		// CURLOPT_URL => 'http://10.230.200.158:8081/api/asset/asset_move?asset_id='.$assetId,
 		CURLOPT_URL => 'https://itam.digiprimatera.co.id:8081/api/asset/asset_move?asset_id='.$assetId,
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
