@@ -357,6 +357,7 @@
 
     function closeMat(){
       $('.scan').show();
+      $('#modalLong').modal('hide');
       initScanner();
       $.ajax({
           url : "<?=base_url()?>index.php/pindai_rfid/closeMat/",
