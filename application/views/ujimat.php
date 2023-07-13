@@ -78,66 +78,6 @@
           <div class="modal-body">
           <table>
               <tbody class="detail-data-rfid">
-                  <!-- <tr>
-                      <td>ASSET ID</td>
-                      <td><span class="asset_id"></span></td>
-                  </tr>
-                  <tr>
-                      <td>Nama Aset</td>
-                      <td> : <span class="name_asset"></span></td>
-                  </tr>
-                  <tr>
-                      <td>Serial Number</td>
-                      <td> : <span class="serial_number"></span></td>
-                  </tr>
-                  <tr>
-                      <td>PPK</td>
-                      <td> : <span class="ppk_user"></span></td>
-                  </tr>
-                  <tr>
-                      <td>Proyek</td>
-                      <td> : <span class="name_project"></span></td>
-                  </tr>
-                  <tr>
-                      <td>Nilai Proyek</td>
-                      <td> : <span class="price"></span></td>
-                  </tr>
-                  <tr>
-                      <td>Tahun Project</td>
-                      <td> : <span class="year_project"></span></td>
-                  </tr> -->
-                    <!-- <tr class="table-font-weight-bold">
-                        <td style="vertical-align: top;">ID</td>
-                        <td><span class="asset_id"></span></td>
-                    </tr>
-                    <tr>
-                        <td class="table-font-weight-bold" style="vertical-align: top;">Aset</td>
-                        <td> : <span class="name_asset"></span></td>
-                    </tr>
-                    <tr>
-                        <td class="table-font-weight-bold" style="vertical-align: top;">Serial</td>
-                        <td> : <span class="serial_number"></span></td>
-                    </tr>
-                    <tr>
-                        <td class="table-font-weight-bold" style="vertical-align: top;">PPK</td>
-                        <td> : <span class="ppk_user"></span></td>
-                    </tr>
-                    <tr>
-                        <td class="table-font-weight-bold" style="vertical-align: top;">Proyek</td>
-                        <td> : <span class="name_project"></span></td>
-                    </tr>
-                    <tr>
-                        <td class="table-font-weight-bold" style="vertical-align: top;">Nilai</td>
-                        <td> : <span class="price"></span></td>
-                    </tr>
-                    <tr>
-                        <td class="table-font-weight-bold" style="vertical-align: top;">Tahun</td>
-                        <td> : <span class="year_project"></span></td>
-                    </tr>
-                    <tr>
-                        <td class="table-font-weight-bold" style="vertical-align: top;">Vendor</td>
-                        <td> : <span class="name_vendor"></span></td>
-                    </tr> -->
                     <tr class="table-font-weight-bold">
                         <td style="vertical-align: top;">ID</td>
                         <td style="vertical-align: top;">:</td>
@@ -232,12 +172,12 @@
     });
     
     
-    // $( document ).ready(function() {
-    // //   setTimeout(function(){
-    // //       initScanner();
-    // //     },500)
-    //     initScanner();
-    // });
+    $( document ).ready(function() {
+      setTimeout(function(){
+          initScanner();
+        },500)
+        initScanner();
+    });
 
     let selectedDeviceId = null;
     var hints = new Map();
@@ -356,7 +296,7 @@
           success: function(data){
             // console.log(data)
             // $('.scan').hide();
-            $('#modalLong').modal('show');
+
 
             $('.asset_id').text(data['data']['detail'][0]['asset_id']);
             $('.name_asset').text(data['data']['detail'][0]['name_asset']);
@@ -387,6 +327,10 @@
                 var date = dd+'-'+mm+'-'+yyyy+' '+todaydate.getHours() + ':' + todaydate.getMinutes();
 
                 $('.list-data-history').append("<tr><td>"+data['data']['move'][z]['location_awal']+"</td><td>"+data['data']['move'][z]['location_tujuan']+"</td><td>"+date+"</td></tr>");
+            }
+
+            if (data?.data?.detail[0]?.asset_id) {
+                $('#modalLong').modal('show');
             }
 
           },
