@@ -349,9 +349,10 @@
 
           },
           error: function (xhr, ajaxOptions, thrownError) {
+            // Tag QR asal asalan
             Toast.fire({
                 icon: 'error',
-                title: 'Data RFID tidak ditemukan 2'
+                title: 'Data RFID tidak ditemukan'
             })
             // console.log(thrownError)
             // console.log(xhr)
