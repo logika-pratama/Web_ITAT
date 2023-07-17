@@ -87,7 +87,13 @@
                                             <div class="col-4">
                                                 <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/ujimat')?>" class="btn btn-secondary btn-sm mb-2" style="height:107px; width:100%;"  class="btn btn-primary btn-sm mb-2" style="height:85px; width:100%;">
                                                     <i class="bx bx-package bx-sm mb-1 mt-2"></i>
-                                                    <p class="icon-name text-capitalize">Uji Mat (QR Code)</p>
+                                                    <p class="icon-name text-capitalize">Uji Mat CAM (QR Code)</p>
+                                                </a>
+                                            </div>
+                                            <div class="col-4">
+                                                <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/ujimatrfid')?>" class="btn btn-secondary btn-sm mb-2" style="height:107px; width:100%;"  class="btn btn-primary btn-sm mb-2" style="height:85px; width:100%;">
+                                                    <i class="bx bx-package bx-sm mb-1 mt-2"></i>
+                                                    <p class="icon-name text-capitalize">Uji Mat Laser (QR Code)</p>
                                                 </a>
                                             </div>
                                             <div class="col-4">
