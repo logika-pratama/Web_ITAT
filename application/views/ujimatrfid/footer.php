@@ -80,6 +80,8 @@ function showData(){
                 icon: 'error',
                 title: 'Permintaan data gagal, scan ulang setelah beberapa saat'
             })
+            $("[name='scanrfid']").val('');
+            $(".scancuy").focus()
             $('.scan').show();
         } else {
             $('.asset_id').text(data['data']['detail'][0]['asset_id']);
@@ -122,9 +124,8 @@ function showData(){
             icon: 'error',
             title: 'Data RFID tidak ditemukan'
         })
-        // console.log(thrownError)
-        // console.log(xhr)
-        // console.log(ajaxOptions)
+        $("[name='scanrfid']").val('');
+        $(".scancuy").focus()
         $('.scan').show();
         // sleep(1500);
         initScanner();

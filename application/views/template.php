@@ -97,7 +97,7 @@
                                                 </a>
                                             </div>
                                             <div class="col-4">
-                                                <a href="<?=base_url('index.php/searching/waiting?url=')?>https://10.230.200.158:8082/login" class="btn btn-warning btn-sm mb-2" style="height:107px; width:100%;">
+                                                <a href="https://10.230.200.158:8082/auto_login?email=petugas_gudang&password=Asetpolri2022" class="btn btn-warning btn-sm mb-2" style="height:107px; width:100%;">
                                                     <i class="bx bxs-box bx-sm mb-1 mt-2" style="font-size: 200px;"></i>
                                                     <p class="icon-name text-capitalize">Aset Gudang</p>
                                                 </a>
