@@ -401,10 +401,17 @@
             initScanner();
             // autoOnFlashlight();
             // oNFlashlight();
+            try {
+              setTimeout(function(){
+                oNFlashlight();
+              }, 5000)
+            } catch(e) {
+              Toast.fire({
+                icon: 'error',
+                title: e.message
+              })
+            }
 
-            setTimeout(function(){
-              oNFlashlight();
-            }, 5000)
 
           }
       });
