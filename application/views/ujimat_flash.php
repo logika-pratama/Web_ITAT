@@ -324,23 +324,14 @@
         $('.name_project').text('');
         $('.name_vendor').text('');
 
-
-      $.ajax({
+      try {
+        $.ajax({
           url : "<?=base_url()?>index.php/scan_rfid/setRFID/"+rfid,
           type: "GET",
           dataType:"JSON",
           success: function(data){
             console.log(data)
-            if (!data?.data?.detail && data?.meta?.code == 200 && data?.meta?.message.toLowerString().includes("success")) {
-            // if (!data?.data?.detail[0]?.asset_id && data?.meta?.code == 200) {
-                Toast.fire({
-                    icon: 'error',
-                    title: 'Data RFID tidak ditemukan'
-                })
-                $('.scan').show();
-                initScanner();
-                turnOnFlashlight();
-            } else if (!data?.data?.detail && data?.meta?.code == 200) {
+            if (!data?.data?.detail[0]?.asset_id && data?.meta?.code == 200) {
               Toast.fire({
                     icon: 'error',
                     title: data?.meta?.message
@@ -402,24 +393,21 @@
             // console.log(xhr)
             // console.log(ajaxOptions)
             $('.scan').show();
-            // sleep(1500);
             initScanner();
-            // autoOnFlashlight();
-            // oNFlashlight();
-            // try {
-            //   setTimeout(function(){
-            //     oNFlashlight();
-            //   }, 5000)
-            // } catch(e) {
-            //   Toast.fire({
-            //     icon: 'error',
-            //     title: e.message
-            //   })
-            // }
             turnOnFlashlight();
 
           }
-      });
+        });
+      } catch (e) {
+        Toast.fire({
+          icon: 'error',
+          title: 'Data RFID tidak ditemukan'
+        })
+        $('.scan').show();
+        initScanner();
+        turnOnFlashlight();
+      }
+
     }
 
     function closeMat(){
