@@ -400,7 +400,7 @@
             // sleep(1500);
             initScanner();
             // autoOnFlashlight();
-            // oNFlashlight();
+            oNFlashlight();
             try {
               setTimeout(function(){
                 oNFlashlight();
@@ -493,7 +493,7 @@
 
 
   function oNFlashlight() {
-    if (!track0) {
+    if (!isFlashOn) {
       Toast.fire({
         icon: 'error',
         title: 'tidak menghidupkan senter'
