@@ -342,7 +342,7 @@
                 })
                 $('.scan').show();
                 initScanner();
-                // autoOnFlashlight();
+                turnOnFlashlight();
             } else if (!data?.data?.detail[0]?.asset_id) {
                 Toast.fire({
                     icon: 'error',
@@ -350,7 +350,7 @@
                 })
                 $('.scan').show();
                 initScanner();
-                // autoOnFlashlight();
+                turnOnFlashlight();
             } else {
                 $('.asset_id').text(data['data']['detail'][0]['asset_id']);
                 $('.name_asset').text(data['data']['detail'][0]['name_asset']);
