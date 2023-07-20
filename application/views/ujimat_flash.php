@@ -404,7 +404,7 @@
 
             setTimeout(function(){
               oNFlashlight();
-            }, 2000)
+            }, 5000)
 
           }
       });
@@ -486,6 +486,19 @@
 
 
   function oNFlashlight() {
+    if (!track0) {
+      Toast.fire({
+        icon: 'error',
+        title: 'tidak menghidupkan senter'
+      })
+      return;
+    }
+
+    Toast.fire({
+      icon: 'success',
+      title: 'menghidupkan senter'
+    })
+
     const videoElement = document.getElementById('previewKamera');
     videoStream = videoElement.srcObject
     const track = videoStream.getVideoTracks()[0];
