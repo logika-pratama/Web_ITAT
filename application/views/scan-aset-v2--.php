@@ -64,9 +64,6 @@
     <div class="scan"></div>
 
     <video id="previewKamera" class="video"></video>
-    <span>
-      <button id="toggleFlashButton" class="btn btn-secondary btn-sm m-2">ON/OFF Flashlight</button>
-    </span>
   </div>
   <div class="modal fade" id="modalLong" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
       <div class="modal-dialog modal-fullscreen" role="document">
@@ -75,48 +72,36 @@
                 <h5 class="modal-title" id="modalLongTitle">Detail RFID</h5>
             </div>
             <div class="modal-body">
-              <table>
-                  <tbody class="detail-data-rfid">
-                        <tr class="table-font-weight-bold">
-                            <td style="vertical-align: top;">ID</td>
-                            <td style="vertical-align: top;">:</td>
-                            <td><span class="asset_id"></span></td>
-                        </tr>
-                        <tr>
-                            <td class="table-font-weight-bold" style="vertical-align: top;">Aset</td>
-                            <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
-                            <td><span class="name_asset"></span></td>
-                        </tr>
-                        <tr>
-                            <td class="table-font-weight-bold" style="vertical-align: top;">Serial</td>
-                            <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
-                            <td><span class="serial_number"></span></td>
-                        </tr>
-                        <tr>
-                            <td class="table-font-weight-bold" style="vertical-align: top;">PPK</td>
-                            <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
-                            <td><span class="ppk_user"></span></td>
-                        </tr>
-                        <tr>
-                            <td class="table-font-weight-bold" style="vertical-align: top;">Proyek</td>
-                            <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
-                            <td><span class="name_project"></span></td>
-                        </tr>
-                        <!-- <tr>
-                            <td class="table-font-weight-bold" style="vertical-align: top;">Nilai</td>
-                            <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
-                            <td><span class="price"></span></td>
-                        </tr> -->
-                        <tr>
-                            <td class="table-font-weight-bold" style="vertical-align: top;">Tahun</td>
-                            <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
-                            <td><span class="year_project"></span></td>
-                        </tr>
-                        <tr>
-                            <td class="table-font-weight-bold" style="vertical-align: top;">Vendor</td>
-                            <td class="table-font-weight-bold" style="vertical-align: top;">:</td>
-                            <td><span class="name_vendor"></span></td>
-                        </tr>
+              <!-- <table>
+                  <tbody>
+                      <tr>
+                          <td>ASSET ID</td>
+                          <td><span class="asset_id"></span></td>
+                      </tr>
+                      <tr>
+                          <td>Nama Aset</td>
+                          <td> : <span class="name_asset"></span></td>
+                      </tr>
+                      <tr>
+                          <td>Serial Number</td>
+                          <td> : <span class="serial_number"></span></td>
+                      </tr>
+                      <tr>
+                          <td>PPK</td>
+                          <td> : <span class="ppk_user"></span></td>
+                      </tr>
+                      <tr>
+                          <td>Proyek</td>
+                          <td> : <span class="name_project"></span></td>
+                      </tr>
+                      <tr>
+                          <td>Nilai Proyek</td>
+                          <td> : <span class="price"></span></td>
+                      </tr>
+                      <tr>
+                          <td>Tahun Project</td>
+                          <td> : <span class="year_project"></span></td>
+                      </tr>
                   </tbody>
               </table>
 
@@ -139,13 +124,13 @@
                   </thead>
                   <tbody class="list-data-history">
                   </tbody>
-              </table>
+              </table> -->
 
             </div>
             <div class="modal-footer">
-              <button type="button" onclick="closeModalContent()" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                  Close
-              </button>
+            <button type="button" onclick="closeMat()" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                Close
+            </button>
             </div>
         </div>
       </div>
@@ -182,27 +167,17 @@
     hints.set(ZXing.DecodeHintType.ASSUME_GS1, false)
     hints.set(ZXing.DecodeHintType.TRY_HARDER, false)
     const codeReader = new ZXing.BrowserMultiFormatReader(hints);
+    const sourceSelect = $("#pilihKamera");
 
-    function autoOnFlashlight() {
-      const videoElement = document.getElementById('previewKamera');
-      videoStream = videoElement.srcObject
-      if (!videoStream) {
-        console.log("Video stream doesn't exist")
-        return;
-      }
-      const track = videoStream.getVideoTracks()[0];
-      const capabilities = track.getCapabilities();
-      if (!capabilities.torch) {
-        console.log('Torch/flashlight is not supported on this device.');
-        return;
-      }
-      isFlashOn = !isFlashOn;
-      track.applyConstraints({
-        advanced: [{ torch: true }]
-      })
-    }
+    $(document).on('change','#pilihKamera',function(){
+        selectedDeviceId = $(this).val();
+        if(codeReader){
+            codeReader.reset()
+            initScanner();
+        }
+    })
 
-
+    
     function initScanner() {
         codeReader
         .listVideoInputDevices()
@@ -212,22 +187,43 @@
             );
 
             if(videoInputDevices.length > 0){
+                    
                 if(selectedDeviceId == null){
-                    if(videoInputDevices.length > 1){
-                        selectedDeviceId = videoInputDevices[1].deviceId
-                    } else {
-                        selectedDeviceId = videoInputDevices[0].deviceId
-                    }
-                    // selectedDeviceId = videoInputDevices[0].deviceId
+                    // if(videoInputDevices.length > 1){
+                    //     selectedDeviceId = videoInputDevices[1].deviceId
+                    // } else {
+                    //     selectedDeviceId = videoInputDevices[0].deviceId
+                    // }
+                    selectedDeviceId = videoInputDevices[0].deviceId
                 }
                     
+                    
+                if (videoInputDevices.length >= 1) {
+                    sourceSelect.html('');
+                    videoInputDevices.forEach((element) => {
+                        const sourceOption = document.createElement('option')
+                        sourceOption.text = element.label
+                        sourceOption.value = element.deviceId
+                        if(element.deviceId == selectedDeviceId){
+                            sourceOption.selected = 'selected';
+                        }
+                        sourceSelect.append(sourceOption)
+                    })
+                
+                }
+                // f35bf484feac18e2f9421957fcfd60e67a21fd32a88551baf200e6cbf9c853f8
+                // selectedDeviceId
                 codeReader
                     .decodeOnceFromVideoDevice(selectedDeviceId, 'previewKamera')
                     .then(result => {
-                        $('.scan').hide();
-                        codeReader.reset();
-
-                        showData(result.text);
+                            showData(result.text);
+                            setTimeout(function(){
+                              initScanner()
+                              if(codeReader){
+                                  codeReader.reset()
+                              }
+                            },1000)
+                            
                     })
                     .catch(err => console.error(err));
                     
@@ -244,41 +240,83 @@
     }
 
     function resetModalBody() {
-      $(".list-data-history").html('');
-      $(".list-data").html('');
-
-      $('.asset_id').text('');
-      $('.name_asset').text('');
-      // $('.price').text('');
-      $('.serial_number').text('');
-      $('.year_project').text('');
-      $('.ppk_user').text('');
-      $('.name_project').text('');
-      $('.name_vendor').text('');
+      $(".modal-body").html('');
     }
 
     function setModalBody(data) {
       const asset = data.asset
-      $('.asset_id').text(data['asset_id']);
-      $('.name_asset').text(data['name_asset']);
-      // $('.price').text(formatPriceToIDR(data['price']));
-      $('.serial_number').text(data['serial_number']);
-      $('.year_project').text(data['year_project']);
-      $('.ppk_user').text(data['ppk_user']);
-      $('.name_project').text(data['name_project']);
-      $('.name_vendor').text(data['name_vendor']);
+      let content = `
+        <table>
+            <tbody>
+                <tr class="table-font-weight-bold">
+                    <td style="vertical-align: top;">ID</td>
+                    <td><span class="asset_id">${asset.asset_id}</span></td>
+                </tr>
+                <tr>
+                    <td class="table-font-weight-bold" style="vertical-align: top;">Aset</td>
+                    <td> : <span class="name_asset">${asset.name_asset}</span></td>
+                </tr>
+                <tr>
+                    <td class="table-font-weight-bold" style="vertical-align: top;">Serial</td>
+                    <td> : <span class="serial_number">${asset.serial_number}</span></td>
+                </tr>
+                <tr>
+                    <td class="table-font-weight-bold" style="vertical-align: top;">PPK</td>
+                    <td> : <span class="ppk_user">${asset.ppk_user}</span></td>
+                </tr>
+                <tr>
+                    <td class="table-font-weight-bold" style="vertical-align: top;">Proyek</td>
+                    <td> : <span class="name_project">${asset.name_project}</span></td>
+                </tr>
+                <tr>
+                    <td class="table-font-weight-bold" style="vertical-align: top;">Nilai</td>
+                    <td> : <span class="price">${formatPriceToIDR(asset.price)}</span></td>
+                </tr>
+                <tr>
+                    <td class="table-font-weight-bold" style="vertical-align: top;">Tahun</td>
+                    <td> : <span class="year_project">${asset.year_project}</span></td>
+                </tr>
+                <tr>
+                    <td class="table-font-weight-bold" style="vertical-align: top;">Vendor</td>
+                    <td> : <span class="name_vendor">${asset.name_vendor}</span></td>
+                </tr>
+            </tbody>
+        </table>
+      `;
 
       // Spek Tek
       const spekTek = asset.product_attribute
+      content += `
+        <table class="table table-striped table-bordered mt-3">
+            <thead>
+            </thead>
+            <tbody class="list-data">
+      `
       for (let i in spekTek) {
           if (spekTek[i].description) {
-            $('.list-data').append("<tr><td>"+ spekTek[i].name+"</td><td>"+spekTek[i].description +"</td></tr>");
+              content += "<tr><td>"+ spekTek[i].name+"</td><td>"+spekTek[i].description +"</td></tr>"
           }
       }
+      content += `
+          </tbody>
+        </table>
+      `
 
       // History
       const history = data.history
       if (history.length > 0) {
+        content += `
+          <h5>History</h5>
+          <table class="table table-striped table-bordered mt-3">
+            <thead>
+                <tr>
+                    <td>Dari</td>
+                    <td>Ke</td>
+                    <td>Tanggal / Jam</td>
+                </tr>
+            </thead>
+            <tbody class="list-data-history">
+        `
         for (let i in history) {
           let todaydate = new Date(history[i].tanggal); 
           let dd = todaydate .getDate();
@@ -287,10 +325,17 @@
           if(dd<10){  dd='0'+dd } 
           if(mm<10){  mm='0'+mm } 
           let date = dd+'-'+mm+'-'+yyyy+' '+todaydate.getHours() + ':' + todaydate.getMinutes();
-          $('.list-data-history').append("<tr><td>"+history[i].location_awal+"</td><td>"+history[i].location_tujuan+"</td><td>"+date+"</td></tr>");
+
+          content += "<tr><td>"+history[i].location_awal+"</td><td>"+history[i].location_tujuan+"</td><td>"+date+"</td></tr>"
         }
+        
+        content += `
+            </tbody>
+          </table>
+        `
       }
 
+      $('.modal-body').append(content);
     }
 
     function showData(rfid){
@@ -314,31 +359,34 @@
                     title: data.meta.message // "Data tidak ditemukan"
                 })
                 $('.scan').show();
-                // codeReader.reset();
+                codeReader.reset();
                 initScanner();
-                turnOnFlashlight();
             } else {
                 $('.scan').hide();
                 $('#modalLong').modal('show');
                 setModalBody(data.data);
             }  
           },
-          error: function (xhr, ajaxOptions, thrownError) {
-            Toast.fire({
-                icon: 'error',
-                title: 'Request data dari ITAM gagal lakukan scan ulang'
-            })
-            $('.scan').show();
-            initScanner();
-            turnOnFlashlight();
-          }
+          // error: function (xhr, ajaxOptions, thrownError) {
+          //   Toast.fire({
+          //       icon: 'error',
+          //       title: 'Request data dari ITAM gagal lakukan scan ulang'
+          //   })
+          // }
       });
     }
 
-    function closeModalContent(){
+    function closeMat(){
       $('.scan').show();
       initScanner();
-      turnOnFlashlight();
+      // $.ajax({
+      //     url : "<?=base_url()?>index.php/pindai_rfid/closeMat/",
+      //     type: "POST",
+      //     dataType:"JSON",
+      //     success: function(data){
+      //       initScanner();
+      //     },
+      // });
     }
 
     function formatPriceToIDR(value) {
