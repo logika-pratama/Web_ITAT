@@ -44,7 +44,7 @@ class Scan_aset_v2 extends CI_Controller {
 				"meta" => array(
 					"code" => 404,
 					"status" => "failed",
-					"message" => "Data tidak ditemukan pada ITAM"
+					"message" => "Data RFID tidak ditemukan"
 				)
 			);
 		} else {
@@ -72,7 +72,8 @@ class Scan_aset_v2 extends CI_Controller {
 		curl_setopt_array($curl, array(
 		// CURLOPT_URL => 'https://itam.digiprimatera.co.id:8081/api/asset/detail?asset_id='.$assetId,
 		// CURLOPT_URL => 'http://10.230.200.158:8081/api/asset/detail?asset_id='.$assetId,
-		CURLOPT_URL => 'https://itam.digiprimatera.co.id:8081/api/asset/detail?asset_id='.$assetId,
+		// CURLOPT_URL => 'https://itam.digiprimatera.co.id:8081/api/asset/detail?asset_id='.$assetId,
+		CURLOPT_URL => itamUrl().'api/asset/detail?asset_id='.$assetId,
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,
@@ -98,7 +99,8 @@ class Scan_aset_v2 extends CI_Controller {
 		curl_setopt_array($curl, array(
 		// CURLOPT_URL => 'https://aset.divtik.polri.go.id/api_itam/api/asset/asset_move?asset_id='.$assetId,
 		// CURLOPT_URL => 'http://10.230.200.158:8081/api/asset/asset_move?asset_id='.$assetId,
-		CURLOPT_URL => 'https://itam.digiprimatera.co.id:8081/api/asset/asset_move?asset_id='.$assetId,
+		// CURLOPT_URL => 'https://itam.digiprimatera.co.id:8081/api/asset/asset_move?asset_id='.$assetId,
+		CURLOPT_URL => itamUrl().'api/asset/asset_move?asset_id='.$assetId,
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,
