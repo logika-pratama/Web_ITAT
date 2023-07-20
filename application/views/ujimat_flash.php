@@ -400,17 +400,17 @@
             // sleep(1500);
             initScanner();
             // autoOnFlashlight();
-            oNFlashlight();
-            try {
-              setTimeout(function(){
-                oNFlashlight();
-              }, 5000)
-            } catch(e) {
-              Toast.fire({
-                icon: 'error',
-                title: e.message
-              })
-            }
+            // oNFlashlight();
+            // try {
+            //   setTimeout(function(){
+            //     oNFlashlight();
+            //   }, 5000)
+            // } catch(e) {
+            //   Toast.fire({
+            //     icon: 'error',
+            //     title: e.message
+            //   })
+            // }
 
 
           }
@@ -430,6 +430,11 @@
             
           },
       });
+
+      // oNFlashlight();
+      setTimeout(function(){
+        oNFlashlight();
+      }, 5000)
     }
 
     function formatPriceToIDR(value) {
