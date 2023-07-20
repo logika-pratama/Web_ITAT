@@ -336,6 +336,7 @@
     }
 
     function closeModalContent(){
+      $('#modalLong').modal('hide');
       $('.scan').show();
       initScanner();
       turnOnFlashlight();
