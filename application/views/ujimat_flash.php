@@ -400,7 +400,7 @@
             // sleep(1500);
             initScanner();
             // autoOnFlashlight();
-            oNFlashlight();
+            // oNFlashlight();
 
             setTimeout(function(){
               oNFlashlight();
