@@ -404,7 +404,7 @@
 
             setTimeout(function(){
               oNFlashlight();
-            }, 1000)
+            }, 2000)
 
           }
       });
