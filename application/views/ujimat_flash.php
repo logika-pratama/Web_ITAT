@@ -434,11 +434,15 @@
       // oNFlashlight();
       setTimeout(function(){
         oNFlashlight();
-      }, 3000)
+      }, 2500)
 
-      // setTimeout(function(){
-      //   oNFlashlight();
-      // }, 5000)
+      setTimeout(function(){
+        oNFlashlight();
+      }, 5000)
+
+      setTimeout(function(){
+        oNFlashlight();
+      }, 10000)
     }
 
     function formatPriceToIDR(value) {
