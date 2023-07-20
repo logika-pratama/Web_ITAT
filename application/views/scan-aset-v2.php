@@ -259,14 +259,14 @@
 
     function setModalBody(data) {
       const asset = data.asset
-      $('.asset_id').text(data['asset_id']);
-      $('.name_asset').text(data['name_asset']);
-      // $('.price').text(formatPriceToIDR(data['price']));
-      $('.serial_number').text(data['serial_number']);
-      $('.year_project').text(data['year_project']);
-      $('.ppk_user').text(data['ppk_user']);
-      $('.name_project').text(data['name_project']);
-      $('.name_vendor').text(data['name_vendor']);
+      $('.asset_id').text(asset['asset_id']);
+      $('.name_asset').text(asset['name_asset']);
+      // $('.price').text(formatPriceToIDR(asset['price']));
+      $('.serial_number').text(asset['serial_number']);
+      $('.year_project').text(asset['year_project']);
+      $('.ppk_user').text(asset['ppk_user']);
+      $('.name_project').text(asset['name_project']);
+      $('.name_vendor').text(asset['name_vendor']);
 
       // Spek Tek
       const spekTek = asset.product_attribute
@@ -351,7 +351,102 @@
           result = result.substr(1)
       }
       return 'Rp'+result;
-  }
+    }
+
+    const toggleFlashButton = document.getElementById('toggleFlashButton');
+    var videoElement = document.getElementById('previewKamera');
+    var isFlashOn = false;
+    var track0 = null
+
+    function toggleFlashlight() {
+      if (track0 != null) {
+        isFlashOn = false
+        $('.scan').hide();
+        codeReader.reset();
+        $('.scan').hide();
+        codeReader.reset()
+        track0 = null
+        initScanner()
+        $('.scan').show();
+        return
+      }
+      const videoElement = document.getElementById('previewKamera');
+
+      videoStream = videoElement.srcObject
+      const track = videoStream.getVideoTracks()[0];
+      if (track0 == null) {
+        track0 = track
+      }
+      const capabilities = track.getCapabilities();
+      if (!capabilities.torch) {
+        isFlashOn = false;
+        Toast.fire({
+          icon: 'error',
+          title: 'Tidak memiliki support flashlight pada kemera yang digunakan'
+        })
+        console.log('Torch/flashlight is not supported on this device.');
+        return;
+      }
+
+      isFlashOn = true;
+      track.applyConstraints({
+        advanced: [{ torch: true }]
+      })
+      if (!isFlashOn) {
+        track0 = null
+      }
+
+    }
+
+    toggleFlashButton.addEventListener('click', toggleFlashlight);
+
+
+    function turnOnFlashlight() {
+      // We need to wait for video stream is active, so we need to assume that the video in active after 0s, 2.5s, 5s, 10s
+      oNFlashlight();
+
+      setTimeout(function(){
+        oNFlashlight();
+      }, 2500)
+
+      setTimeout(function(){
+        oNFlashlight();
+      }, 5000)
+
+      setTimeout(function(){
+        oNFlashlight();
+      }, 10000)
+    }
+
+    function oNFlashlight() {
+      try {
+        if (!isFlashOn) {
+          return;
+        }
+
+        const videoElement = document.getElementById('previewKamera');
+        videoStream = videoElement.srcObject
+        const track = videoStream.getVideoTracks()[0];
+        track0 = track
+        const capabilities = track.getCapabilities();
+        if (!capabilities.torch) {
+          isFlashOn = false;
+          Toast.fire({
+            icon: 'error',
+            title: 'Tidak memiliki support flashlight pada kemera yang digunakan'
+          })
+          console.log('Torch/flashlight is not supported on this device.');
+          return;
+        }
+
+        isFlashOn = true;
+        track.applyConstraints({
+          advanced: [{ torch: true }]
+        })
+      } catch (e) {
+        console.log(e)
+      }
+    }
 
   </script>
 </html>

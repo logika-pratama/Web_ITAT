@@ -184,10 +184,8 @@
             success: function(data){},
         });
         setTimeout(function(){
-                initScanner();
-                // autoOnFlashlight();
+          initScanner();
         },500)
-        // initScanner();
     });
 
     let selectedDeviceId = null;
@@ -204,29 +202,6 @@
     //         initScanner();
     //     }
     // })
-
-    function autoOnFlashlight() {
-      const videoElement = document.getElementById('previewKamera');
-      videoStream = videoElement.srcObject
-      if (!videoStream) {
-        console.log("Video stream doesn't exist")
-        return;
-      }
-      const track = videoStream.getVideoTracks()[0];
-      const capabilities = track.getCapabilities();
-      if (!capabilities.torch) {
-        // Toast.fire({
-        //   icon: 'error',
-        //   title: 'Torch/flashlight is not supported on this device.'
-        // })
-        console.log('Torch/flashlight is not supported on this device.');
-        return;
-      }
-      isFlashOn = !isFlashOn;
-      track.applyConstraints({
-        advanced: [{ torch: true }]
-      })
-    }
     
     function initScanner() {
         codeReader
@@ -262,7 +237,6 @@
                     })
                 
                 }
-                // autoOnFlashlight();
                 // f35bf484feac18e2f9421957fcfd60e67a21fd32a88551baf200e6cbf9c853f8
                 // selectedDeviceId
                 codeReader
@@ -293,7 +267,6 @@
     }
     if (navigator.mediaDevices) {
         initScanner()
-        // autoOnFlashlight()
     } else {
         alert('Cannot access camera.');
     }
