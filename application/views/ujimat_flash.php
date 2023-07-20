@@ -411,7 +411,7 @@
             //     title: e.message
             //   })
             // }
-
+            turnOnFlashlight();
 
           }
       });
@@ -421,7 +421,6 @@
       $('.scan').show();
       $('#modalLong').modal('hide');
       initScanner();
-      // autoOnFlashlight();
       $.ajax({
           url : "<?=base_url()?>index.php/pindai_rfid/closeMat/",
           type: "POST",
@@ -430,19 +429,7 @@
             
           },
       });
-
-      // oNFlashlight();
-      setTimeout(function(){
-        oNFlashlight();
-      }, 2500)
-
-      setTimeout(function(){
-        oNFlashlight();
-      }, 5000)
-
-      setTimeout(function(){
-        oNFlashlight();
-      }, 10000)
+      turnOnFlashlight();
     }
 
     function formatPriceToIDR(value) {
@@ -505,39 +492,51 @@
   toggleFlashButton.addEventListener('click', toggleFlashlight);
 
 
+  function turnOnFlashlight() {
+    // We need to wait for video stream is active, so we need to assume that the video in active after 0s, 2.5s, 5s, 10s
+    oNFlashlight();
+
+    setTimeout(function(){
+      oNFlashlight();
+    }, 2500)
+
+    setTimeout(function(){
+      oNFlashlight();
+    }, 5000)
+
+    setTimeout(function(){
+      oNFlashlight();
+    }, 10000)
+  }
+
   function oNFlashlight() {
-    if (!isFlashOn) {
-      Toast.fire({
-        icon: 'error',
-        title: 'tidak menghidupkan senter'
+    try {
+      if (!isFlashOn) {
+        return;
+      }
+
+      const videoElement = document.getElementById('previewKamera');
+      videoStream = videoElement.srcObject
+      const track = videoStream.getVideoTracks()[0];
+      track0 = track
+      const capabilities = track.getCapabilities();
+      if (!capabilities.torch) {
+        isFlashOn = false;
+        Toast.fire({
+          icon: 'error',
+          title: 'Tidak memiliki support flashlight pada kemera yang digunakan'
+        })
+        console.log('Torch/flashlight is not supported on this device.');
+        return;
+      }
+
+      isFlashOn = true;
+      track.applyConstraints({
+        advanced: [{ torch: true }]
       })
-      return;
+    } catch (e) {
+      console.log(e)
     }
-
-    Toast.fire({
-      icon: 'success',
-      title: 'menghidupkan senter'
-    })
-
-    const videoElement = document.getElementById('previewKamera');
-    videoStream = videoElement.srcObject
-    const track = videoStream.getVideoTracks()[0];
-    track0 = track
-    const capabilities = track.getCapabilities();
-    if (!capabilities.torch) {
-      isFlashOn = false;
-      Toast.fire({
-        icon: 'error',
-        title: 'Tidak memiliki support flashlight pada kemera yang digunakan'
-      })
-      console.log('Torch/flashlight is not supported on this device.');
-      return;
-    }
-
-    isFlashOn = true;
-    track.applyConstraints({
-      advanced: [{ torch: true }]
-    })
   }
 
   </script>
