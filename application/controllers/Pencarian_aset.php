@@ -150,4 +150,28 @@ class Pencarian_aset extends CI_Controller {
 		return $rss;
 	}
 
+	public function getKontrak(){
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => 'https://aset.divtik.polri.go.id/mobile/'.'api/kontrak',
+		// CURLOPT_URL => itamUrl().'api/kontrak',
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'GET',
+		CURLOPT_HTTPHEADER => array(
+			'apikey: $pbkdf2-sha512$6000$P4cQYmzN.X8v5bw3xhijtA$PzGUd4dnuuvvEDgwhUsvDafEKu4W4Z5McvDO5nchfAlllfNsbCXBeB5XE/KrbtFEqfM4ymR2IMzGsKWT0vXKFA'
+		),
+		));
+
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+		$rss = json_decode($response,true);
+		echo json_encode($rss['data']);
+	}
+
 }

@@ -1,16 +1,34 @@
 
-<div class="row">
+<div class="row p-3">
     <!-- Filter -->
-    <div class="col-sm-12">
+    <!-- <div class="col-sm-12">
         <div class="form-group m-1">
             <label for="input_PPK">PPK</label>
             <input type="text" id="input_PPK" name="input_PPK" style="width:100%;" class="form-control" />
         </div>
+    </div> -->
+    <div class="col-sm-12">
+        <h3>Pencarian Aset</h3>   
     </div>
+
     <div class="col-sm-12">
         <div class="form-group m-1">
-            <label for="input_tahunPengadaan">Tahun Pengadaan</label>
-            <input type="text" id="input_tahunPengadaan" name="input_tahunPengadaan" style="width:100%;" class="form-control" />
+            <label for="input_PPK"><strong>Nama PPK</strong></label>
+            <select class="form-control input_PPK" style="width:100%;">
+                <option value="">-- Semua PPK --</option>
+            </select>
+        </div>    
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group m-1">
+            <label for="input_IDAset"><strong>ID Aset</strong></label>
+            <input type="text" id="input_IDAset" name="input_IDAset" style="width:100%; height: 30px;" class="form-control" />
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group m-1">
+            <label for="input_tahunPengadaan"><strong>Tahun Pengadaan</strong></label>
+            <input type="text" id="input_tahunPengadaan" name="input_tahunPengadaan" style="width:100%; height: 30px;" class="form-control" />
         </div>
     </div>
     <div class="col-sm-12">
@@ -23,7 +41,7 @@
     <!-- Content -->
     <div class="col-sm-12 mt-3">
         <div class="table-responsive">
-            <table class="table table-striped table-bordered mt-3" style="font-size:10px;" id="myTable">
+            <table class="table table-striped table-bordered mt-3" style="font-size:14px;" id="myTable">
             <input name="nomer" type="hidden" value="0">
             <thead style="background-color:#342a29;">
                 <tr>

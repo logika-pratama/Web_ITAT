@@ -60,6 +60,12 @@
         }
       }
 
+      .feature-title {
+        position: relative;
+        color: rgb(255, 255, 255);
+        mix-blend-mode: difference;
+      }
+
     </style>
   </head>
   <body>
@@ -69,8 +75,13 @@
 
     <video id="previewKamera" class="video"></video>
     <span>
-      <button id="toggleFlashButton" class="btn btn-secondary btn-sm m-2">ON/OFF Flashlight</button>
+      <button id="toggleFlashButton" class="btn btn-secondary btn-sm m-2" style="position: absolute;">ON/OFF Flashlight</button>
     </span>
+    <span class="float-end m-2 me-4">
+      <h2 class="feature-title">Uji Mat</h2>
+    </span>
+
+    <select id="pilihKamera" class="form-control pilihKamera fixed-bottom mb-1" style="100%"></select>
   </div>
   
   <div class="modal fade" id="modalLong" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
@@ -195,13 +206,14 @@
     const codeReader = new ZXing.BrowserMultiFormatReader(hints);
     const sourceSelect = $("#pilihKamera");
 
-    // $(document).on('change','#pilihKamera',function(){
-    //     selectedDeviceId = $(this).val();
-    //     if(codeReader){
-    //         codeReader.reset()
-    //         initScanner();
-    //     }
-    // })
+    $(document).on('change','#pilihKamera',function(){
+        selectedDeviceId = $(this).val();
+        if(codeReader){
+            codeReader.reset()
+            initScanner();
+            turnOnFlashlight();
+        }
+    })
     
     function initScanner() {
         codeReader
@@ -235,7 +247,6 @@
                         }
                         sourceSelect.append(sourceOption)
                     })
-                
                 }
                 // f35bf484feac18e2f9421957fcfd60e67a21fd32a88551baf200e6cbf9c853f8
                 // selectedDeviceId

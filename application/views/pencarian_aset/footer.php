@@ -15,7 +15,10 @@ var table;
 var filter = {
   // page: 19591,
   page: 3,
-  perPage: 10
+  perPage: 10,
+  PPK: '',
+  tahun: '',
+  assetId: ''
 }
 var pagingInfo = {
   page: 1,
@@ -28,13 +31,9 @@ var pagingInfo = {
   slides: []
 }
 
-var form = {
-  PPK: '',
-  tahun: ''
-}
-
 
 $(document).ready(function() {
+  getComboPPK();
   setAssets();
 });
 
@@ -44,14 +43,16 @@ function clearFilter() {
   filter.page = 1
   filter.perPage = 10
 
-  $("#input_PPK").val('');
+  // $(".input_PPK").val('');
+  $('.input_PPK').val('').trigger('change.select2');
   $("#input_tahunPengadaan").val('');
-  form.PPK = '';
-  form.tahun = '';
+  $("#input_IDAset").val('');
+  filter.PPK = '';
+  filter.tahun = '';
+  filter.assetId = '';
 
   console.log("clearFilter");
   console.log(filter);
-  console.log(form);
 
   setAssets();
 }
@@ -60,12 +61,12 @@ function findAssets() {
   filter.page = 1
   filter.perPage = 10
 
-  form.PPK =  $("#input_PPK").val();
-  form.tahun =  $("#input_tahunPengadaan").val();
+  filter.PPK =  $(".input_PPK").val();
+  filter.tahun =  $("#input_tahunPengadaan").val();
+  filter.assetId =  $("#input_IDAset").val();
 
   console.log("findAssets");
   console.log(filter);
-  console.log(form);
 
   setAssets();
 }
@@ -349,6 +350,26 @@ function formatNullable(value) {
   }
 
   return value
+}
+
+function getComboPPK() {
+  $('.input_PPK').select2();
+  $.ajax({
+      url : "<?=base_url()?>index.php/pencarian_aset/getKontrak/",
+      type: "GET",
+      dataType:"JSON",
+      success: function(data){
+        console.log(data)
+        let PPK = data.map(kontrak => kontrak.nama_ppk?.trim());
+        PPK = [...new Set(PPK)]
+        PPK = PPK.filter(p => p)
+        PPK.sort()
+        console.log(PPK)
+        for (let i in PPK) {
+          $('.input_PPK').append(`<option value="${PPK[i]}">${PPK[i]}</option>`);
+        }   
+      },
+  });
 }
 
 </script>

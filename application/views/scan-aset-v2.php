@@ -56,6 +56,12 @@
         }
       }
 
+      .feature-title {
+        position: relative;
+        color: rgb(255, 255, 255);
+        mix-blend-mode: difference;
+      }
+
     </style>
   </head>
   <body>
@@ -67,6 +73,13 @@
     <span>
       <button id="toggleFlashButton" class="btn btn-secondary btn-sm m-2">ON/OFF Flashlight</button>
     </span>
+    <span class="float-end m-2 me-4">
+      <h2 class="feature-title">Pindai Aset</h2>
+    </span>
+
+    <!-- <select id="pilihKamera" class="form-control pilihKamera fixed-bottom m-auto" style="width: 75%"></select> -->
+    <select id="pilihKamera" class="form-control pilihKamera fixed-bottom mb-1" style="width: 100%"></select>
+
   </div>
   <div class="modal fade" id="modalLong" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
       <div class="modal-dialog modal-fullscreen" role="document">
@@ -182,6 +195,17 @@
     hints.set(ZXing.DecodeHintType.ASSUME_GS1, false)
     hints.set(ZXing.DecodeHintType.TRY_HARDER, false)
     const codeReader = new ZXing.BrowserMultiFormatReader(hints);
+    const sourceSelect = $("#pilihKamera");
+
+    $(document).on('change','#pilihKamera',function(){
+      selectedDeviceId = $(this).val();
+      if(codeReader){
+        codeReader.reset();
+        initScanner();
+        turnOnFlashlight();
+      }
+    })
+
 
     function autoOnFlashlight() {
       const videoElement = document.getElementById('previewKamera');
@@ -202,7 +226,6 @@
       })
     }
 
-
     function initScanner() {
         codeReader
         .listVideoInputDevices()
@@ -219,6 +242,20 @@
                         selectedDeviceId = videoInputDevices[0].deviceId
                     }
                     // selectedDeviceId = videoInputDevices[0].deviceId
+                }
+
+                if (videoInputDevices.length >= 1) {
+                    sourceSelect.html('');
+                    videoInputDevices.forEach((element) => {
+                        const sourceOption = document.createElement('option')
+                        sourceOption.text = element.label
+                        sourceOption.value = element.deviceId
+                        if(element.deviceId == selectedDeviceId){
+                            sourceOption.selected = 'selected';
+                        }
+                        sourceSelect.append(sourceOption)
+                    })
+                
                 }
                     
                 codeReader
@@ -237,6 +274,7 @@
         })
         .catch(err => console.error(err));
     }
+
     if (navigator.mediaDevices) {
         initScanner()
     } else {
