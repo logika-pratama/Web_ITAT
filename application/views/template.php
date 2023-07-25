@@ -55,7 +55,8 @@
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-12">
                         <div class="card-body p-1">
-                          <div class="main-content main-template" style="height:88vh;">
+                          <!-- <div class="main-content main-template" style="height:88vh;"> -->
+                          <div class="main-content main-template mb-4" style="height:100%;">
                             <div class="col-md-12">
                                 <h5 class="card-header text-center m-0 font-weight-bold text-primary">ITAT MOBILE</h5>
                             </div>
