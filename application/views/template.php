@@ -134,7 +134,7 @@
                                             </div>
                                             <div class="col-4">
                                                 <a href="javascript:void(0)" onclick="changePageMain()" data-url="<?=base_url('index.php/pencarian_aset')?>" class="btn btn-info btn-sm mb-2" style="height:107px; width:100%;">
-                                                    <i class="bx bx-qr bx-sm mb-1 mt-2" style="font-size: 200px;"></i>
+                                                    <i class="bx bx-search bx-sm mb-1 mt-2" style="font-size: 200px;"></i>
                                                     <p class="icon-name text-capitalize">Pencarian Aset</p>
                                                 </a>
                                             </div>

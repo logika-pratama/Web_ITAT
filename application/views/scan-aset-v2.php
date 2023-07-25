@@ -78,7 +78,11 @@
     </span>
 
     <!-- <select id="pilihKamera" class="form-control pilihKamera fixed-bottom m-auto" style="width: 75%"></select> -->
-    <select id="pilihKamera" class="form-control pilihKamera fixed-bottom mb-1" style="width: 100%"></select>
+    <!-- <select id="pilihKamera" class="form-control pilihKamera fixed-bottom mb-1" style="width: 100%"></select> -->
+    <select id="pilihKamera" class="form-control pilihKamera fixed-bottom mb-1 col-sm-9" style="width: 75%; heigth: 25px;"></select>
+    <button id="refreshKamera" class="btn btn-secondary btn-sm mb-1" style="width: 15%;  heigth: 25px; position: fixed; bottom: 0.25%; right: 5%;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10 11H7.101l.001-.009a4.956 4.956 0 0 1 .752-1.787a5.054 5.054 0 0 1 2.2-1.811c.302-.128.617-.226.938-.291a5.078 5.078 0 0 1 2.018 0a4.978 4.978 0 0 1 2.525 1.361l1.416-1.412a7.036 7.036 0 0 0-2.224-1.501a6.921 6.921 0 0 0-1.315-.408a7.079 7.079 0 0 0-2.819 0a6.94 6.94 0 0 0-1.316.409a7.04 7.04 0 0 0-3.08 2.534a6.978 6.978 0 0 0-1.054 2.505c-.028.135-.043.273-.063.41H2l4 4l4-4zm4 2h2.899l-.001.008a4.976 4.976 0 0 1-2.103 3.138a4.943 4.943 0 0 1-1.787.752a5.073 5.073 0 0 1-2.017 0a4.956 4.956 0 0 1-1.787-.752a5.072 5.072 0 0 1-.74-.61L7.05 16.95a7.032 7.032 0 0 0 2.225 1.5c.424.18.867.317 1.315.408a7.07 7.07 0 0 0 2.818 0a7.031 7.031 0 0 0 4.395-2.945a6.974 6.974 0 0 0 1.053-2.503c.027-.135.043-.273.063-.41H22l-4-4l-4 4z"/></svg>
+    </button>
 
   </div>
   <div class="modal fade" id="modalLong" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
@@ -196,6 +200,14 @@
     hints.set(ZXing.DecodeHintType.TRY_HARDER, false)
     const codeReader = new ZXing.BrowserMultiFormatReader(hints);
     const sourceSelect = $("#pilihKamera");
+
+    $(document).on('click','#refreshKamera',function(){
+        if(codeReader){
+            codeReader.reset()
+            initScanner();
+            turnOnFlashlight();
+        }
+    })
 
     $(document).on('change','#pilihKamera',function(){
       selectedDeviceId = $(this).val();

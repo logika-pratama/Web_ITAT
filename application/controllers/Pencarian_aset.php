@@ -12,9 +12,9 @@ class Pencarian_aset extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
-		if(empty($this->session->userdata('token'))){
-			redirect('login');
-		}
+		// if(empty($this->session->userdata('token'))){
+		// 	redirect('login');
+		// }
 	}
 
 	public function index()
@@ -36,11 +36,20 @@ class Pencarian_aset extends CI_Controller {
 		if (isset($filter->perPage) && $filter->perPage != '') {
 			$query = $query.'&perPage='.(string) $filter->perPage;
 		}
+		if (isset($filter->PPK) && $filter->PPK != '') {
+			$query = $query.'&ppk_id='.(string) $filter->PPK;
+		}
+		if (isset($filter->tahun) && $filter->tahun != '') {
+			$query = $query.'&tahun_pengadaan='.(string) $filter->tahun;
+		}
+		if (isset($filter->assetId) && $filter->assetId != '') {
+			$query = $query.'&asset_id='.(string) $filter->assetId;
+		}
 
 		$curl = curl_init();
 
-		$url = 'https://aset.divtik.polri.go.id/mobile/'.'api/asset/detail'.$query;
-		// $url = itamUrl().'api/asset/detail'.$query;
+		// $url = 'https://aset.divtik.polri.go.id/mobile/'.'api/asset/detail'.$query;
+		$url = itamUrl().'api/asset/detail'.$query;
 		curl_setopt_array($curl, array(
 		CURLOPT_URL => $url,
 		CURLOPT_RETURNTRANSFER => true,
@@ -103,8 +112,8 @@ class Pencarian_aset extends CI_Controller {
 	private function getDetailAsset($assetId) {
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => 'https://aset.divtik.polri.go.id/mobile/'.'api/asset/detail?asset_id='.$assetId,
-		// CURLOPT_URL => itamUrl().'api/asset/detail?asset_id='.$assetId,
+		// CURLOPT_URL => 'https://aset.divtik.polri.go.id/mobile/'.'api/asset/detail?asset_id='.$assetId,
+		CURLOPT_URL => itamUrl().'api/asset/detail?asset_id='.$assetId,
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,
@@ -128,8 +137,8 @@ class Pencarian_aset extends CI_Controller {
 	private function getDetailAssetHistory($assetId) {
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => 'https://aset.divtik.polri.go.id/mobile/'.'api/asset/asset_move?asset_id='.$assetId,
-		// CURLOPT_URL => itamUrl().'api/asset/asset_move?asset_id='.$assetId,
+		// CURLOPT_URL => 'https://aset.divtik.polri.go.id/mobile/'.'api/asset/asset_move?asset_id='.$assetId,
+		CURLOPT_URL => itamUrl().'api/asset/asset_move?asset_id='.$assetId,
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,
@@ -153,8 +162,32 @@ class Pencarian_aset extends CI_Controller {
 	public function getKontrak(){
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => 'https://aset.divtik.polri.go.id/mobile/'.'api/kontrak',
-		// CURLOPT_URL => itamUrl().'api/kontrak',
+		// CURLOPT_URL => 'https://aset.divtik.polri.go.id/mobile/'.'api/kontrak',
+		CURLOPT_URL => itamUrl().'api/kontrak',
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'GET',
+		CURLOPT_HTTPHEADER => array(
+			'apikey: $pbkdf2-sha512$6000$P4cQYmzN.X8v5bw3xhijtA$PzGUd4dnuuvvEDgwhUsvDafEKu4W4Z5McvDO5nchfAlllfNsbCXBeB5XE/KrbtFEqfM4ymR2IMzGsKWT0vXKFA'
+		),
+		));
+
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+		$rss = json_decode($response,true);
+		echo json_encode($rss['data']);
+	}
+
+	public function getPPK(){
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+		// CURLOPT_URL => 'https://aset.divtik.polri.go.id/mobile/'.'api/user/ppk',
+		CURLOPT_URL => itamUrl().'api/user/ppk',
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,

@@ -14,7 +14,7 @@
 var table;
 var filter = {
   // page: 19591,
-  page: 3,
+  page: 1,
   perPage: 10,
   PPK: '',
   tahun: '',
@@ -34,8 +34,15 @@ var pagingInfo = {
 
 $(document).ready(function() {
   getComboPPK();
+  getComboTahunPengadaan();
   setAssets();
+  // focusTagInput();
 });
+
+// function focusTagInput() {
+//   $("#input_IDAset").tagsinput('focus');
+// }
+
 
 // Belum ada apply filter menggunakan PPK dan tahun
 
@@ -45,7 +52,8 @@ function clearFilter() {
 
   // $(".input_PPK").val('');
   $('.input_PPK').val('').trigger('change.select2');
-  $("#input_tahunPengadaan").val('');
+  // $("#input_tahunPengadaan").val('');
+  $('.input_tahunPengadaan').val('').trigger('change.select2');
   $("#input_IDAset").val('');
   filter.PPK = '';
   filter.tahun = '';
@@ -62,8 +70,10 @@ function findAssets() {
   filter.perPage = 10
 
   filter.PPK =  $(".input_PPK").val();
-  filter.tahun =  $("#input_tahunPengadaan").val();
+  // filter.tahun =  $("#input_tahunPengadaan").val();
+  filter.tahun =  $(".input_tahunPengadaan").val();
   filter.assetId =  $("#input_IDAset").val();
+  // scan = $("[name='scanrfid']").val();
 
   console.log("findAssets");
   console.log(filter);
@@ -187,11 +197,20 @@ function setPagingSlides() {
 
 function updateSetAssetsWithPaging() {
   let page = event.currentTarget.dataset.id;
-  let userFilter = {
-    page: parseInt(page),
-    perPage: pagingInfo.perPage
-  }
-  setAssets(userFilter);
+  filter.page = parseInt(page);
+  filter.perPage = pagingInfo.perPage;
+  // filter: {
+
+  // }
+  // let userFilter = {
+  //   page: parseInt(page),
+  //   perPage: pagingInfo.perPage,
+  //   PPK: filter.PPK,
+  //   tahun: '',
+  //   assetId: ''
+  // }
+  // setAssets(userFilter);
+  setAssets();
 }
 
 function resetPagingInfo() {
@@ -352,21 +371,62 @@ function formatNullable(value) {
   return value
 }
 
+// function getComboPPK() {
+//   $('.input_PPK').select2();
+//   $.ajax({
+//       url : "<?=base_url()?>index.php/pencarian_aset/getKontrak/",
+//       type: "GET",
+//       dataType:"JSON",
+//       success: function(data){
+//         console.log(data)
+//         let PPK = data.map(kontrak => kontrak.nama_ppk?.trim());
+//         PPK = [...new Set(PPK)]
+//         PPK = PPK.filter(p => p)
+//         PPK.sort()
+//         console.log(PPK)
+//         for (let i in PPK) {
+//           $('.input_PPK').append(`<option value="${PPK[i]}">${PPK[i]}</option>`);
+//         }   
+//       },
+//   });
+// }
+
 function getComboPPK() {
   $('.input_PPK').select2();
+  $.ajax({
+      url : "<?=base_url()?>index.php/pencarian_aset/getPPK/",
+      type: "GET",
+      dataType:"JSON",
+      success: function(data){
+        console.log(data)
+        for (let i in data) {
+          $('.input_PPK').append(`<option value="${data[i].id}">${data[i].display_name}</option>`);
+        }   
+      },
+  });
+}
+
+function getComboTahunPengadaan() {
+  $('.input_tahunPengadaan').select2();
+  // let tahunPengadaan = [2018, 2019, 2020, 2021, 2022, 2023];
+  // for (let i in tahunPengadaan) {
+  //   $('.input_tahunPengadaan').append(`<option value="${tahunPengadaan[i]}">${tahunPengadaan[i]}</option>`);
+  // }  
+
+
   $.ajax({
       url : "<?=base_url()?>index.php/pencarian_aset/getKontrak/",
       type: "GET",
       dataType:"JSON",
       success: function(data){
-        console.log(data)
-        let PPK = data.map(kontrak => kontrak.nama_ppk?.trim());
-        PPK = [...new Set(PPK)]
-        PPK = PPK.filter(p => p)
-        PPK.sort()
-        console.log(PPK)
-        for (let i in PPK) {
-          $('.input_PPK').append(`<option value="${PPK[i]}">${PPK[i]}</option>`);
+        // console.log(data)
+        let tahunPengadaan = data.map(kontrak => kontrak.tahun_apbn?.trim());
+        tahunPengadaan = [...new Set(tahunPengadaan)]
+        tahunPengadaan = tahunPengadaan.filter(p => p)
+        tahunPengadaan.sort()
+        console.log(tahunPengadaan)
+        for (let i in tahunPengadaan) {
+          $('.input_tahunPengadaan').append(`<option value="${tahunPengadaan[i]}">${tahunPengadaan[i]}</option>`);
         }   
       },
   });

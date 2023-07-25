@@ -7,7 +7,7 @@
             <input type="text" id="input_PPK" name="input_PPK" style="width:100%;" class="form-control" />
         </div>
     </div> -->
-    <div class="col-sm-12">
+    <div class="col-sm-12" style="min-width: 200px;">
         <h3>Pencarian Aset</h3>   
     </div>
 
@@ -22,15 +22,25 @@
     <div class="col-sm-6">
         <div class="form-group m-1">
             <label for="input_IDAset"><strong>ID Aset</strong></label>
-            <input type="text" id="input_IDAset" name="input_IDAset" style="width:100%; height: 30px;" class="form-control" />
+            <input type="text" id="input_IDAset" name="input_IDAset" style="width:100%; height: 29px;" class="form-control" />
+            <!-- <input type="text" id="input_IDAset" name="input_IDAset" style="width:100%;" class="form-control"  data-role="tagsinput"/> -->
         </div>
     </div>
     <div class="col-sm-6">
         <div class="form-group m-1">
             <label for="input_tahunPengadaan"><strong>Tahun Pengadaan</strong></label>
-            <input type="text" id="input_tahunPengadaan" name="input_tahunPengadaan" style="width:100%; height: 30px;" class="form-control" />
+            <!-- <input type="text" id="input_tahunPengadaan" name="input_tahunPengadaan" style="width:100%; height: 30px;" class="form-control" /> -->
+            <select class="form-control input_tahunPengadaan" style="width:100%;">
+                <option value="">-- Semua Tahun Pengadaan --</option>
+            </select>
         </div>
     </div>
+    <!-- <div class="col-sm-6">
+        <div class="form-group m-1">
+            <label for="input_tahunPengadaan"><strong>Tahun Pengadaan</strong></label>
+            <input type="text" id="input_tahunPengadaan" name="input_tahunPengadaan" style="width:100%; height: 30px;" class="form-control" />
+        </div>
+    </div> -->
     <div class="col-sm-12">
         <div class="m-1 mt-3">
             <button onclick="findAssets()" type="submit" class="btn btn-info btn-sm float-end ms-4" style="width: 80px">Cari</button>
