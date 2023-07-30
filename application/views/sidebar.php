@@ -39,14 +39,26 @@
 
         <ul class="menu-sub">
         <li class="menu-item">
-            <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/pindai_rfid')?>" class="menu-link">
-            <div data-i18n="Without menu">Pemindai RFID</div>
+            <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/scan_rfid')?>" class="menu-link">
+            <div data-i18n="Without menu">Pengecekan Barang</div>
             </a>
         </li>
 
         <li class="menu-item">
-            <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/scan_rfid')?>" class="menu-link">
-            <div data-i18n="Without menu">Scan RFID</div>
+            <a href="javascript:void(0)" onclick="changePage()" data-url="<?=base_url('index.php/pindai_rfid')?>" class="menu-link">
+            <div data-i18n="Without menu">Gerbang Pemindai</div>
+            </a>
+        </li>
+
+        <li class="menu-item">
+            <a href="<?=base_url('index.php/searching/waiting?url=')?>https://10.230.200.158:8082/" class="menu-link">
+            <div data-i18n="Without navbar">Penerimaan Barang</div>
+            </a>
+        </li>
+        
+        <li class="menu-item">
+            <a href="<?=base_url('index.php/searching/waiting?url=')?>https://10.230.200.158:8082/" class="menu-link">
+            <div data-i18n="Without menu">Aset Gudang</div>
             </a>
         </li>
 
