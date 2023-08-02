@@ -59,9 +59,9 @@
   <br />
   contoh :<br />
   'hostname' = 'localhost',<br />
-	'username' = 'root',<br />
-	'password' = 'P@ssw0rd',<br />
-	'database' = 'rfid_db',<br />
+	'username' = '[db_user]',<br />
+	'password' = '[db_password]',<br />
+	'database' = '[db_database]',<br />
 	'dbdriver' = 'mysqli',<br />
   
   Lakukan check ip address pada server
