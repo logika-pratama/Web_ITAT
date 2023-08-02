@@ -5,27 +5,37 @@
 * Sebelumnya siapkan server installasi webserver apache ,mysql-server ,sslEngine,php7.1 dan Git <br />
   Install Webserver :
   
-  * Apache2
+* Apache2
   ```sh
-  $ sudo apt install apache2
+  sudo apt-get install software-properties-common
+  ```
+  ```sh
+  sudo add-apt-repository ppa:ondrej/php
+  ```
+  ```sh
+  sudo apt-get update
+  ```
+  ```sh
+  sudo apt install apache2
   ```
 * php 7.1
    ```sh
-  $ sudo apt install php7.1
+  sudo apt-get install php7.1 php7.1-cli php7.1-common php7.1-json php7.1-opcache php7.1-mysql php7.1-mbstring php7.1-mcrypt php7.1-zip php7.1-fpm
+
    ```  
 * MySql Server
   ```sh 
-  $ sudo apt install mysql-server
+  sudo apt install mysql-server
   ```
 
 * SslEngine  
   ```sh
-  $ sudo yum install mod_ssl
+  sudo yum install mod_ssl
   ```
 
 * mysql 
   ```sh
-  $ sudo apt-get install git-all
+  sudo apt-get install git-all
   ```
  
 
@@ -55,4 +65,3 @@
   ```sh
   https://IP-ADDRESS-SEVER/itat
   ```
-  
