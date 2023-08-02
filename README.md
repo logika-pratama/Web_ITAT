@@ -7,6 +7,10 @@
   
 * Apache2
   ```sh
+  sudo apt install apache2
+  ```
+* php 7.1
+  ```sh
   sudo apt-get install software-properties-common
   ```
   ```sh
@@ -16,10 +20,6 @@
   sudo apt-get update
   ```
   ```sh
-  sudo apt install apache2
-  ```
-* php 7.1
-   ```sh
   sudo apt-get install php7.1 php7.1-cli php7.1-common php7.1-json php7.1-opcache php7.1-mysql php7.1-mbstring php7.1-mcrypt php7.1-zip php7.1-fpm
 
    ```  
@@ -45,9 +45,17 @@
   ```sh
   $ git clone  https://github.com/logika-pratama/itat.git
   ```
+
+* Letakan Folder clone pada webserver
+  Clone Repository
+  ```sh
+  /var/www/html/
+  ```
  
-* Konfigurasi database pada source code berdasarkan settingan mysql<br />
+* Konfigurasi database pada source code berdasarkan setting mysql<br />
+  
   /application/config/database.php
+  
   <br />
   contoh :<br />
   'hostname' = 'localhost',<br />
