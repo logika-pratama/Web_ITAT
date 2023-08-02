@@ -2,14 +2,32 @@
 
   
 ### Prerequisites
-* Sebelumnya siapkan server installasi webserver apache ,mysql ,sslEngine,php7.1 dan Git <br />
+* Sebelumnya siapkan server installasi webserver apache ,mysql-server ,sslEngine,php7.1 dan Git <br />
   Install Webserver :
   
-  sudo apt install apache2<br />
-  sudo apt install php7.1<br />
-  sudo apt install mysql<br />
-  sudo yum install mod_ssl<br />
-  sudo apt-get install git-all<br /> 
+  * Apache2
+  ```sh
+  $ sudo apt install apache2
+  ```
+* php 7.1
+   ```sh
+  $ sudo apt install php7.1
+   ```  
+* MySql Server
+  ```sh 
+  $ sudo apt install mysql-server
+  ```
+
+* SslEngine  
+  ```sh
+  $ sudo yum install mod_ssl
+  ```
+
+* mysql 
+  ```sh
+  $ sudo apt-get install git-all
+  ```
+ 
 
 ### Konfigurasi
 * Github <br />
