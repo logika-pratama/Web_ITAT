@@ -108,7 +108,7 @@ if (navigator.mediaDevices) {
 }
 
 function konfirmasi(){
-    console.log('konfirmasi');
+    // console.log('konfirmasi');
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
