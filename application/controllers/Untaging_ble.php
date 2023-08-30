@@ -56,7 +56,6 @@ if(empty($this->session->userdata('token'))){
 
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-		// CURLOPT_URL => 'http://192.168.100.173:8000/track_object',
 		CURLOPT_URL => 'http://10.230.200.156:8000/track_object',
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',

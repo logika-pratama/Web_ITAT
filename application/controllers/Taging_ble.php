@@ -32,7 +32,6 @@ if(empty($this->session->userdata('token'))){
 	// }
 
 	public function konfrim(){
-		// consoleLog('text konfrim');
 		$ble1 = $this->input->post('ble1');
 		$ble2 = $this->input->post('ble2');
 	
@@ -59,7 +58,6 @@ if(empty($this->session->userdata('token'))){
 
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-		// CURLOPT_URL => 'http://192.168.100.173:8000/track_object',
 		CURLOPT_URL => 'http://10.230.200.156:8000/track_object',
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',

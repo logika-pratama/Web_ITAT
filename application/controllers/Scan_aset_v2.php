@@ -25,7 +25,11 @@ class Scan_aset_v2 extends CI_Controller {
 		// $this->load->view('main',$data);
 		$this->load->view('scan-aset-v2',$data);
 	}
-
+	
+	// function consoleLog($message) {
+	// 	echo '<script type="text/javascript">' .
+    //       'console.log(' . $message . ');</script>';
+	// }
 
 	public function getScanAsset() {
 		$assetId = $this->input->get('assetId');
