@@ -1,5 +1,66 @@
+<style>
+    .detail-data-rfid > tr > td {
+            width: 1%;
+        }
 
-<div class="row">
+      video {
+        width:100%;
+        height:100%;
+        /* object-fit:cover;
+        z-index:-1;
+        position:absolute; */
+      }
+
+      .imgqrcode{   
+        width:80%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index:5;
+        margin: auto;
+        background-color: white;
+        opacity: 0.3;
+      }
+
+      .scan {
+    width: 100%;
+    height: 5px;
+    background-color: green;
+    position: absolute;
+    z-index: 20;
+    -moz-animation: scan 2s infinite;
+    -webkit-animation: scan 2s infinite;
+    animation: scan 2s infinite;
+    -webkit-animation-direction: alternate-reverse;
+    
+    left: 1%;
+    transform: translateX(-20%);
+    
+    top: 1%;
+    transform: translateY(-20%);
+}
+
+      @-webkit-keyframes scan {
+        0%, 100% {
+          -webkit-transform: translateY(0);
+          transform: translateY(0);
+        }
+        100% {
+          -webkit-transform: translateY(100vh);
+          transform: translateY(100vh);
+        }
+      }
+
+      .feature-title {
+        position: relative;
+        color: rgb(255, 255, 255);
+        mix-blend-mode: difference;
+      }
+</style>
+
+<!-- <div class="row"> -->
     <div class="col-md-12 mt-1">
         <div class="form-group">
             <div id="texttags">
@@ -8,7 +69,24 @@
         </div>    
     </div>
 
-    <div class="col-md-12 mb-2 camp text-center visible">
+    <div class="camp text-center visible">
+        <span>
+            <button id="toggleFlash" class="btn btn-primary btn-sm m-2" style="width:100%;">ON/OFF Flashlight</button>
+        </span>
+        <span class="float-end m-2 me-4">
+            <h2 class="feature-title">Pemindai RFID</h2>
+        </span>
+            <div class="p-2 m-3">
+                <img src="<?=base_url('assets/img/qrcode.png')?>" class="imgqrcode"/>
+                    <div class="scan" ></div>
+                <video id="previewKamera" style="video"></video>
+            </div>
+            <br>
+            <label class="form-label">Pilih Kamera</label>
+            <select id="pilihKamera" class="form-control pilihKamera"></select>
+    </div>
+
+    <!-- <div class="col-md-12 mb-2 camp text-center visible">
         <div class="p-2 m-3">
             <video id="previewKamera" style="width: 100%;"></video>
         </div>
@@ -16,10 +94,10 @@
         <label class="form-label">Pilih Kamera</label>
         <select id="pilihKamera" class="form-control pilihKamera">
         </select>
-    </div>
+    </div> -->
 
     <div class="col-md-12 mt-2">
-        <a hre="javascript:void(0)" class="btn btn-primary btn-sm" style="color:white; width:100%;" onclick="showData(1)">Pindai Gate Scan Qrcode</a>
+        <a href="javascript:void(0)" class="btn btn-primary btn-sm" style="color:white; width:100%;" onclick="showData(1)">Pindai Gate Scan Qrcode</a>
     </div>
 
     <div class="col-12">
@@ -110,4 +188,4 @@
         </div>
     </div>
     </div>
-</div>
+<!-- </div> -->

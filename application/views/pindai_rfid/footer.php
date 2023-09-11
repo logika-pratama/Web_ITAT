@@ -168,6 +168,38 @@ $(document).on('change','#pilihKamera',function(){
     }
 })
 
+// Mendapatkan elemen video
+const videoElement = document.getElementById("previewKamera");
+
+// Mendapatkan tombol toggle flash
+const toggleFlashButton = document.getElementById("toggleFlash");
+
+// Variabel untuk melacak status flash
+let isFlashOn = false;
+
+// Fungsi untuk mengaktifkan/menonaktifkan flash
+function toggleFlash() {
+    const track = videoElement.srcObject.getVideoTracks()[0];
+    const capabilities = track.getCapabilities();
+    
+    if (!capabilities.torch) {
+        alert("Flash tidak tersedia pada perangkat ini.");
+        return;
+    }
+    
+    isFlashOn = !isFlashOn;
+    
+    track.applyConstraints({
+        advanced: [{ torch: isFlashOn }]
+    });
+    
+    // Ubah teks tombol sesuai dengan status flash
+    toggleFlashButton.textContent = isFlashOn ? "Matikan Flash" : "Hidupkan Flash";
+}
+
+// event listener untuk tombol flash
+toggleFlashButton.addEventListener("click", toggleFlash);
+
 function initScanner() {
     codeReader
     .listVideoInputDevices()
