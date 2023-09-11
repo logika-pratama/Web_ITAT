@@ -573,7 +573,7 @@ if (!function_exists('itamURL'))
 {
 	function itamURL()
 	{
-		// return 'http://10.230.200.158:8081/';
-		return 'https://aset.divtik.polri.go.id/api_itam/';
+		return 'http://10.230.200.158:8081/';
+		// return 'https://aset.divtik.polri.go.id/api_itam/';
 	}
 }
